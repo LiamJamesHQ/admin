@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Your Build | Barrel Sauna UK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#2B5336; --forest-dark:#243d29;
+  --sage:#50795F; --sage-pale:#8fae86; --sage-muted:#7d9a86;
+  --terracotta:#C08B41; --honey:#C08B41; --honey-d:#b07d38;
+  --thermo:#96502B; --thermo-l:#a95f36;
+  --char:#1C1B19; --char-l:#2a2825; --char-line:rgba(28,27,25,0.10);
+  --maroon:#5E1F28; --maroon-bg:rgba(94,31,40,0.05);
+  --bone:#F1F2EC; --bone-dark:#e8eae2; --panel:#f7f8f3;
+  --body:#4a4a4a; --sub:#999999; --fine:#bbbbbb;
+  --dead:#aaaaaa; --connector:#e2ddd4;
+  --hairline:rgba(43,83,54,0.12); --card-border:rgba(58,82,52,0.15);
+  --face:'Raleway',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --gutter:32px; --radius:8px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--face);
+  background:var(--bone);
+  color:var(--body);
+  font-weight:400;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- SHELL ---------- */
+.wrap{ max-width:860px; margin:0 auto; padding:0 var(--gutter); }
+section{ padding:72px 0; border-bottom:1px solid var(--hairline); }
+section:last-of-type{ border-bottom:none; }
+
+.label{
+  text-transform:uppercase; font-size:11px; font-weight:700;
+  letter-spacing:2.2px; color:var(--sage-muted);
+  margin:0 0 18px 0; line-height:1.5;
+}
+h1,h2,h3{ margin:0; font-family:var(--face); }
+h2{ font-size:28px; font-weight:700; color:var(--forest); line-height:1.3; margin:0 0 22px 0; }
+h3{ font-size:17px; font-weight:700; color:var(--forest); line-height:1.4; margin:0 0 10px 0; }
+p{ margin:0 0 18px 0; font-size:15px; font-weight:400; line-height:1.8; }
+p:last-child{ margin-bottom:0; }
+.sub{ font-size:14px; color:var(--sub); line-height:1.75; }
+.fine{ font-size:13px; color:var(--dead); line-height:1.7; }
+.focal{ font-size:16px; font-weight:400; color:var(--terracotta); line-height:1.5; }
+
+/* ---------- HERO ---------- */
+.hero{
+  background:linear-gradient(150deg,var(--forest) 0%,var(--forest-dark) 100%);
+  color:#fff; padding:88px 0 76px 0; border-bottom:none;
+}
+.hero .label{ color:var(--sage-pale); }
+.hero h1{
+  font-size:52px; font-weight:400; letter-spacing:-1px;
+  line-height:1.12; color:#fff; margin:0 0 26px 0;
+}
+.hero h1 .em{ font-weight:800; color:var(--honey); }
+.hero p{ color:rgba(255,255,255,0.82); font-size:16px; max-width:600px; }
+.metaline{
+  margin-top:38px; padding-top:26px;
+  border-top:1px solid rgba(255,255,255,0.16);
+  display:flex; flex-wrap:wrap; gap:44px;
+}
+.metaline div{ min-width:110px; }
+.metaline .k{
+  text-transform:uppercase; font-size:10px; font-weight:700;
+  letter-spacing:2px; color:var(--sage-pale); margin:0 0 6px 0; line-height:1.5;
+}
+.metaline .v{ font-size:15px; font-weight:500; color:#fff; margin:0; line-height:1.5; }
+
+/* ---------- STEP CARDS ---------- */
+.step{
+  position:relative; background:#fff;
+  border:1px solid var(--card-border); border-radius:16px;
+  padding:38px 40px; margin:0 0 20px 0; overflow:hidden;
+}
+.ghost{
+  position:absolute; right:26px; top:-8px;
+  font-size:112px; font-weight:900; color:var(--thermo);
+  opacity:0.07; line-height:1; pointer-events:none; user-select:none;
+}
+.num{
+  font-style:italic; font-weight:500; color:var(--honey);
+  font-size:14px; margin:0 0 8px 0; line-height:1.5;
+}
+.when{
+  display:inline-block; margin:0 0 16px 0;
+  background:var(--panel); border-left:3px solid var(--terracotta);
+  padding:8px 16px; border-radius:0 6px 6px 0;
+  font-size:13px; font-weight:500; color:var(--forest); line-height:1.5;
+}
+ul.ticks{ margin:14px 0 0 0; padding:0; list-style:none; }
+ul.ticks li{
+  position:relative; padding:0 0 9px 24px;
+  font-size:14px; font-weight:400; color:var(--sub); line-height:1.75;
+}
+ul.ticks li:before{
+  content:'✓'; position:absolute; left:0; top:0;
+  color:var(--sage); font-size:13px; font-weight:500;
+}
+
+/* ---------- MATERIALS ---------- */
+.matgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; margin-top:16px; }
+.mat{
+  background:var(--panel); border:1px solid var(--hairline);
+  border-radius:8px; padding:13px 16px;
+  font-size:13px; font-weight:400; color:var(--forest); line-height:1.5;
+}
+
+/* ---------- PANELS ---------- */
+.panel{
+  background:#fff; border:1px solid var(--card-border);
+  border-radius:var(--radius); border-left:3px solid var(--terracotta);
+  padding:30px 32px; margin:0 0 20px 0;
+}
+.panel.quiet{ border-left-color:var(--sage); }
+.panel.warn{
+  background:var(--maroon-bg); border-color:rgba(94,31,40,0.12);
+  border-left-color:var(--maroon);
+}
+.panel.warn h3{ color:var(--maroon); }
+.oneliner{
+  font-style:italic; font-size:16px; font-weight:400;
+  color:var(--maroon); line-height:1.6; margin:0;
+}
+
+/* ---------- FAQ ---------- */
+details{ border-bottom:1px solid var(--hairline); padding:20px 0; }
+details:first-of-type{ border-top:1px solid var(--hairline); }
+summary{
+  cursor:pointer; list-style:none;
+  font-size:16px; font-weight:700; color:var(--forest);
+  line-height:1.5; display:flex; justify-content:space-between; gap:20px;
+}
+summary::-webkit-details-marker{ display:none; }
+summary:after{ content:'+'; color:var(--terracotta); font-weight:400; font-size:20px; line-height:1; }
+details[open] summary:after{ content:'\2212'; }
+details p{ margin:14px 0 0 0; font-size:14px; color:var(--sub); }
+
+/* ---------- EXPLORE ---------- */
+.exgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+a.ex{
+  display:block; text-decoration:none;
+  background:#fff; border:1px solid var(--card-border); border-radius:12px;
+  padding:22px 24px; transition:border-color .18s ease, transform .18s ease;
+}
+a.ex:hover{ border-color:var(--honey); transform:translateY(-2px); }
+a.ex .exn{ font-size:15px; font-weight:500; color:var(--forest); line-height:1.5; margin:0; }
+a.ex .exs{ font-size:13px; font-weight:400; color:var(--sub); line-height:1.6; margin:5px 0 0 0; }
+
+/* ---------- CONTACT + FOOTER ---------- */
+.contact{ background:var(--forest); color:#fff; padding:60px 0; }
+.contact .label{ color:var(--sage-pale); }
+.contact h2{ color:#fff; }
+.contact p{ color:rgba(255,255,255,0.82); }
+.contact a{ color:var(--honey); text-decoration:none; font-weight:500; }
+footer{ background:var(--char); color:rgba(255,255,255,0.5); padding:34px 0; }
+footer p{ font-size:12px; font-weight:400; margin:0 0 5px 0; line-height:1.7; }
+
+@media (max-width:620px){
+  .hero h1{ font-size:36px; }
+  section{ padding:52px 0; }
+  .step{ padding:30px 26px; }
+  .ghost{ font-size:82px; right:14px; }
+  .metaline{ gap:26px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <p class="label">Order confirmed</p>
+    <h1 id="hHead">Your build is <span class="em">underway</span>.</h1>
+    <p>Your deposit has been received and your place in the order queue is secured. Everything we make is built to order, so the work of commissioning your materials begins now.</p>
+    <div class="metaline">
+      <div><p class="k">Reference</p><p class="v" id="hRef">Pending</p></div>
+      <div><p class="k">Your build</p><p class="v" id="hProduct">Barrel Sauna</p></div>
+      <div><p class="k">Confirmed</p><p class="v" id="hDate">Today</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section>
+  <div class="wrap">
+    <p class="label">What happens next</p>
+    <h2>Five stages, from confirmation to handover</h2>
+    <p class="sub" style="max-width:620px; margin-bottom:36px;">Nothing here is taken from stock. Every project follows its own commissioning route, which is why the sequence below matters more than a single date on a calendar.</p>
+
+    <div class="step">
+      <div class="ghost">1</div>
+      <p class="num">One</p>
+      <h3>Order confirmed</h3>
+      <p class="when" id="w1">Now</p>
+      <p class="sub">Your order is entered into our production system and your customer profile is created. From this point our team begins coordinating everything your build requires.</p>
+    </div>
+
+    <div class="step">
+      <div class="ghost">2</div>
+      <p class="num">Two</p>
+      <h3>Materials commissioned</h3>
+      <p class="when" id="w2">Within days</p>
+      <p class="sub" id="matIntro">Your specification is broken down and each component is ordered against your build specifically.</p>
+      <div class="matgrid" id="matGrid"></div>
+    </div>
+
+    <div class="step">
+      <div class="ghost">3</div>
+      <p class="num">Three</p>
+      <h3>Production queue</h3>
+      <p class="when" id="w3">3 to 5 weeks</p>
+      <p class="sub">Once every component has landed, your order enters the workshop schedule. Because each project is bespoke, no two builds run to an identical rhythm.</p>
+    </div>
+
+    <div class="step">
+      <div class="ghost">4</div>
+      <p class="num">Four</p>
+      <h3>Production update</h3>
+      <p class="when" id="w4">Around 6 weeks</p>
+      <p class="sub">One of our team will be in touch with photographs and a clearer picture of where things stand. By this stage we can usually give you a firmer completion window and begin planning the installation. If anything material arises before then, you will hear from us sooner.</p>
+    </div>
+
+    <div class="step">
+      <div class="ghost">5</div>
+      <p class="num">Five</p>
+      <h3>Delivery and installation</h3>
+      <p class="when" id="w5">2 to 3 weeks after your update</p>
+      <p class="sub">As production nears completion we will contact you to arrange delivery or installation. Timing shifts a little depending on your location, the installation type and the workshop's current load.</p>
+      <ul class="ticks" id="instTicks"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCT-SPECIFIC NOTE ============ -->
+<section>
+  <div class="wrap">
+    <p class="label" id="specLabel">Worth knowing</p>
+    <h2 id="specHead">Built on site, in a day where we can</h2>
+    <div class="panel quiet"><p class="sub" id="specBody">Loading your build details.</p></div>
+  </div>
+</section>
+
+<!-- ============ SITE READINESS ============ -->
+<section>
+  <div class="wrap">
+    <p class="label">Before we arrive</p>
+    <h2>Getting your site ready</h2>
+    <p class="sub" style="max-width:620px;">A little preparation on your side keeps installation day efficient. Nothing here is urgent yet, but it is worth casting an eye over now rather than the week before.</p>
+    <div class="panel">
+      <ul class="ticks" id="siteTicks"></ul>
+    </div>
+    <p class="fine">If anything on this list looks difficult at your property, tell us early. Almost everything can be worked around when we know in advance.</p>
+  </div>
+</section>
+
+<!-- ============ WINDOWS, NOT DATES ============ -->
+<section>
+  <div class="wrap">
+    <p class="label">Our approach</p>
+    <h2>Why we give windows rather than fixed dates</h2>
+    <p>Every installation is different, and that difference is the point. If the project immediately before yours needs additional groundwork or unforeseen site work, our team stays until it is done properly.</p>
+    <p>That same protection extends to you. When your build needs an extra day to be right, it gets one.</p>
+    <div class="panel warn">
+      <p class="oneliner">A realistic window means the work is finished properly. A fixed date means somebody's build gets rushed, and one day it would be yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHANGES ============ -->
+<section>
+  <div class="wrap">
+    <p class="label">Changes to your build</p>
+    <h2>The point of no return is materials</h2>
+    <p class="sub" style="max-width:640px;">Adjustments are straightforward until your materials are commissioned. Once timber is cut to your dimensions and bespoke components are on order, a change means re-ordering rather than re-planning, and additional cost usually follows.</p>
+    <p class="focal">If you are weighing up a change, tell us now rather than later.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="wrap">
+    <p class="label">Common questions</p>
+    <h2>Answers to what most people ask</h2>
+    <details><summary>Can I still change my order?</summary><p>Adjustments are usually possible before materials are commissioned. Afterwards, changes may not be feasible, and where they are, additional cost typically applies. Ask us as soon as the thought occurs.</p></details>
+    <details><summary>When will I hear from you?</summary><p>Around the six week mark, unless something needs your attention sooner. We contact customers at genuine milestones rather than sending routine updates that say nothing new.</p></details>
+    <details><summary>Can I have weekly updates?</summary><p>Every project is bespoke, so weekly reporting tends to produce a lot of noise and very little signal. We would rather contact you when something has actually moved. You are welcome to ask at any point.</p></details>
+    <details><summary>Could my installation window shift?</summary><p>Occasionally, yes. Weather, a preceding installation running long, or a supplier lead time can all move things. Anything significant, you will hear from us.</p></details>
+    <details><summary>When is the balance due?</summary><p>Your £500 deposit secures your place in the order queue. The balance is due before delivery, and we will set out the exact schedule with you well ahead of time.</p></details>
+    <details><summary>Who do I contact with a question?</summary><p>Reply to the message that brought you here, or ring us on the number below. Whoever picks it up will have your reference and your specification in front of them.</p></details>
+  </div>
+</section>
+
+<!-- ============ EXPLORE ============ -->
+<section>
+  <div class="wrap">
+    <p class="label">While you wait</p>
+    <h2>Pieces that sit well alongside your build</h2>
+    <p class="sub" style="max-width:600px; margin-bottom:28px;">Adding to your order before production begins is far simpler than commissioning separately later.</p>
+    <div class="exgrid" id="exGrid"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact">
+  <div class="wrap">
+    <p class="label">One route in</p>
+    <h2>Talk to us</h2>
+    <p style="max-width:560px;">Reply to the message that brought you here and it reaches the team handling your build directly. Or ring <a href="tel:+442920676731">+44 2920 676731</a> and give your reference.</p>
+    <p class="sub" style="color:rgba(255,255,255,0.6); margin-top:26px;">The Barrel Sauna UK Team</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Barrel Sauna UK • Handcrafted in Wales</p>
+    <p>Welsh family business · Handmade to order · Built to last</p>
+    <p>barrelsaunauk.com</p>
+  </div>
+</footer>
+
+<script>
+const PRODUCTS = {
+  barrel:{
+    name:'Barrel Sauna',
+    materials:['Thermowood or Nordic Spruce','Bespoke windows','Custom timber rings','Harvia heater','Lighting','Roofing','Glass','Electrical components'],
+    matIntro:'Your timber is selected and cut to your dimensions, and each component is ordered against your build specifically.',
+    specLabel:'Worth knowing',
+    specHead:'Built on site, in a day where we can',
+    specBody:'Where your sauna is assembled at your property, materials sometimes arrive a day or two ahead of the carpentry team. That lets them start immediately rather than travelling back and forth from Wales. Depending on your position on our installation route, the team may arrive with everything ready, take a prior delivery, or begin groundwork before the structure goes up.',
+    site:['Level, firm ground where the sauna will stand','Clear access for the team and materials, ideally at least a metre wide','A standard outdoor socket within reach for tools','Any decking or base work agreed with us in advance','Somewhere the team can park within reasonable carrying distance'],
+    inst:['Assembly typically completes within a day for most barrel sizes','The team will walk you through heater operation before leaving','Your handover document is signed off on site']
+  },
+  mobile:{
+    name:'Mobile Sauna',
+    materials:['Thermowood or Nordic Spruce','Steel chassis','Trailer fabrication','Axles and brakes','Wheels','Galvanising','Harvia heater','Lighting and glass','Electrical systems','DVSA testing'],
+    matIntro:'Your trailer chassis is fabricated alongside the sauna itself, and each component is ordered against your build specifically.',
+    specLabel:'Mobile sauna customers',
+    specHead:'DVSA testing sets your real date',
+    specBody:'Your trailer must pass DVSA testing before handover. Test dates are booked in advance and usually give us the first genuinely reliable indication of completion. Once your test slot is confirmed, we can give you a far more accurate delivery window than anything before it.',
+    site:['Somewhere to park and manoeuvre the trailer safely','A towing vehicle rated for the loaded weight, if collecting','Your towing licence category checked against the trailer weight','Storage that keeps the unit level when not in use'],
+    inst:['Handover includes a walkthrough of towing, braking and stabilisers','Documentation and test certification are handed over with the unit','We will talk you through heater operation and shutdown']
+  },
+  hottub:{
+    name:'Hot Tub',
+    materials:['Shell moulds','Filtration system','Heater','Chiller, if selected','Pumps','Jets','Cover','Pipework'],
+    matIntro:'Your shell is moulded and the plant components are ordered against your specification.',
+    specLabel:'Worth knowing',
+    specHead:'Power and water need arranging ahead',
+    specBody:'A hot tub needs a suitable electrical supply and a filling route. Most installations are straightforward, but a qualified electrician is usually required for the final connection. Sorting this before your delivery window opens avoids a filled tub sitting cold.',
+    site:['A level, load-bearing base rated for a filled tub','An outdoor electrical supply, connection by a qualified electrician','A hose route to fill from','Clear access wide enough for the shell to pass','Drainage considered for future emptying'],
+    inst:['We position, connect and commission the unit','Water chemistry and filtration are explained before we leave','First fill and heat-up timings are covered in handover']
+  },
+  icebath:{
+    name:'Ice Bath',
+    materials:['Chiller','Filtration','Plumbing','Cabinet materials','Electrical components'],
+    matIntro:'Your chiller and filtration are ordered to your specification and the cabinet is built around them.',
+    specLabel:'Worth knowing',
+    specHead:'The chiller sets the requirements',
+    specBody:'Your chiller needs a standard supply and enough ventilated space around it to work efficiently. Positioning matters more than most people expect, and a few minutes of thought now prevents a unit that runs harder than it should.',
+    site:['A level, firm base','A standard outdoor socket within reach','Ventilated clearance around the chiller housing','Access wide enough for the cabinet','Drainage considered for water changes'],
+    inst:['We position, connect and commission the unit','Temperature setting and filtration are explained at handover','Maintenance intervals are covered before we leave']
+  },
+  hut:{
+    name:'Shepherd Hut',
+    materials:['Steel chassis','Timber frame and cladding','Roofing','Doors and windows','Insulation','Interior finishes','Electrical systems'],
+    matIntro:'Your chassis is fabricated and the timber is selected and cut to your dimensions.',
+    specLabel:'Worth knowing',
+    specHead:'Placement and services need planning',
+    specBody:'A hut is craned or manoeuvred into position, so access is the first thing to settle. If your hut includes services, the connection points want agreeing early, since retrofitting a route after the hut is sited is considerably harder than planning one before.',
+    site:['Clear access for delivery, with turning space','Level, firm ground at the final position','Service routes agreed in advance if applicable','Any planning or siting permissions confirmed','Overhead clearance checked along the access route'],
+    inst:['Siting and levelling are completed on the day','Services are connected where agreed in advance','Your handover document is signed off on site']
+  }
+};
+
+const EXPLORE = [
+  {n:'Ice Baths',s:'The natural counterpart to heat',u:'#'},
+  {n:'Hot Tubs',s:'Year round, whatever the weather',u:'#'},
+  {n:'Barrel Showers',s:'Rinse off between rounds',u:'#'},
+  {n:'Firewood Stores',s:'Seasoned and close to hand',u:'#'},
+  {n:'Pergolas',s:'Shelter for the space around it',u:'#'},
+  {n:'Accessories',s:'Buckets, ladles, thermometers, stones',u:'#'}
+];
+
+function q(k,d){ const v=new URLSearchParams(location.search).get(k); return v===null||v===''?d:v; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function fmtDate(d){
+  return d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+}
+function shift(base,weeks){
+  const d=new Date(base); d.setDate(d.getDate()+weeks*7); return d;
+}
+function longWeek(base,weeks){
+  return shift(base,weeks).toLocaleDateString('en-GB',{day:'numeric',month:'long'});
+}
+
+function render(o){
+  const p = PRODUCTS[o.product] || PRODUCTS.barrel;
+  const base = o.date ? new Date(o.date) : new Date(NaN);
+  const known = !isNaN(base.getTime());
+
+  document.getElementById('hHead').innerHTML = o.name
+    ? `Your build is <span class="em">underway</span>, ${esc(o.name)}.`
+    : `Your build is <span class="em">underway</span>.`;
+  document.getElementById('hRef').textContent = o.ref || 'Pending';
+  document.getElementById('hProduct').textContent = p.name;
+  document.getElementById('hDate').textContent = known ? fmtDate(base) : 'Today';
+
+  /* timings */
+  document.getElementById('w1').textContent = known ? fmtDate(base) : 'Now';
+  document.getElementById('w2').textContent = known ? 'Week commencing ' + longWeek(base,1) : 'Within days';
+  document.getElementById('w3').textContent = known ? longWeek(base,3) + ' to ' + longWeek(base,5) : '3 to 5 weeks';
+  document.getElementById('w4').textContent = known ? 'Week commencing ' + longWeek(base,6) : 'Around 6 weeks';
+  document.getElementById('w5').textContent = known ? longWeek(base,8) + ' to ' + longWeek(base,9) : '2 to 3 weeks after your update';
+
+  /* materials */
+  document.getElementById('matIntro').textContent = p.matIntro;
+  document.getElementById('matGrid').innerHTML = p.materials.map(m=>`<div class="mat">${esc(m)}</div>`).join('');
+
+  /* product note */
+  document.getElementById('specLabel').textContent = p.specLabel;
+  document.getElementById('specHead').textContent  = p.specHead;
+  document.getElementById('specBody').textContent  = p.specBody;
+
+  /* site and install */
+  document.getElementById('siteTicks').innerHTML = p.site.map(s=>`<li>${esc(s)}</li>`).join('');
+  document.getElementById('instTicks').innerHTML = p.inst.map(s=>`<li>${esc(s)}</li>`).join('');
+
+  /* explore */
+  document.getElementById('exGrid').innerHTML = EXPLORE.map(e=>
+    `<a class="ex" href="${e.u}"><p class="exn">${esc(e.n)}</p><p class="exs">${esc(e.s)}</p></a>`).join('');
+}
+
+render({
+  product: q('product','barrel'),
+  name:    q('name',''),
+  ref:     q('ref',''),
+  date:    q('date','')
+});
+</script>
+
+</body>
+</html>
