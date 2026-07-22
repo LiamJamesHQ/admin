@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSUK Estimate Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#2B5336; --forest-dark:#243d29; --sage:#50795F; --sage-pale:#8fae86;
+  --sage-muted:#7d9a86; --terracotta:#C08B41; --terracotta-d:#b07d38;
+  --terracotta-bg:#fdf6ec; --bone:#F1F2EC; --bone-dark:#e8eae2; --panel:#f7f8f3;
+  --body:#4a4a4a; --sub:#999999; --fine:#bbbbbb; --dead:#aaaaaa;
+  --dead-border:#d8d3cb; --hairline:rgba(43,83,54,0.12); --card-border:rgba(58,82,52,0.15);
+  --thermo:#96502B; --char:#1C1B19; --maroon:#5E1F28; --maroon-bg:rgba(94,31,40,0.05);
+  --face:'Raleway',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--face);background:var(--bone);color:var(--body);line-height:1.8;-webkit-font-smoothing:antialiased}
+
+/* ---------- STICKY TOTAL BAR ---------- */
+.tbar{position:fixed;top:0;left:0;right:0;background:var(--forest);color:var(--bone);
+  display:flex;justify-content:space-between;align-items:center;padding:12px 32px;
+  transform:translateY(-100%);transition:transform .25s ease;z-index:200;}
+.tbar.on{transform:translateY(0)}
+.tbar .who{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-pale);font-weight:700}
+.tbar .amt{font-size:20px;font-weight:700;color:var(--bone)}
+
+/* ---------- MASTHEAD ---------- */
+.mast{background:var(--forest);color:var(--bone);padding:44px 32px 40px;}
+.mast .inner{max-width:1240px;margin:0 auto}
+.mast .lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--sage-pale);font-weight:700;margin-bottom:12px}
+.mast h1{font-size:34px;font-weight:800;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
+.mast p{font-size:14px;color:var(--sage-pale);font-weight:400;max-width:640px;line-height:1.7}
+
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:1240px;margin:0 auto;padding:32px;display:grid;grid-template-columns:1fr 400px;gap:32px;align-items:start}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr;padding:20px}}
+
+/* ---------- CARDS ---------- */
+.card{background:#fff;border:1px solid var(--card-border);border-radius:8px;margin-bottom:20px;overflow:hidden}
+.card-hd{background:var(--panel);padding:14px 22px;border-bottom:1px solid var(--hairline);
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-muted);font-weight:700}
+.card-bd{padding:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:620px){.row{grid-template-columns:1fr}}
+.f{margin-bottom:16px}
+.f:last-child{margin-bottom:0}
+label{display:block;font-size:13px;font-weight:700;color:var(--forest);margin-bottom:6px;line-height:1.5}
+input[type=text],input[type=email],input[type=number],select,textarea{
+  width:100%;padding:10px 12px;border:1px solid var(--dead-border);border-radius:6px;
+  font-family:var(--face);font-size:14px;color:var(--body);background:#fff;line-height:1.5}
+select{cursor:pointer}
+textarea{min-height:72px;resize:vertical;line-height:1.7}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(80,121,95,.10)}
+
+/* ---------- TICK ROWS ---------- */
+.tick{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--hairline)}
+.tick:last-child{border-bottom:none}
+.tick input{margin-top:5px;width:15px;height:15px;flex:0 0 15px;accent-color:var(--forest);cursor:pointer}
+.tick .t{flex:1;font-size:14px;line-height:1.6;color:var(--body);cursor:pointer}
+.tick .p{font-size:14px;color:var(--forest);font-weight:700;white-space:nowrap;padding-left:10px}
+.tick .p.inc{color:var(--sage-muted);font-weight:400;font-size:13px}
+.note{font-size:13px;color:var(--sub);line-height:1.7;margin-top:4px}
+
+/* ---------- AMBER FLAG ---------- */
+.flag{display:block;margin-top:5px;padding:8px 11px;background:var(--terracotta-bg);
+  border-left:3px solid var(--terracotta);border-radius:0 4px 4px 0;
+  font-size:12px;line-height:1.65;color:var(--thermo)}
+.flag b{font-weight:700;color:var(--thermo)}
+.flag-i{display:inline-block;width:15px;height:15px;line-height:15px;text-align:center;
+  background:var(--terracotta);color:#fff;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
+
+.pending{font-size:12px;color:var(--thermo);background:var(--terracotta-bg);
+  border-left:3px solid var(--terracotta);padding:8px 11px;border-radius:0 4px 4px 0;margin-top:6px;line-height:1.6}
+
+/* ---------- ESTIMATE PANE ---------- */
+.est{position:sticky;top:60px;background:var(--forest);color:var(--bone);border-radius:8px;overflow:hidden}
+.est-hd{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.12)}
+.est-hd .lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--sage-pale);font-weight:700;margin-bottom:6px}
+.est-hd .nm{font-size:18px;font-weight:700;color:#fff;line-height:1.35}
+.est-bd{padding:18px 24px;max-height:340px;overflow-y:auto}
+.li{display:flex;justify-content:space-between;gap:14px;padding:7px 0;font-size:13px;line-height:1.6}
+.li .l{color:var(--sage-pale);flex:1}
+.li .v{color:var(--bone);white-space:nowrap;font-weight:500}
+.li.sub{border-top:1px solid rgba(255,255,255,.12);margin-top:8px;padding-top:12px}
+.li.sub .l{color:var(--bone);font-weight:700}
+.grp{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-pale);
+  font-weight:700;margin:14px 0 4px;opacity:.75}
+.grp:first-child{margin-top:0}
+.empty{font-size:13px;color:var(--sage-pale);line-height:1.7;padding:8px 0}
+.est-ft{padding:20px 24px;background:var(--forest-dark)}
+.tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;
+  margin-top:10px;border-top:1px solid rgba(255,255,255,.18)}
+.tot .l{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-pale);font-weight:700}
+.tot .amt{font-size:28px;font-weight:800;color:var(--terracotta);letter-spacing:-.5px}
+.dep{margin-top:16px;padding:14px 16px;background:var(--maroon-bg);border-left:3px solid var(--maroon);border-radius:0 4px 4px 0}
+.dep .hd{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-pale);font-weight:700;margin-bottom:5px}
+.dep .bd{font-size:13px;color:var(--bone);line-height:1.65}
+
+/* ---------- ACTIONS ---------- */
+.acts{padding:20px 24px;background:var(--forest-dark);border-top:1px solid rgba(255,255,255,.10)}
+.act{display:block;width:100%;padding:12px 16px;margin-bottom:9px;border:1px solid rgba(255,255,255,.28);
+  background:transparent;color:var(--bone);border-radius:6px;font-family:var(--face);
+  font-size:14px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s}
+.act:hover{background:rgba(255,255,255,.09)}
+.act.primary{background:var(--terracotta);border-color:var(--terracotta);color:#fff;font-weight:700}
+.act.primary:hover{background:var(--terracotta-d);border-color:var(--terracotta-d)}
+.act.quiet{border-color:rgba(255,255,255,.16);color:var(--sage-pale);font-weight:400;font-size:13px;margin-bottom:0}
+.tip{font-size:12px;color:var(--sage-pale);line-height:1.6;margin-top:10px}
+
+/* ---------- TOAST ---------- */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(140%);
+  background:var(--char);color:#fff;padding:13px 26px;border-radius:6px;font-size:14px;
+  font-weight:600;transition:transform .28s ease;z-index:400}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+/* ---------- AUDIT BANNER ---------- */
+.audit{max-width:1240px;margin:0 auto;padding:0 32px}
+.audit-in{background:var(--terracotta-bg);border:1px solid var(--terracotta);border-radius:8px;padding:20px 24px;margin-top:24px}
+.audit-in h2{font-size:15px;font-weight:700;color:var(--thermo);margin-bottom:8px}
+.audit-in p{font-size:13px;color:var(--thermo);line-height:1.75;margin-bottom:10px}
+.audit-in ul{margin:0 0 6px 18px}
+.audit-in li{font-size:13px;color:var(--thermo);line-height:1.75;margin-bottom:5px}
+.audit-in .cl{background:none;border:none;color:var(--thermo);font-family:var(--face);
+  font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;padding:0;letter-spacing:.5px}
+
+/* ---------- PRINT ---------- */
+/* ---------- PRINT SHEET ---------- */
+#sheet{display:none}
+@media print{
+  body{background:#fff}
+  .tbar,.mast,.audit,.wrap,.toast{display:none!important}
+  #sheet{display:block!important}
+  @page{margin:14mm}
+}
+#sheet .s-hd{background:var(--forest);color:var(--bone);padding:22px 26px;margin-bottom:26px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+#sheet .s-hd .lbl{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--sage-pale);font-weight:700;margin-bottom:6px}
+#sheet .s-hd h1{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.25;margin-bottom:4px}
+#sheet .s-hd .sub{font-size:13px;color:var(--sage-pale);font-weight:400}
+#sheet .s-meta{display:flex;flex-wrap:wrap;gap:26px;padding:0 26px 20px;border-bottom:1px solid var(--hairline);margin-bottom:22px}
+#sheet .s-meta div{font-size:12px;line-height:1.6}
+#sheet .s-meta .k{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-muted);font-weight:700;display:block;margin-bottom:2px}
+#sheet .s-meta .v{color:var(--forest);font-size:13px}
+#sheet .s-body{padding:0 26px}
+#sheet .s-grp{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-muted);
+  font-weight:700;margin:20px 0 7px;padding-bottom:5px;border-bottom:1px solid var(--hairline)}
+#sheet .s-li{display:flex;justify-content:space-between;gap:20px;padding:5px 0;
+  font-size:13px;line-height:1.65;break-inside:avoid}
+#sheet .s-li .l{color:var(--body);flex:1}
+#sheet .s-li .v{color:var(--forest);white-space:nowrap;font-weight:600}
+#sheet .s-li .v.inc{color:var(--sage-muted);font-weight:400}
+#sheet .s-money{margin:30px 26px 0;padding:20px 24px;background:var(--panel);
+  border-top:2px solid var(--forest);break-inside:avoid;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+#sheet .s-money .r{display:flex;justify-content:space-between;padding:5px 0;font-size:13px}
+#sheet .s-money .r .l{color:var(--body)}
+#sheet .s-money .r .v{color:var(--forest);font-weight:600}
+#sheet .s-money .r.tot{border-top:1px solid var(--hairline);margin-top:10px;padding-top:14px;align-items:baseline}
+#sheet .s-money .r.tot .l{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-muted);font-weight:700}
+#sheet .s-money .r.tot .v{font-size:24px;font-weight:800;color:var(--terracotta);letter-spacing:-.5px}
+#sheet .s-dep{margin:20px 26px 0;padding:18px 22px;background:var(--maroon-bg);
+  border-left:3px solid var(--maroon);break-inside:avoid;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+#sheet .s-dep .h{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--maroon);font-weight:700;margin-bottom:6px}
+#sheet .s-dep .b{font-size:13px;color:var(--body);line-height:1.7}
+#sheet .s-dep .s-link{display:inline-block;margin-top:10px;padding:9px 18px;background:var(--terracotta);
+  color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border-radius:5px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+#sheet .s-notes{margin:20px 26px 0;padding:16px 20px;background:var(--panel);break-inside:avoid}
+#sheet .s-notes .h{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-muted);font-weight:700;margin-bottom:6px}
+#sheet .s-notes .b{font-size:13px;color:var(--body);line-height:1.7;white-space:pre-wrap}
+#sheet .s-ft{margin:34px 26px 0;padding-top:16px;border-top:1px solid var(--hairline);
+  font-size:11px;color:var(--sub);line-height:1.7}
+#sheet .s-ft .sign{color:var(--forest);font-weight:700;font-size:13px;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<div class="tbar" id="tbar">
+  <div class="who" id="tbarWho">Running total</div>
+  <div class="amt" id="tbarAmt">£0</div>
+</div>
+
+<div class="mast">
+  <div class="inner">
+    <div class="lbl">Barrel Sauna UK · Internal</div>
+    <h1>Estimate Builder</h1>
+    <p>Build a client estimate on the call. Prices carried across from the Ecwid configurator. Anything marked amber needs a decision from James before this goes live.</p>
+  </div>
+</div>
+
+<div class="audit" id="auditWrap">
+  <div class="audit-in">
+    <h2>Pricing review, nine items need a decision</h2>
+    <p>These came across from Ecwid as they stand. Each one is flagged in amber where it sits in the form, so you can see it in context.</p>
+    <ul>
+      <li><b>DualTemp with Cover, Single Dipper Slimline</b> reads £25,650. Corrected here to £2,650. This is the urgent one.</li>
+      <li><b>DualTemp</b> is £1,200 on the Double Dipper Classic and £2,500 on both Slimlines. Same unit, two prices.</li>
+      <li><b>Three headline prices</b> do not reconcile with their own option sets. Wood Fired and Single Dipper Slimline both carry an unexplained gap.</li>
+      <li><b>Delivery</b> runs on five different schedules across seven products. UK mainland ranges £250 to £600.</li>
+      <li><b>Sauna changing rooms</b> appear twice at two prices, and the three side-door sizes are all £1,100.</li>
+      <li><b>LED spotlight</b> is £149 on two products and £169 on three.</li>
+      <li><b>Auto run function</b> at £500 only fits two of the eleven heaters. Nothing currently stops a closer selling it alongside a wood burner.</li>
+      <li><b>The U shape globe bench</b> carries no price at all, so it can be added to any build at no cost whether or not a globe window is fitted.</li>
+      <li><b>Mobile sauna trailers</b>, 3m to 6m, have no prices in Ecwid. All six currently add nothing.</li>
+    </ul>
+    <button class="cl" onclick="document.getElementById('auditWrap').style.display='none'">Hide this panel</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="left">
+
+    <div class="card">
+      <div class="card-hd">Client</div>
+      <div class="card-bd">
+        <div class="row">
+          <div class="f"><label for="cName">Client name</label><input type="text" id="cName" placeholder="Jane Smith"></div>
+          <div class="f"><label for="cEmail">Email</label><input type="email" id="cEmail" placeholder="jane@example.com"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="cPhone">Phone</label><input type="text" id="cPhone" placeholder="Include the country or area code"></div>
+          <div class="f"><label for="cCloser">You spoke to</label>
+            <select id="cCloser">
+              <option value="">Select…</option>
+              <option>James</option><option>Ollie</option><option>Giles</option><option>Marta</option>
+            </select>
+          </div>
+        </div>
+        <div class="f"><label for="cPostcode">Delivery postcode</label><input type="text" id="cPostcode" placeholder="SA1 1AA"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hd">Product</div>
+      <div class="card-bd">
+        <div class="f"><label for="pLine">Which build</label><select id="pLine"></select></div>
+        <div id="pIntro" class="note"></div>
+      </div>
+    </div>
+
+    <div id="groups"></div>
+
+    <div class="card">
+      <div class="card-hd">Adjustment and notes</div>
+      <div class="card-bd">
+        <div class="row">
+          <div class="f"><label for="adjLabel">Adjustment reason</label><input type="text" id="adjLabel" placeholder="e.g. Goodwill discount"></div>
+          <div class="f"><label for="adjAmount">Amount (minus to reduce)</label><input type="number" id="adjAmount" step="1" value="0"></div>
+        </div>
+        <div class="f"><label for="cNotes">Notes</label><textarea id="cNotes" placeholder="Anything agreed on the call…"></textarea></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="est">
+    <div class="est-hd">
+      <div class="lbl">Estimate</div>
+      <div class="nm" id="estName">New estimate</div>
+    </div>
+    <div class="est-bd">
+      <div id="estBody"></div>
+    </div>
+    <div class="est-ft">
+      <div class="li"><div class="l">Build subtotal</div><div class="v" id="sumBuild">£0</div></div>
+      <div class="li"><div class="l">Delivery and logistics</div><div class="v" id="sumLogi">£0</div></div>
+      <div class="li" id="sumAdjRow" style="display:none"><div class="l" id="sumAdjLabel">Adjustment</div><div class="v" id="sumAdj">£0</div></div>
+      <div class="li"><div class="l">VAT (20%)</div><div class="v" id="sumVat">£0</div></div>
+      <div class="tot"><div class="l">Total</div><div class="amt" id="sumGrand">£0</div></div>
+      <div class="dep">
+        <div class="hd">To secure the build</div>
+        <div class="bd">£500, non-refundable, secures a place in the order queue. Deducted from the total.</div>
+      </div>
+    </div>
+    <div class="acts">
+      <button class="act primary" id="btnWa">Copy for WhatsApp</button>
+      <button class="act" id="btnEmailRich">Copy for email</button>
+      <button class="act" id="btnMail">Open in mail app</button>
+      <button class="act" id="btnPrint">Save as PDF</button>
+      <div class="tip">Paste the email straight into Gmail or Outlook and the branding comes with it. When saving the PDF, tick Background graphics or the green prints white.</div>
+      <button class="act quiet" id="btnReset" style="margin-top:12px">Clear and start again</button>
+    </div>
+  </div>
+</div>
+
+<div id="sheet"></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================================
+   CATALOGUE. Every price lives here and nowhere else.
+   Change a number once, it changes everywhere.
+
+   flag: text     → renders an amber note under the option
+   pending: true  → option set not yet captured from Ecwid
+   logistics:true → excluded from the commissionable build subtotal
+   ========================================================================= */
+
+var CATALOGUE = {
+
+/* ---------------------------------------------------------------- 1 */
+ddClassic:{
+  name:"The Double Dipper Classic Ice Bath",
+  intro:"Oval two-person ice bath. 990mm internal, 1150mm external, 1005mm total height, 1000mm soaking depth. Fixed Thermowood bench 350mm wide, 300mm high.",
+  base:0,
+  groups:[
+    {t:"The tub",type:"radio",key:"clad",items:[
+      {l:"Treated Thermowood. Heat dried and thermally modified at 200°C to remove up to 96% moisture.",p:3700,base:true},
+      {l:"Pinewood Plunge",p:3600,base:true}
+    ]},
+    {t:"Interior colour",type:"select",key:"colour",items:[
+      {l:"Storm Grey",p:0},{l:"Glacier Blue",p:0},{l:"Ice White",p:0},{l:"Decide later",p:0}
+    ]},
+    {t:"Included as standard",type:"info",items:[
+      {l:"Two precision fit stainless steel reinforcement bands"},
+      {l:"Drainage. Internal base plug and external stainless steel side tap"},
+      {l:"Single stepper"},
+      {l:"Chiller unit, filter and chiller, cools to 3 to 5°C"},
+      {l:"Chiller machine installation"}
+    ]},
+    {t:"Upgrades",type:"check",items:[
+      {l:"Double stepper",p:85},
+      {l:"Handcrafted timber lid. Cross braced with metal handles.",p:150},
+      {l:"Timber stain. Colour chosen later.",p:165},
+      {l:"Insulated floor base. Double layer with 100mm insulation.",p:300},
+      {l:"Air jet system",p:450},
+      {l:"LED internal spotlight",p:149,
+       flag:"£149 here, £169 on three other products. Same component."},
+      {l:"DualTemp chiller upgrade. Heats to 40°C, cools to 3 to 5°C.",p:1200,
+       flag:"£1,200 here, £2,500 on both Slimlines. Same named unit."}
+    ]},
+    {t:"Groundwork",type:"check",items:[
+      {l:"Ground prep consultation. Decking or concrete base, priced separately.",p:0}
+    ]},
+    {t:"Delivery",type:"check",logistics:true,items:[
+      {l:"Fully assembled delivery. Arrives ready to fill and plug in.",p:250},
+      {l:"Crane required. Estimated, varies by site access.",p:600},
+      {l:"Ireland, Scotland or Isle of Wight",p:600,
+       flag:"£600 here, £300 on the barrel sauna, £500 on the Slimline."},
+      {l:"EU delivery",p:900}
+    ]}
+  ]
+},
+
+/* ---------------------------------------------------------------- 2 */
+sauna:{
+  name:"Bespoke Barrel Sauna",
+  intro:"Handcrafted barrel sauna. Includes benches with backrests, stainless steel tightening bands and fixings, decorative barrel boards, horizontal base feet, structural floor panels, solid timber front door with lock and spare keys, heater surround with fire protection plates, internal safety guarding, floor drainage, rodent guard plates and ventilation fixtures. Volcanic stones included.",
+  base:0,
+  groups:[
+    {t:"Build type",type:"select",key:"buildtype",items:[
+      {l:"Residential",p:0},{l:"Commercial",p:0}
+    ]},
+    {t:"Length",type:"radio",key:"len",items:[
+      {l:"1.8m Thermowood",p:5250,base:true},
+      {l:"2.5m Thermowood",p:7995,base:true},
+      {l:"3.2m Thermowood",p:8795,base:true},
+      {l:"3.6m Thermowood",p:10250,base:true},
+      {l:"4.1m Thermowood",p:10995,base:true},
+      {l:"4.6m Thermowood",p:11795,base:true},
+      {l:"5m Thermowood",p:12745,base:true},
+      {l:"6m Thermowood",p:13495,base:true}
+    ]},
+    {t:"Timber",type:"select",key:"timber",items:[
+      {l:"Treated Thermowood. Heat dried at 200°C, up to 96% moisture removed.",p:0},
+      {l:"Pinewood",p:0}
+    ]},
+    {t:"Height and width",type:"select",key:"hw",items:[
+      {l:"2m x 2m. Included with selected windows.",p:0},
+      {l:"2.3m x 2.3m with wider seats",p:725},
+      {l:"Large 2.3m x 2.3m with wider seats",p:995},
+      {l:"Large 2.3m x 2.3m with wider bench design",p:1100}
+    ]},
+    {t:"Rear window",type:"select",key:"rear",items:[
+      {l:"Full wood wall. Included.",p:0},
+      {l:"2 x vertical sleek double glazed windows",p:325},
+      {l:"Half glass, 2m diameter sauna",p:550},
+      {l:"Half glass, 2.3m sauna",p:645},
+      {l:"Half glass cover with shoe bolts, 2m diameter",p:725},
+      {l:"Half glass cover with shoe bolts, 2.3m diameter",p:900},
+      {l:"Full flat glass, 2m diameter sauna",p:995},
+      {l:"Flat glass, 2.3m diameter sauna",p:1200},
+      {l:"Tint globe with custom internal timber ring",p:2795},
+      {l:"Panoramic globe. Blackout finish with custom timber ring internal trimming.",p:2995}
+    ]},
+    {t:"Entrance windows",type:"select",key:"entwin",items:[
+      {l:"No windows",p:0},
+      {l:"1 vertical sleek window in centre of door",p:70},
+      {l:"2 x double glazed framed vertical sleek windows, front sides",p:325},
+      {l:"3 x double glazed framed vertical sleek windows, in door and both sides",p:395},
+      {l:"Full glass facade panels and glass door, 2m diameter premium",p:1100},
+      {l:"Full glass facade panels and glass door, 2.3m diameter premium",p:1300}
+    ]},
+    {t:"Front door",type:"select",key:"door",items:[
+      {l:"Classic. Secure sauna door with vertical tinted window, wooden handle, stainless steel lock and key. Included.",p:0},
+      {l:"Zenview Spa. Full sandglass sauna door with wooden handle.",p:195},
+      {l:"Zenview Secure. Full sandglass door with thick frame, stainless steel lock and key.",p:249}
+    ]},
+    {t:"Entrance layout",type:"select",key:"entlay",items:[
+      {l:"Flush. Included.",p:0},
+      {l:"Include porch, 0.6m",p:425},
+      {l:"Include porch with arm rests, 0.6m",p:495}
+    ]},
+    {t:"Internal layout",type:"select",key:"intlay",items:[
+      {l:"All sauna space. No changing room.",p:0},
+      {l:"1m changing and cooling room with additional sandglass door",p:725,
+       flag:"The same changing rooms appear again under Side door at £1,100. Two routes, two prices."},
+      {l:"1.5m changing and cooling room with additional sandglass door",p:725},
+      {l:"Bespoke layout. See notes. Not included in the subtotal.",p:0}
+    ]},
+    {t:"Internal fittings",type:"check",items:[
+      {l:"1 x fitted towel hanger, 4 hooks",p:20},
+      {l:"2 x fitted towel hangers, 8 hooks total",p:35},
+      {l:"Under seat storage in changing room",p:150},
+      {l:"Fold up table",p:195}
+    ]},
+    {t:"Bench and heater layout",type:"select",key:"bench",items:[
+      {l:"No front windows",p:0},
+      {l:"2 x side benches with central heater. Included.",p:0},
+      {l:"3 way U shape benches with curved globe bench and side heater. Rear bench fits flush with the globe window, adding 0.5m extra sauna space. Included with globe window.",p:0,
+       flag:"Included only when the rear window is a Panoramic or Tint Globe. Without a globe window Ecwid still charges nothing for it, so this layout can be sold at no cost on any build. Confirm the intended price."},
+      {l:"3 way straight benches with side heater",p:425}
+    ]},
+    {t:"Heater",type:"select",key:"heater",items:[
+      {l:"4.5kW Harvia KIP90 electric heater, stainless steel finish, wall mounted, switch operated. Included.",p:0},
+      {l:"Harvia KIP90 electric heater, black finish, wall mounted, switch operated. Included.",p:0},
+      {l:"Narvi external feed burner",p:350},
+      {l:"WiFi IPX5 with integrated control panel",p:795},
+      {l:"Harvia Cilindro PC90XE standing heater. WiFi and digital wall panel control, smartphone app compatible. Volcanic stones and safety features included.",p:900},
+      {l:"Harvia 20 Pro SL wood burning heater, external feed",p:1100},
+      {l:"Harvia 16.5kW M3 wood burning heater, internal feed. Chimney, heat reflectors, heat plate, heat shield, base plates and guard rail all included.",p:1250},
+      {l:"Harvia 24kW M3 wood burning heater, internal feed. Chimney, heat reflectors, heat plate, heat shield, base plates and guard rail all included.",p:1450},
+      {l:"Harvia Legend wood burning heater, internal feed. Chimney, heat reflectors, heat plate, heat shield, base plates, stones and guard rail all included.",p:2189},
+      {l:"Harvia Green Flame wood burning heater, internal feed. Chimney, heat reflectors, heat plate, heat shield, base plates, stones and guard rail all included.",p:3995},
+      {l:"Other heater. Pricing to be confirmed, not included in the subtotal.",p:0}
+    ]},
+    {t:"Heater extras",type:"check",items:[
+      {l:"Auto timer and safety switch for WiFi app controlled heater. Compatible with WiFi heater only.",p:500,
+       flag:"Only fits the WiFi IPX5 or the Harvia Cilindro PC90XE. If a different heater is selected above, this cannot be supplied."},
+      {l:"Heated water tank for warm rinsing and steam. Woodburner only.",p:375}
+    ]},
+    {t:"Roof covering",type:"select",key:"roof",items:[
+      {l:"Black classic hexagon bitumen roof shingles with UV protection and weatherproof seal. Included.",p:0},
+      {l:"Grey classic hexagon bitumen roof shingles with UV protection and weatherproof seal",p:0},
+      {l:"Red classic hexagon bitumen roof shingles with UV protection and weatherproof seal",p:0},
+      {l:"Green classic hexagon bitumen roof shingles with UV protection and weatherproof seal",p:0},
+      {l:"Wooden roof slates with authentic finish and enhanced natural style",p:375}
+    ]},
+    {t:"Roof lip edges",type:"select",key:"rooflip",items:[
+      {l:"Classic rounded roof edge lips for traditional barrel finish. Included.",p:0},
+      {l:"Straight roof edge finish for a sleek modern profile",p:50}
+    ]},
+    {t:"Wood finishing",type:"check",items:[
+      {l:"Painted base feet in black",p:100},
+      {l:"Paraffin oil treatment",p:275},
+      {l:"Wood stain",p:395}
+    ]},
+    {t:"External base",type:"select",key:"extbase",pendingPrice:true,items:[
+      {l:"None",p:0},
+      {l:"Decide later",p:0},
+      {l:"3m made to order mobile sauna trailer. Galvanised steel with braking system, anti sway and anchoring.",p:0},
+      {l:"3.5m made to order mobile sauna trailer. Galvanised steel with braking system, anti sway and anchoring.",p:0},
+      {l:"4m made to order mobile sauna trailer. Galvanised steel with braking system, anti sway and anchoring.",p:0},
+      {l:"4.5m made to order mobile sauna trailer. Galvanised steel with braking system, anti sway and anchoring.",p:0},
+      {l:"5m made to order mobile sauna trailer. Galvanised steel with braking system, anti sway and anchoring.",p:0},
+      {l:"6m made to order mobile sauna trailer. Galvanised steel with braking system, anti sway and anchoring.",p:0}
+    ]},
+    {t:"Sauna lighting",type:"check",items:[
+      {l:"Harvia heat proof wall light",p:150},
+      {l:"Harvia heat proof wall light x 2",p:300},
+      {l:"Harvia heat proof wall light x 3",p:450},
+      {l:"Under seat sauna heat proof waterproof warm LED with trim surround and IP rated wall switch",p:295},
+      {l:"Under seat heat proof changing room warm LED",p:295},
+      {l:"Under seat changing and cooling room colour changing heat proof LED with trim surround and IP rated wall switch",p:325},
+      {l:"Under seat sauna colour changing heat proof LED with trim surround and IP rated wall switch",p:325}
+    ]},
+    {t:"Changing room lighting",type:"check",items:[
+      {l:"Wall light",p:149},
+      {l:"Cool blue or colour changing light",p:349}
+    ]},
+    {t:"Outdoor and porch lighting",type:"check",items:[
+      {l:"Wall light",p:195},
+      {l:"Modern wall light",p:295}
+    ]},
+    {t:"Side door with split section changing room. XL saunas only.",type:"select",key:"sidedoor",items:[
+      {l:"None",p:0},
+      {l:"1m changing room",p:1100,
+       flag:"All three sizes are £1,100. And these duplicate the £725 changing rooms above."},
+      {l:"1.5m changing room",p:1100},
+      {l:"2m changing room",p:1100}
+    ]},
+    {t:"Additional customisation",type:"check",items:[
+      {l:"Interchangeable high end aspen middle section, 2m sauna",p:450}
+    ]},
+    {t:"Accessories",type:"check",items:[
+      {l:"Sandglass timer",p:15},
+      {l:"Cloth rack",p:20},
+      {l:"Headrest",p:25},
+      {l:"Thermometer and hydrometer",p:30},
+      {l:"Bucket and ladle",p:30},
+      {l:"2 x headrest",p:50}
+    ]},
+    {t:"Solar",type:"check",items:[
+      {l:"Plug sockets in changing room under seat for charging and workspace. Wired into solar system.",p:200},
+      {l:"Rooftop solar panels with battery and internal or external light wiring",p:1995},
+      {l:"Full solar system with battery, internal and external light wiring, and ice bath chiller filter unit",p:4995}
+    ]},
+    {t:"Extras",type:"check",items:[
+      {l:"Additional central double side steps for ice bath on mobile sauna",p:295},
+      {l:"Additional raised decking surround or counterweight for mobile sauna and ice bath",p:595}
+    ]},
+    {t:"Additional builds",type:"check",items:[
+      {l:"Barrel shower",p:2495},
+      {l:"Single dipper Thermowood ice bath or cold plunger with chiller and filter",p:3995},
+      {l:"Thermowood hot tub with massage jets, LED lights, stairs and thermo cover",p:5995},
+      {l:"Double dipper Thermowood ice bath with chiller filter",p:5995},
+      {l:"Eco glamping pod",p:7995},
+      {l:"2 x Thermowood hot tub with massage jets, LED lights, stairs and thermo cover",p:11395}
+    ]},
+    {t:"Delivery method",type:"select",key:"del",logistics:true,items:[
+      {l:"Collection",p:0},
+      {l:"Fully assembled delivery, England and Wales",p:495},
+      {l:"Full on site build by our team. Includes handballing, travel, accommodation and carpenter labour.",p:1250},
+      {l:"Large sauna, full on site build by our team",p:1500},
+      {l:"Price on request outside England and Wales",p:0}
+    ]},
+    {t:"Additional delivery charge for remote or non standard access",type:"check",logistics:true,items:[
+      {l:"Ireland, Scotland or the Isle of Wight",p:300},
+      {l:"EU",p:500},
+      {l:"Crane. Actual cost may vary.",p:1200,
+       flag:"£1,200 here, £600 on the Classic, £950 on the Single Slimline, £1,400 on the pod."}
+    ]},
+    {t:"Not included",type:"info",items:[
+      {l:"Electrical installation. Our team supplies and fits the unit with all safety elements, but wiring must be done by a qualified local electrician after the build."},
+      {l:"Optional maintenance plan, £1,200 a year. Two visits, deep clean, chimney sweep, oil or stain reapplication, heater inspection, window cleaning and timber adjustment. Confirmed on final invoice."}
+    ]}
+  ]
+},
+
+/* ---------------------------------------------------------------- 3 */
+pod:{
+  name:"Eco Glamping Pod",
+  intro:"2.4m wide by 4.8m long. Pine roof edge panels and black hexagon bitumen shingles included with all pod types.",
+  base:0,
+  groups:[
+    {t:"Exterior size and wall build",type:"radio",key:"wall",items:[
+      {l:"Pinewood",p:9995,base:true},
+      {l:"Thermowood, 48mm thick walls",p:11495,base:true},
+      {l:"Fully insulated. Premium 130mm wall thickness, 128mm sides, 120mm front and rear, dual 14mm pine cladding with 100mm stone wool insulation.",p:11695,base:true}
+    ]},
+    {t:"Floor type and build",type:"select",key:"floor",items:[
+      {l:"Standard. 30mm pinewood floor boards.",p:0},
+      {l:"160mm premium insulated. 28mm pine floorboards over 100mm stone wool and structural base.",p:0}
+    ]},
+    {t:"Entrance layout",type:"check",items:[
+      {l:"1m terrace with 0.6m covered porch. 28mm impregnated timber decking with roof covered section at the entrance.",p:350}
+    ]},
+    {t:"Entrance terrace",type:"select",key:"terrace",items:[
+      {l:"None",p:0},
+      {l:"1m front terrace. Timber decking platform at the entrance for outdoor use. Included with insulated pod. Adds 1m beyond the pod base, so with the 0.6m porch the total terrace depth becomes 1.6m.",p:0}
+    ]},
+    {t:"Entry door",type:"select",key:"pdoor",items:[
+      {l:"Classic double door with double glazed squared windows and secure lock and key. Included with non insulated.",p:0},
+      {l:"Danish style double glazed entry door. Double doors with tall sleek glass panels, thick timber frame, stainless steel lock and key. Included with insulated pod.",p:0}
+    ]},
+    {t:"Internal layout",type:"select",key:"playout",items:[
+      {l:"Open plan",p:0},
+      {l:"1.5m bedroom partition. Fixed internal dividing wall positioned 1.5m from the rear for a separate sleeping area.",p:100}
+    ]},
+    {t:"Bedroom",type:"check",items:[
+      {l:"Fixed double bed. Timber framed, built into the rear sleeping area.",p:250}
+    ]},
+    {t:"Rear wall",type:"check",items:[
+      {l:"Half glass double glazed fixed rear window. 26mm unit, two panes, 6-14-6 insulating air gap.",p:1500}
+    ]},
+    {t:"Exterior finish",type:"check",items:[
+      {l:"Stain or paint, outside only. Protective finish for exterior cladding and trim.",p:280},
+      {l:"Stain or paint, inside and outside. Full timber treatment for cladding, trim and interior walls.",p:350}
+    ]},
+    {t:"Delivery method",type:"select",key:"pdel",logistics:true,items:[
+      {l:"Delivered fully built, standard access. Offloaded into place, no crane. Access must allow machinery and be wider than the pod.",p:600},
+      {l:"Build on site by team, 1 to 2 day build. Delivered in sections and built on your prepared ground.",p:1200},
+      {l:"Delivered fully built, tricky access. Offloaded by crane for restricted sites. Final cost confirmed on invoice after access assessment.",p:1400,
+       flag:"£1,400 here against £600 to £1,200 for crane on other products."}
+    ]}
+  ]
+},
+
+/* ---------------------------------------------------------------- 4 */
+chillCore:{
+  name:"The Chill Core Cold Plunge",
+  intro:"Round single cold plunge. 1 to 2 people, ideally one at a time for full depth immersion. 990mm internal, 1150mm external, 1005mm total height, 1000mm soaking depth. Internal seat approx 350mm wide, 300mm high.",
+  base:0,
+  groups:[
+    {t:"The tub",type:"radio",key:"clad",items:[
+      {l:"Treated Thermowood. Heat dried and thermally modified at 200°C.",p:1865,base:true},
+      {l:"Pinewood Plunge",p:1365,base:true}
+    ]},
+    {t:"Interior",type:"select",key:"colour",items:[
+      {l:"Stainless steel",p:0},
+      {l:"Blackout, polypropylene",p:0},
+      {l:"Storm Grey, polypropylene",p:0},
+      {l:"Frost Grey, polypropylene",p:0},
+      {l:"Glacier Blue, polypropylene",p:0},
+      {l:"Ice White, polypropylene",p:0},
+      {l:"Decide later",p:0}
+    ]},
+    {t:"Included as standard",type:"info",items:[
+      {l:"Dual stainless steel tightening bands"},
+      {l:"Drainage. Internal base plug and external stainless steel side tap"},
+      {l:"Single stepper"},
+      {l:"Chiller unit installation, where a chiller is fitted"}
+    ]},
+    {t:"Upgrades",type:"check",items:[
+      {l:"Canopy cover",p:125},
+      {l:"Large double stepper",p:150},
+      {l:"Handcrafted wooden lid with handles",p:155},
+      {l:"LED internal spotlight. Polypropylene interior only.",p:149},
+      {l:"Timber stain. Colour chosen later.",p:165},
+      {l:"Insulated floor base. Double layer with 100mm insulation.",p:300},
+      {l:"Air jet system. Polypropylene interior only.",p:450}
+    ]},
+    {t:"Chiller",type:"select",key:"chill",pending:true,items:[
+      {l:"Options pending. No chiller line captured on this product.",p:0}
+    ]},
+    {t:"Groundwork",type:"check",items:[
+      {l:"Ground prep consultation. Decking or concrete base, priced separately.",p:0}
+    ]},
+    {t:"Delivery",type:"select",key:"del",logistics:true,pending:true,items:[
+      {l:"Options pending. Not yet captured.",p:0}
+    ]},
+    {t:"Included",type:"info",items:[
+      {l:"Two year warranty on all components"},
+      {l:"Aftercare support. Our team is available after delivery."}
+    ]}
+  ]
+},
+
+/* ---------------------------------------------------------------- 5 */
+woodFired:{
+  name:"Double Dipper Wood Fired Hot Tub",
+  intro:"Oval two seater. External height 108cm, internal 100cm, external width 170cm, internal 170cm. Two internal seats, 26cm high, 33cm wide. Soaking depth 100cm seat to rim, 108cm base to rim. Water volume 750 litres. Approx 1,110kg filled with two adults. Needs a flat base supporting 1,150kg, minimum 210 x 180cm.",
+  base:0,
+  groups:[
+    {t:"Wooden cladding",type:"radio",key:"clad",items:[
+      {l:"Treated Thermowood. Heat dried and thermally modified at 200°C.",p:2565,base:true,
+       flag:"Ecwid headline is £3,315. That equals this £2,565 plus the £750 heater, so the heater is already inside the headline while also sitting below as an addable option. Confirm which is right."},
+      {l:"Pinewood Plunge",p:2365,base:true}
+    ]},
+    {t:"Interior",type:"select",key:"colour",items:[
+      {l:"Storm Grey",p:0},{l:"Glacier Blue",p:0},{l:"Ice White",p:0},{l:"Decide later",p:0}
+    ]},
+    {t:"Included as standard",type:"info",items:[
+      {l:"Dual stainless steel tightening bands"},
+      {l:"Drainage. Internal base plug and external stainless steel side tap"},
+      {l:"Classic ladder"}
+    ]},
+    {t:"Heating",type:"check",items:[
+      {l:"Integrated wood burning stove with chimney",p:750,
+       flag:"May already be inside the headline price. See the cladding note."}
+    ]},
+    {t:"Upgrades",type:"check",items:[
+      {l:"Double stepper",p:150},
+      {l:"Handcrafted wooden lid with handles",p:175},
+      {l:"Thermo insulated cover. Heavy duty marine grade vinyl, centre fold, UV and mildew resistant, fireproof.",p:285},
+      {l:"LED internal spotlight",p:169},
+      {l:"Air jet system",p:450}
+    ]},
+    {t:"Groundwork",type:"check",items:[
+      {l:"Ground prep consultation. Decking or concrete base, priced separately.",p:0}
+    ]},
+    {t:"Delivery",type:"select",key:"del",logistics:true,items:[
+      {l:"UK standard delivery",p:300,
+       flag:"£300 here, £250 on both Slimlines and the Classic. Fourth different UK mainland figure in the catalogue."},
+      {l:"Ireland, Scotland or Isle of Wight",p:600},
+      {l:"EU delivery",p:900},
+      {l:"Other. See notes.",p:0}
+    ]},
+    {t:"Included",type:"info",items:[
+      {l:"Two year warranty on all components"},
+      {l:"Aftercare support. Our team is available after delivery."}
+    ]}
+  ]
+},
+
+/* ---------------------------------------------------------------- 6 */
+ddSlimline:{
+  name:"Double Dipper Ice Bath, Slimline",
+  intro:"Oval two seater. Internal width approx 120cm, external 130cm. Internal length 190cm, external 200cm. Internal height 97cm, external 104cm. Seat height 28cm, width 40cm, backrest 66cm. Water volume 800 litres. Dry weight 160kg, max load approx 1,200kg. Packed transport size 235 x 119 x 150cm.",
+  base:0,
+  groups:[
+    {t:"Build type",type:"select",key:"buildtype",items:[
+      {l:"Residential",p:0},{l:"Commercial",p:0}
+    ]},
+    {t:"The tub",type:"radio",key:"clad",items:[
+      {l:"Thermowood cladding, 22mm thick. Heat dried and thermally modified at 200°C.",p:2765,base:true}
+    ]},
+    {t:"Interior. Fibreglass with two fixed seats.",type:"select",key:"colour",items:[
+      {l:"Storm Grey",p:0},{l:"Glacier Blue",p:0},{l:"Ice White",p:0},{l:"Blackout",p:0}
+    ]},
+    {t:"Included as standard",type:"info",items:[
+      {l:"Curved Thermowood double step"},
+      {l:"Drainage. Internal base plug and external stainless steel side tap"}
+    ]},
+    {t:"Chiller",type:"select",key:"chill",items:[
+      {l:"No chiller. Ice bath only.",p:0},
+      {l:"Chiller unit, filter and chiller. Cools to 3 to 5°C.",p:750},
+      {l:"DualTemp unit, filter, hot and cold. 3 to 5°C to 40°C.",p:2500,
+       flag:"£2,500 here, £1,200 on the Double Dipper Classic. Same named unit."}
+    ]},
+    {t:"Chiller housing",type:"check",items:[
+      {l:"Protective wooden housing for external chiller unit. Recommended.",p:145}
+    ]},
+    {t:"Insulation",type:"check",items:[
+      {l:"Full body foam insulation. Rigid polyurethane, fitted in walls and base.",p:320}
+    ]},
+    {t:"Electrics",type:"check",items:[
+      {l:"Underwater LED spotlight",p:169},
+      {l:"Air jet system",p:450}
+    ]},
+    {t:"Lid",type:"check",items:[
+      {l:"Thermo insulated cover. Heavy duty marine grade vinyl, centre fold, UV and mildew resistant, fireproof.",p:285}
+    ]},
+    {t:"Timber treatment",type:"check",items:[
+      {l:"Stain service now, colour chosen later",p:150}
+    ]},
+    {t:"Accessories",type:"check",items:[
+      {l:"Clamp on metal bottle holder, 3 drink slots, rim mounting",p:55},
+      {l:"Larger 5 slot bottle holder",p:65},
+      {l:"Floating drop in thermometer with easy read dial",p:85},
+      {l:"Custom sign. Mainly for commercial builds.",p:85},
+      {l:"Aqualarus surface skimmer. Removes floating debris automatically.",p:185}
+    ]},
+    {t:"Delivery",type:"select",key:"del",logistics:true,items:[
+      {l:"UK mainland delivery",p:250},
+      {l:"Ireland, Scotland or Isle of Wight",p:500},
+      {l:"EU delivery. Price to be confirmed.",p:900},
+      {l:"Other international. Price to be confirmed.",p:1500}
+    ]},
+    {t:"Not included",type:"info",items:[
+      {l:"Electrical installation. Our team installs the tub and all fittings, but the final 220V connection must be completed on site by a qualified electrician."}
+    ]}
+  ]
+},
+
+/* ---------------------------------------------------------------- 7 */
+sdSlimline:{
+  name:"Single Dipper Cold Plunge, Slimline",
+  intro:"Our narrowest plunge tub. One person seated. Internal width 91cm, external 105cm. Internal height 91cm, external 105cm. Soaking depth 25cm seat to rim, 93cm base to rim. Wall thickness 19mm. Water volume approx 400 to 450 litres. Max load approx 1,200kg. Each tub is made to order, so final measurements may vary slightly.",
+  base:0,
+  groups:[
+    {t:"Build type",type:"select",key:"buildtype",items:[
+      {l:"Residential",p:0},{l:"Commercial",p:0}
+    ]},
+    {t:"The tub",type:"radio",key:"clad",items:[
+      {l:"Thermowood cladding, 22mm thick. Heat dried and thermally modified at 200°C.",p:2785,base:true,
+       flag:"Ecwid headline is £3,305 against this £2,785. £520 unaccounted for by any visible option."}
+    ]},
+    {t:"Interior. Fibreglass.",type:"select",key:"colour",items:[
+      {l:"Storm Grey",p:0},{l:"Glacier Blue",p:0},{l:"Ice White",p:0},{l:"Blackout",p:0}
+    ]},
+    {t:"Included as standard",type:"info",items:[
+      {l:"Curved Thermowood double step"},
+      {l:"Drainage. Internal base plug and external stainless steel side tap"}
+    ]},
+    {t:"Chiller",type:"select",key:"chill",items:[
+      {l:"No chiller. Tub only.",p:0},
+      {l:"Chiller unit, filter and chiller. Cools to 3 to 5°C.",p:750},
+      {l:"Chiller unit with cover",p:900},
+      {l:"DualTemp unit, filter, hot and cold. 3 to 5°C to 40°C.",p:2500},
+      {l:"DualTemp unit with cover",p:2650,
+       flag:"Ecwid reads £25,650. Corrected here to £2,650, which matches the £150 cover premium on the chiller line. As typed it would produce an estimate ten times the product value on a live call."}
+    ]},
+    {t:"Chiller housing",type:"check",items:[
+      {l:"Protective wooden housing for external chiller unit. Recommended.",p:145}
+    ]},
+    {t:"Insulation",type:"check",items:[
+      {l:"Full body foam insulation. Rigid polyurethane, fitted in walls and base.",p:320}
+    ]},
+    {t:"Electrics",type:"check",items:[
+      {l:"Underwater LED spotlight",p:169},
+      {l:"Air jet system",p:450}
+    ]},
+    {t:"Lid",type:"check",items:[
+      {l:"Thermo insulated cover. Heavy duty marine grade vinyl, centre fold, UV and mildew resistant, fireproof.",p:285}
+    ]},
+    {t:"Accessories",type:"check",items:[
+      {l:"Clamp on metal bottle holder, 3 drink slots, rim mounting",p:55},
+      {l:"Larger 5 slot bottle holder",p:65},
+      {l:"Floating drop in thermometer with easy read dial",p:85},
+      {l:"Custom sign. Mainly for commercial builds.",p:85},
+      {l:"Aqualarus surface skimmer. Removes floating debris automatically.",p:185}
+    ]},
+    {t:"Delivery",type:"select",key:"del",logistics:true,items:[
+      {l:"UK mainland delivery",p:250},
+      {l:"Ireland, Scotland or Isle of Wight",p:500},
+      {l:"EU delivery. Price to be confirmed.",p:900},
+      {l:"Other international. Price to be confirmed.",p:1500}
+    ]},
+    {t:"Access",type:"check",logistics:true,items:[
+      {l:"Crane service to lift the tub into place for tricky access. Final price to be confirmed.",p:950}
+    ]},
+    {t:"Not included",type:"info",items:[
+      {l:"Electrical installation. Our team installs the tub and all fittings, but the final 220V connection must be completed on site by a qualified electrician."}
+    ]}
+  ]
+}
+
+};
+
+var VAT = 0.20;
+var DEPOSIT = 500;
+var DEPOSIT_URL = 'https://barrelsaunauk.com/secure-your-build';
+var DEPOSIT_URL_PLAIN = 'barrelsaunauk.com/secure-your-build';
+
+/* ========================= HELPERS ========================= */
+function money(n){
+  return '£' + Math.round(n).toLocaleString('en-GB');
+}
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function el(id){ return document.getElementById(id); }
+
+/* ========================= RENDER FORM ========================= */
+function initProducts(){
+  var sel = el('pLine');
+  sel.innerHTML = '';
+  Object.keys(CATALOGUE).forEach(function(k){
+    var o = document.createElement('option');
+    o.value = k;
+    o.textContent = CATALOGUE[k].name;
+    sel.appendChild(o);
+  });
+}
+
+function buildGroups(){
+  var key = el('pLine').value;
+  var prod = CATALOGUE[key];
+  el('pIntro').textContent = prod.intro || '';
+  el('estName').textContent = prod.name;
+
+  var host = el('groups');
+  host.innerHTML = '';
+
+  prod.groups.forEach(function(g, gi){
+    var card = document.createElement('div');
+    card.className = 'card';
+
+    var hd = document.createElement('div');
+    hd.className = 'card-hd';
+    hd.textContent = g.t;
+    card.appendChild(hd);
+
+    var bd = document.createElement('div');
+    bd.className = 'card-bd';
+
+    if(g.type === 'info'){
+      g.items.forEach(function(it){
+        var d = document.createElement('div');
+        d.className = 'tick';
+        d.innerHTML = '<div class="t">' + esc(it.l) + '</div><div class="p inc">Included</div>';
+        bd.appendChild(d);
+      });
+    }
+    else if(g.type === 'select' || g.type === 'radio'){
+      var f = document.createElement('div');
+      f.className = 'f';
+      var s = document.createElement('select');
+      s.dataset.gi = gi;
+      s.dataset.kind = g.type;
+      if(g.type === 'select'){
+        var blank = document.createElement('option');
+        blank.value = '';
+        blank.textContent = 'Please choose…';
+        s.appendChild(blank);
+      }
+      g.items.forEach(function(it, ii){
+        var o = document.createElement('option');
+        o.value = ii;
+        o.textContent = it.l + (it.p ? '  (' + money(it.p) + ')' : (it.base ? '  (' + money(0) + ')' : ''));
+        if(it.p) o.textContent = it.l + '  (' + money(it.p) + ')';
+        else o.textContent = it.l;
+        s.appendChild(o);
+      });
+      s.addEventListener('change', render);
+      f.appendChild(s);
+      bd.appendChild(f);
+
+      if(g.pending){
+        var pw = document.createElement('div');
+        pw.className = 'pending';
+        pw.textContent = 'Option set not yet captured from Ecwid. The field is here so nothing goes missing.';
+        bd.appendChild(pw);
+      }
+      if(g.pendingPrice){
+        var pp = document.createElement('div');
+        pp.className = 'pending';
+        pp.textContent = 'Options captured, prices not. Every line above currently adds nothing to the total. Needs the trailer pricing before this goes live.';
+        bd.appendChild(pp);
+      }
+      g.items.forEach(function(it){
+        if(it.flag){
+          var fl = document.createElement('div');
+          fl.className = 'flag';
+          fl.innerHTML = '<span class="flag-i">!</span>' + esc(it.flag);
+          bd.appendChild(fl);
+        }
+      });
+    }
+    else { /* check */
+      g.items.forEach(function(it, ii){
+        var d = document.createElement('div');
+        d.className = 'tick';
+        var uid = 'c_' + gi + '_' + ii;
+        d.innerHTML =
+          '<input type="checkbox" id="' + uid + '" data-gi="' + gi + '" data-ii="' + ii + '">' +
+          '<label class="t" for="' + uid + '">' + esc(it.l) + '</label>' +
+          '<div class="p' + (it.p ? '' : ' inc') + '">' + (it.p ? money(it.p) : 'Included') + '</div>';
+        bd.appendChild(d);
+        if(it.flag){
+          var fl = document.createElement('div');
+          fl.className = 'flag';
+          fl.innerHTML = '<span class="flag-i">!</span>' + esc(it.flag);
+          bd.appendChild(fl);
+        }
+      });
+      bd.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+        cb.addEventListener('change', render);
+      });
+    }
+
+    card.appendChild(bd);
+    host.appendChild(card);
+  });
+
+  render();
+}
+
+/* ========================= COLLECT ========================= */
+function collect(){
+  var key = el('pLine').value;
+  var prod = CATALOGUE[key];
+  var out = { name:prod.name, lines:[], build:0, logi:0 };
+
+  var host = el('groups');
+
+  prod.groups.forEach(function(g, gi){
+    var picked = [];
+
+    if(g.type === 'select' || g.type === 'radio'){
+      var s = host.querySelector('select[data-gi="' + gi + '"]');
+      if(s && s.value !== ''){
+        var it = g.items[parseInt(s.value,10)];
+        if(it) picked.push(it);
+      }
+    }
+    else if(g.type === 'check'){
+      host.querySelectorAll('input[data-gi="' + gi + '"]:checked').forEach(function(cb){
+        var it = g.items[parseInt(cb.dataset.ii,10)];
+        if(it) picked.push(it);
+      });
+    }
+
+    if(picked.length){
+      out.lines.push({ t:g.t, items:picked });
+      picked.forEach(function(it){
+        var amt = it.p || 0;
+        if(g.logistics) out.logi += amt;
+        else out.build += amt;
+      });
+    }
+  });
+
+  return out;
+}
+
+/* ========================= RENDER ESTIMATE ========================= */
+function render(){
+  var d = collect();
+
+  var body = el('estBody');
+  body.innerHTML = '';
+
+  if(!d.lines.length){
+    body.innerHTML = '<div class="empty">Choose the build and the options and the estimate appears here.</div>';
+  } else {
+    d.lines.forEach(function(g){
+      var h = document.createElement('div');
+      h.className = 'grp';
+      h.textContent = g.t;
+      body.appendChild(h);
+      g.items.forEach(function(it){
+        var r = document.createElement('div');
+        r.className = 'li';
+        var lbl = it.l.length > 78 ? it.l.slice(0,78) + '…' : it.l;
+        r.innerHTML = '<div class="l">' + esc(lbl) + '</div><div class="v">' + (it.p ? money(it.p) : 'Included') + '</div>';
+        body.appendChild(r);
+      });
+    });
+  }
+
+  var adjAmt = parseFloat(el('adjAmount').value) || 0;
+  var adjLbl = el('adjLabel').value.trim() || 'Adjustment';
+
+  var net = d.build + d.logi + adjAmt;
+  var vat = net * VAT;
+  var grand = net + vat;
+
+  el('sumBuild').textContent = money(d.build);
+  el('sumLogi').textContent = money(d.logi);
+  el('sumVat').textContent = money(vat);
+  el('sumGrand').textContent = money(grand);
+
+  if(adjAmt !== 0){
+    el('sumAdjRow').style.display = '';
+    el('sumAdjLabel').textContent = adjLbl;
+    el('sumAdj').textContent = money(adjAmt);
+  } else {
+    el('sumAdjRow').style.display = 'none';
+  }
+
+  var nm = el('cName').value.trim();
+  el('tbarWho').textContent = nm ? nm + ' · ' + d.name : d.name;
+  el('tbarAmt').textContent = money(grand);
+}
+
+/* ========================= OUTPUTS ========================= */
+function totals(){
+  var d = collect();
+  var adjAmt = parseFloat(el('adjAmount').value) || 0;
+  var net = d.build + d.logi + adjAmt;
+  return { d:d, adj:adjAmt, net:net, vat:net*VAT, grand:net*(1+VAT) };
+}
+
+function waText(){
+  var t = totals();
+  var nm = el('cName').value.trim();
+  var L = [];
+  L.push('Barrel Sauna UK ♨️');
+  L.push('');
+  L.push(nm ? 'Estimate for ' + nm : 'Your estimate');
+  L.push(t.d.name);
+  L.push('');
+  t.d.lines.forEach(function(g){
+    L.push(g.t.toUpperCase());
+    g.items.forEach(function(it){
+      L.push('• ' + it.l + (it.p ? ': ' + money(it.p) : ': included'));
+    });
+    L.push('');
+  });
+  L.push('Build subtotal: ' + money(t.d.build));
+  if(t.d.logi) L.push('Delivery and logistics: ' + money(t.d.logi));
+  if(t.adj) L.push((el('adjLabel').value.trim() || 'Adjustment') + ': ' + money(t.adj));
+  L.push('VAT at 20%: ' + money(t.vat));
+  L.push('Total: ' + money(t.grand) + ' 💷');
+  L.push('');
+  L.push('To secure your build: £500, non-refundable, secures a place in the order queue. Deducted from the total.');
+  L.push('');
+  L.push(DEPOSIT_URL_PLAIN);
+  var n = el('cNotes').value.trim();
+  if(n){ L.push(''); L.push('Notes: ' + n); }
+  L.push('');
+  L.push('The Barrel Sauna UK Team');
+  return L.join('\n');
+}
+
+function emailText(){
+  var t = totals();
+  var nm = el('cName').value.trim();
+  var first = nm ? nm.split(' ')[0] : '';
+  var closer = el('cCloser').value.trim();
+  var L = [];
+
+  L.push(first ? 'Hi ' + first + ',' : 'Hello,');
+  L.push('');
+  L.push('Thanks for your time earlier. I have put together the estimate we talked through, so you have everything in one place.');
+  L.push('');
+  L.push('');
+  L.push('YOUR BUILD');
+  L.push(t.d.name);
+  L.push('');
+
+  t.d.lines.forEach(function(g){
+    L.push(g.t.toUpperCase());
+    g.items.forEach(function(it){
+      var label = it.l;
+      var price = it.p ? money(it.p) : 'Included';
+      wrapLines(label, 46).forEach(function(seg, i){
+        if(i === 0) L.push('  ' + pad(seg, 48) + price);
+        else L.push('  ' + seg);
+      });
+    });
+    L.push('');
+  });
+
+  L.push('');
+  L.push('THE NUMBERS');
+  L.push('');
+  L.push('  ' + pad('Build', 48) + money(t.d.build));
+  if(t.d.logi) L.push('  ' + pad('Delivery and logistics', 48) + money(t.d.logi));
+  if(t.adj) L.push('  ' + pad(el('adjLabel').value.trim() || 'Adjustment', 48) + money(t.adj));
+  L.push('  ' + pad('VAT at 20%', 48) + money(t.vat));
+  L.push('  ' + rep('-', 58));
+  L.push('  ' + pad('TOTAL', 48) + money(t.grand));
+  L.push('');
+  L.push('');
+  L.push('SECURING YOUR BUILD');
+  L.push('');
+  L.push('A deposit of £500 secures a place in the order queue. It is');
+  L.push('non-refundable and it comes off the total above.');
+  L.push('');
+  L.push('  ' + DEPOSIT_URL_PLAIN);
+  L.push('');
+
+  var n = el('cNotes').value.trim();
+  if(n){
+    L.push('');
+    L.push('NOTES FROM OUR CALL');
+    L.push('');
+    wrapLines(n, 62).forEach(function(seg){ L.push(seg); });
+    L.push('');
+  }
+
+  L.push('');
+  L.push('Everything is handmade to order in our Welsh workshop, so no two');
+  L.push('builds are quite the same. If you want to change anything above,');
+  L.push('just say and I will put a fresh estimate together.');
+  L.push('');
+  L.push('Any questions at all, reply here and I will pick it up.');
+  L.push('');
+  L.push(closer ? closer : 'The Barrel Sauna UK Team');
+  if(closer) L.push('Barrel Sauna UK');
+  L.push('Handcrafted in Wales');
+  L.push('');
+  L.push('This estimate holds for 30 days. Prices exclude any groundwork');
+  L.push('or electrical work unless listed above.');
+
+  return L.join('\n');
+}
+
+function pad(str, n){
+  str = String(str);
+  if(str.length >= n) return str + '  ';
+  return str + rep(' ', n - str.length);
+}
+function rep(c, n){
+  var o = '';
+  for(var i=0;i<n;i++) o += c;
+  return o;
+}
+function wrapLines(str, w){
+  var words = String(str).split(/\s+/);
+  var out = [], cur = '';
+  words.forEach(function(word){
+    if((cur + ' ' + word).trim().length <= w){
+      cur = (cur + ' ' + word).trim();
+    } else {
+      if(cur) out.push(cur);
+      cur = word;
+    }
+  });
+  if(cur) out.push(cur);
+  return out.length ? out : [''];
+}
+
+/* ---------- STYLED HTML EMAIL ---------- */
+function emailHtml(){
+  var t = totals();
+  var nm = el('cName').value.trim();
+  var first = nm ? nm.split(' ')[0] : '';
+  var closer = el('cCloser').value.trim();
+  var F = '#2B5336', SP = '#8fae86', TC = '#C08B41', BD = '#4a4a4a',
+      PN = '#f7f8f3', HL = '#e2ddd4', SM = '#7d9a86', MR = '#5E1F28';
+  var ff = 'font-family:verdana,geneva,sans-serif;';
+  var H = [];
+
+  H.push('<div style="' + ff + 'max-width:600px;margin:0 auto;background:#ffffff;">');
+
+  H.push('<div style="background:' + F + ';padding:28px 32px;">');
+  H.push('<p style="margin:0 0 6px 0;' + ff + 'font-size:10px;font-weight:700;color:' + SP + ';letter-spacing:2.5px;">BARREL SAUNA UK</p>');
+  H.push('<p style="margin:0;' + ff + 'font-size:21px;font-weight:700;color:#ffffff;line-height:1.3;">' + (nm ? 'Estimate for ' + esc(nm) : 'Your estimate') + '</p>');
+  H.push('<p style="margin:6px 0 0 0;' + ff + 'font-size:13px;font-weight:400;color:' + SP + ';">' + esc(t.d.name) + '</p>');
+  H.push('</div>');
+
+  H.push('<div style="padding:28px 32px 0 32px;">');
+  H.push('<p style="margin:0 0 16px 0;' + ff + 'font-size:15px;font-weight:400;color:' + BD + ';line-height:1.7;">' + (first ? 'Hi ' + esc(first) + ',' : 'Hello,') + '</p>');
+  H.push('<p style="margin:0 0 24px 0;' + ff + 'font-size:15px;font-weight:400;color:' + BD + ';line-height:1.7;">Thanks for your time earlier. I have put together the estimate we talked through, so you have everything in one place.</p>');
+  H.push('</div>');
+
+  H.push('<div style="padding:0 32px;">');
+  t.d.lines.forEach(function(g){
+    H.push('<p style="margin:22px 0 8px 0;' + ff + 'font-size:10px;font-weight:700;color:' + SM + ';letter-spacing:2px;border-bottom:1px solid ' + HL + ';padding-bottom:6px;">' + esc(g.t.toUpperCase()) + '</p>');
+    H.push('<table width="100%" cellpadding="0" cellspacing="0" border="0">');
+    g.items.forEach(function(it){
+      H.push('<tr>');
+      H.push('<td style="padding:5px 12px 5px 0;' + ff + 'font-size:14px;font-weight:400;color:' + BD + ';line-height:1.6;">' + esc(it.l) + '</td>');
+      H.push('<td align="right" valign="top" style="padding:5px 0;' + ff + 'font-size:14px;font-weight:' + (it.p ? '700' : '400') + ';color:' + (it.p ? F : SM) + ';white-space:nowrap;">' + (it.p ? money(it.p) : 'Included') + '</td>');
+      H.push('</tr>');
+    });
+    H.push('</table>');
+  });
+  H.push('</div>');
+
+  H.push('<div style="margin:30px 32px 0 32px;padding:22px 24px;background:' + PN + ';border-top:2px solid ' + F + ';">');
+  H.push('<table width="100%" cellpadding="0" cellspacing="0" border="0">');
+  function mrow(l, v, big){
+    H.push('<tr>');
+    H.push('<td style="padding:5px 0;' + ff + 'font-size:' + (big?'11px':'14px') + ';font-weight:' + (big?'700':'400') + ';color:' + (big?SM:BD) + ';' + (big?'letter-spacing:2px;':'') + '">' + l + '</td>');
+    H.push('<td align="right" style="padding:5px 0;' + ff + 'font-size:' + (big?'24px':'14px') + ';font-weight:700;color:' + (big?TC:F) + ';">' + v + '</td>');
+    H.push('</tr>');
+  }
+  mrow('Build', money(t.d.build));
+  if(t.d.logi) mrow('Delivery and logistics', money(t.d.logi));
+  if(t.adj) mrow(esc(el('adjLabel').value.trim() || 'Adjustment'), money(t.adj));
+  mrow('VAT at 20%', money(t.vat));
+  H.push('<tr><td colspan="2" style="border-top:1px solid ' + HL + ';height:1px;font-size:1px;line-height:1px;padding-top:10px;">&nbsp;</td></tr>');
+  mrow('TOTAL', money(t.grand), true);
+  H.push('</table>');
+  H.push('</div>');
+
+  H.push('<div style="margin:22px 32px 0 32px;padding:20px 24px;background:rgba(94,31,40,0.05);border-left:3px solid ' + MR + ';">');
+  H.push('<p style="margin:0 0 7px 0;' + ff + 'font-size:10px;font-weight:700;color:' + MR + ';letter-spacing:2px;">SECURING YOUR BUILD</p>');
+  H.push('<p style="margin:0 0 14px 0;' + ff + 'font-size:14px;font-weight:400;color:' + BD + ';line-height:1.7;">A deposit of £500 secures a place in the order queue. It is non-refundable and it comes off the total above.</p>');
+  H.push('<a href="' + DEPOSIT_URL + '" style="display:inline-block;padding:11px 22px;background:' + TC + ';color:#ffffff;' + ff + 'font-size:14px;font-weight:700;text-decoration:none;border-radius:5px;">Secure your build</a>');
+  H.push('</div>');
+
+  var n = el('cNotes').value.trim();
+  if(n){
+    H.push('<div style="margin:22px 32px 0 32px;padding:18px 22px;background:' + PN + ';">');
+    H.push('<p style="margin:0 0 7px 0;' + ff + 'font-size:10px;font-weight:700;color:' + SM + ';letter-spacing:2px;">NOTES FROM OUR CALL</p>');
+    H.push('<p style="margin:0;' + ff + 'font-size:14px;font-weight:400;color:' + BD + ';line-height:1.7;">' + esc(n).replace(/\n/g,'<br>') + '</p>');
+    H.push('</div>');
+  }
+
+  H.push('<div style="padding:28px 32px 0 32px;">');
+  H.push('<p style="margin:0 0 16px 0;' + ff + 'font-size:15px;font-weight:400;color:' + BD + ';line-height:1.7;">Everything is handmade to order in our Welsh workshop, so no two builds are quite the same. If you want to change anything above, just say and I will put a fresh estimate together.</p>');
+  H.push('<p style="margin:0 0 24px 0;' + ff + 'font-size:15px;font-weight:400;color:' + BD + ';line-height:1.7;">Any questions at all, reply here and I will pick it up.</p>');
+  H.push('<p style="margin:0 0 2px 0;' + ff + 'font-size:15px;font-weight:700;color:' + F + ';">' + (closer ? esc(closer) : 'The Barrel Sauna UK Team') + '</p>');
+  if(closer) H.push('<p style="margin:0;' + ff + 'font-size:14px;font-weight:400;color:' + BD + ';">Barrel Sauna UK</p>');
+  H.push('<p style="margin:2px 0 0 0;' + ff + 'font-size:13px;font-weight:400;color:' + SM + ';">Handcrafted in Wales</p>');
+  H.push('</div>');
+
+  H.push('<div style="margin:30px 32px 0 32px;padding:16px 0 30px 0;border-top:1px solid ' + HL + ';">');
+  H.push('<p style="margin:0;' + ff + 'font-size:11px;font-weight:400;color:#999999;line-height:1.7;">This estimate holds for 30 days. Prices exclude any groundwork or electrical work unless listed above. Barrel Sauna UK, handcrafted in Wales.</p>');
+  H.push('</div>');
+
+  H.push('</div>');
+  return H.join('');
+}
+
+function mailtoLink(){
+  var t = totals();
+  var nm = el('cName').value.trim();
+  var to = el('cEmail').value.trim();
+  var subj = 'Your Barrel Sauna UK estimate' + (nm ? ' for ' + nm : '');
+  var short = [];
+  short.push(nm ? 'Hello ' + nm.split(' ')[0] + ',' : 'Hello,');
+  short.push('');
+  short.push('Here is the estimate from our call.');
+  short.push('');
+  short.push(t.d.name);
+  short.push('Build subtotal: ' + money(t.d.build));
+  if(t.d.logi) short.push('Delivery and logistics: ' + money(t.d.logi));
+  short.push('VAT at 20%: ' + money(t.vat));
+  short.push('Total: ' + money(t.grand));
+  short.push('');
+  short.push('To secure your build: £500, non-refundable, secures a place in the order queue. It comes off the total.');
+  short.push('');
+  short.push('The Barrel Sauna UK Team');
+  var body = short.join('\n');
+  return 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+}
+
+/* ---------- PRINT SHEET ---------- */
+function buildSheet(){
+  var t = totals();
+  var nm = el('cName').value.trim();
+  var closer = el('cCloser').value.trim();
+  var pc = el('cPostcode').value.trim();
+  var ph = el('cPhone').value.trim();
+  var em = el('cEmail').value.trim();
+  var H = [];
+
+  H.push('<div class="s-hd">');
+  H.push('<div class="lbl">Barrel Sauna UK</div>');
+  H.push('<h1>' + (nm ? 'Estimate for ' + esc(nm) : 'Your estimate') + '</h1>');
+  H.push('<div class="sub">' + esc(t.d.name) + '</div>');
+  H.push('</div>');
+
+  H.push('<div class="s-meta">');
+  var dt = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  H.push('<div><span class="k">Date</span><span class="v">' + dt + '</span></div>');
+  if(closer) H.push('<div><span class="k">Prepared by</span><span class="v">' + esc(closer) + '</span></div>');
+  if(pc) H.push('<div><span class="k">Delivery area</span><span class="v">' + esc(pc) + '</span></div>');
+  if(ph) H.push('<div><span class="k">Phone</span><span class="v">' + esc(ph) + '</span></div>');
+  if(em) H.push('<div><span class="k">Email</span><span class="v">' + esc(em) + '</span></div>');
+  H.push('</div>');
+
+  H.push('<div class="s-body">');
+  if(!t.d.lines.length){
+    H.push('<p style="font-size:13px;color:#999;">No options selected.</p>');
+  }
+  t.d.lines.forEach(function(g){
+    H.push('<div class="s-grp">' + esc(g.t) + '</div>');
+    g.items.forEach(function(it){
+      H.push('<div class="s-li"><div class="l">' + esc(it.l) + '</div>' +
+             '<div class="v' + (it.p ? '' : ' inc') + '">' + (it.p ? money(it.p) : 'Included') + '</div></div>');
+    });
+  });
+  H.push('</div>');
+
+  H.push('<div class="s-money">');
+  H.push('<div class="r"><div class="l">Build</div><div class="v">' + money(t.d.build) + '</div></div>');
+  if(t.d.logi) H.push('<div class="r"><div class="l">Delivery and logistics</div><div class="v">' + money(t.d.logi) + '</div></div>');
+  if(t.adj) H.push('<div class="r"><div class="l">' + esc(el('adjLabel').value.trim() || 'Adjustment') + '</div><div class="v">' + money(t.adj) + '</div></div>');
+  H.push('<div class="r"><div class="l">VAT at 20%</div><div class="v">' + money(t.vat) + '</div></div>');
+  H.push('<div class="r tot"><div class="l">Total</div><div class="v">' + money(t.grand) + '</div></div>');
+  H.push('</div>');
+
+  H.push('<div class="s-dep">');
+  H.push('<div class="h">Securing your build</div>');
+  H.push('<div class="b">A deposit of £500 secures a place in the order queue. It is non-refundable and it comes off the total above.</div>');
+  H.push('<a class="s-link" href="' + DEPOSIT_URL + '">' + DEPOSIT_URL_PLAIN + '</a>');
+  H.push('</div>');
+
+  var n = el('cNotes').value.trim();
+  if(n){
+    H.push('<div class="s-notes"><div class="h">Notes from our call</div><div class="b">' + esc(n) + '</div></div>');
+  }
+
+  H.push('<div class="s-ft">');
+  H.push('<div class="sign">The Barrel Sauna UK Team</div>');
+  H.push('Handcrafted in Wales. This estimate holds for 30 days. Prices exclude any groundwork or electrical work unless listed above.');
+  H.push('</div>');
+
+  el('sheet').innerHTML = H.join('');
+}
+
+/* ---------- RICH COPY ---------- */
+function copyRich(html, plain, msg){
+  if(window.ClipboardItem && navigator.clipboard && navigator.clipboard.write){
+    try{
+      var item = new ClipboardItem({
+        'text/html': new Blob([html], {type:'text/html'}),
+        'text/plain': new Blob([plain], {type:'text/plain'})
+      });
+      navigator.clipboard.write([item]).then(
+        function(){ toast(msg); },
+        function(){ richFallback(html, msg); }
+      );
+      return;
+    }catch(e){ /* fall through */ }
+  }
+  richFallback(html, msg);
+}
+function richFallback(html, msg){
+  var d = document.createElement('div');
+  d.contentEditable = 'true';
+  d.style.position = 'fixed';
+  d.style.left = '-9999px';
+  d.style.top = '0';
+  d.innerHTML = html;
+  document.body.appendChild(d);
+  var r = document.createRange();
+  r.selectNodeContents(d);
+  var sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(r);
+  try{ document.execCommand('copy'); toast(msg); }
+  catch(e){ toast('Could not copy. Use the plain email instead.'); }
+  sel.removeAllRanges();
+  document.body.removeChild(d);
+}
+
+/* ========================= UI PLUMBING ========================= */
+function toast(m){
+  var t = el('toast');
+  t.textContent = m;
+  t.classList.add('on');
+  clearTimeout(t._h);
+  t._h = setTimeout(function(){ t.classList.remove('on'); }, 2200);
+}
+
+function copy(txt, msg){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){ toast(msg); },
+      function(){ fallbackCopy(txt, msg); });
+  } else {
+    fallbackCopy(txt, msg);
+  }
+}
+function fallbackCopy(txt, msg){
+  var ta = document.createElement('textarea');
+  ta.value = txt;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); toast(msg); }
+  catch(e){ toast('Could not copy. Select and copy by hand.'); }
+  document.body.removeChild(ta);
+}
+
+function init(){
+  initProducts();
+  buildGroups();
+
+  el('pLine').addEventListener('change', buildGroups);
+
+  ['cName','cEmail','cPhone','cCloser','cPostcode','adjLabel','adjAmount','cNotes'].forEach(function(id){
+    el(id).addEventListener('input', render);
+    el(id).addEventListener('change', render);
+  });
+
+  el('btnWa').addEventListener('click', function(){ copy(waText(), 'Copied for WhatsApp'); });
+
+  el('btnMail').addEventListener('click', function(){
+    var to = el('cEmail').value.trim();
+    if(!to){ toast('Add the client email first'); return; }
+    window.location.href = mailtoLink();
+  });
+  el('btnEmailRich').addEventListener('click', function(){
+    copyRich(emailHtml(), emailText(), 'Copied, styled for email');
+  });
+  el('btnPrint').addEventListener('click', function(){ buildSheet(); setTimeout(function(){ window.print(); }, 60); });
+  window.addEventListener('beforeprint', buildSheet);
+  el('btnReset').addEventListener('click', function(){
+    if(!confirm('Clear everything and start again?')) return;
+    ['cName','cEmail','cPhone','cPostcode','adjLabel','cNotes'].forEach(function(id){ el(id).value=''; });
+    el('cCloser').value = '';
+    el('adjAmount').value = '0';
+    buildGroups();
+    window.scrollTo(0,0);
+    toast('Cleared');
+  });
+
+  window.addEventListener('scroll', function(){
+    el('tbar').classList.toggle('on', window.scrollY > 220);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
