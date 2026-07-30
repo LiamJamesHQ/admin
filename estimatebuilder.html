@@ -65,13 +65,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sage);bo
 .tick .p.inc{color:var(--sage-muted);font-weight:400;font-size:13px}
 .note{font-size:13px;color:var(--sub);line-height:1.7;margin-top:4px}
 
-/* ---------- AMBER FLAG ---------- */
-.flag{display:block;margin-top:5px;padding:8px 11px;background:var(--terracotta-bg);
-  border-left:3px solid var(--terracotta);border-radius:0 4px 4px 0;
-  font-size:12px;line-height:1.65;color:var(--thermo)}
-.flag b{font-weight:700;color:var(--thermo)}
-.flag-i{display:inline-block;width:15px;height:15px;line-height:15px;text-align:center;
-  background:var(--terracotta);color:#fff;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
+/* ---------- BUILD RULE NOTE ---------- */
+.rule{display:block;margin-top:5px;padding:8px 11px;background:var(--panel);
+  border-left:3px solid var(--sage);border-radius:0 4px 4px 0;
+  font-size:12px;line-height:1.65;color:var(--body)}
 
 .pending{font-size:12px;color:var(--thermo);background:var(--terracotta-bg);
   border-left:3px solid var(--terracotta);padding:8px 11px;border-radius:0 4px 4px 0;margin-top:6px;line-height:1.6}
@@ -117,22 +114,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sage);bo
   font-weight:600;transition:transform .28s ease;z-index:400}
 .toast.on{transform:translateX(-50%) translateY(0)}
 
-/* ---------- AUDIT BANNER ---------- */
-.audit{max-width:1240px;margin:0 auto;padding:0 32px}
-.audit-in{background:var(--terracotta-bg);border:1px solid var(--terracotta);border-radius:8px;padding:20px 24px;margin-top:24px}
-.audit-in h2{font-size:15px;font-weight:700;color:var(--thermo);margin-bottom:8px}
-.audit-in p{font-size:13px;color:var(--thermo);line-height:1.75;margin-bottom:10px}
-.audit-in ul{margin:0 0 6px 18px}
-.audit-in li{font-size:13px;color:var(--thermo);line-height:1.75;margin-bottom:5px}
-.audit-in .cl{background:none;border:none;color:var(--thermo);font-family:var(--face);
-  font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;padding:0;letter-spacing:.5px}
-
-/* ---------- PRINT ---------- */
 /* ---------- PRINT SHEET ---------- */
 #sheet{display:none}
 @media print{
   body{background:#fff}
-  .tbar,.mast,.audit,.wrap,.toast{display:none!important}
+  .tbar,.mast,.wrap,.toast{display:none!important}
   #sheet{display:block!important}
   @page{margin:14mm}
 }
@@ -189,26 +175,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sage);bo
   <div class="inner">
     <div class="lbl">Barrel Sauna UK · Internal</div>
     <h1>Estimate Builder</h1>
-    <p>Build a client estimate on the call. Prices carried across from the Ecwid configurator. Anything marked amber needs a decision from James before this goes live.</p>
-  </div>
-</div>
-
-<div class="audit" id="auditWrap">
-  <div class="audit-in">
-    <h2>Pricing review, nine items need a decision</h2>
-    <p>These came across from Ecwid as they stand. Each one is flagged in amber where it sits in the form, so you can see it in context.</p>
-    <ul>
-      <li><b>DualTemp with Cover, Single Dipper Slimline</b> reads £25,650. Corrected here to £2,650. This is the urgent one.</li>
-      <li><b>DualTemp</b> is £1,200 on the Double Dipper Classic and £2,500 on both Slimlines. Same unit, two prices.</li>
-      <li><b>Three headline prices</b> do not reconcile with their own option sets. Wood Fired and Single Dipper Slimline both carry an unexplained gap.</li>
-      <li><b>Delivery</b> runs on five different schedules across seven products. UK mainland ranges £250 to £600.</li>
-      <li><b>Sauna changing rooms</b> appear twice at two prices, and the three side-door sizes are all £1,100.</li>
-      <li><b>LED spotlight</b> is £149 on two products and £169 on three.</li>
-      <li><b>Auto run function</b> at £500 only fits two of the eleven heaters. Nothing currently stops a closer selling it alongside a wood burner.</li>
-      <li><b>The U shape globe bench</b> carries no price at all, so it can be added to any build at no cost whether or not a globe window is fitted.</li>
-      <li><b>Mobile sauna trailers</b>, 3m to 6m, have no prices in Ecwid. All six currently add nothing.</li>
-    </ul>
-    <button class="cl" onclick="document.getElementById('auditWrap').style.display='none'">Hide this panel</button>
+    <p>Build a client estimate on the call.</p>
   </div>
 </div>
 
@@ -297,8 +264,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sage);bo
    CATALOGUE. Every price lives here and nowhere else.
    Change a number once, it changes everywhere.
 
-   flag: text     → renders an amber note under the option
-   pending: true  → option set not yet captured from Ecwid
+   note: text     → renders a neutral build rule note under the option
+   pending: true  → option set not yet captured
    logistics:true → excluded from the commissionable build subtotal
    ========================================================================= */
 
@@ -330,10 +297,8 @@ ddClassic:{
       {l:"Timber stain. Colour chosen later.",p:165},
       {l:"Insulated floor base. Double layer with 100mm insulation.",p:300},
       {l:"Air jet system",p:450},
-      {l:"LED internal spotlight",p:149,
-       flag:"£149 here, £169 on three other products. Same component."},
-      {l:"DualTemp chiller upgrade. Heats to 40°C, cools to 3 to 5°C.",p:1200,
-       flag:"£1,200 here, £2,500 on both Slimlines. Same named unit."}
+      {l:"LED internal spotlight",p:149},
+      {l:"DualTemp chiller upgrade. Heats to 40°C, cools to 3 to 5°C.",p:1200}
     ]},
     {t:"Groundwork",type:"check",items:[
       {l:"Ground prep consultation. Decking or concrete base, priced separately.",p:0}
@@ -341,8 +306,7 @@ ddClassic:{
     {t:"Delivery",type:"check",logistics:true,items:[
       {l:"Fully assembled delivery. Arrives ready to fill and plug in.",p:250},
       {l:"Crane required. Estimated, varies by site access.",p:600},
-      {l:"Ireland, Scotland or Isle of Wight",p:600,
-       flag:"£600 here, £300 on the barrel sauna, £500 on the Slimline."},
+      {l:"Ireland, Scotland or Isle of Wight",p:600},
       {l:"EU delivery",p:900}
     ]}
   ]
@@ -409,8 +373,7 @@ sauna:{
     ]},
     {t:"Internal layout",type:"select",key:"intlay",items:[
       {l:"All sauna space. No changing room.",p:0},
-      {l:"1m changing and cooling room with additional sandglass door",p:725,
-       flag:"The same changing rooms appear again under Side door at £1,100. Two routes, two prices."},
+      {l:"1m changing and cooling room with additional sandglass door",p:725},
       {l:"1.5m changing and cooling room with additional sandglass door",p:725},
       {l:"Bespoke layout. See notes. Not included in the subtotal.",p:0}
     ]},
@@ -424,7 +387,7 @@ sauna:{
       {l:"No front windows",p:0},
       {l:"2 x side benches with central heater. Included.",p:0},
       {l:"3 way U shape benches with curved globe bench and side heater. Rear bench fits flush with the globe window, adding 0.5m extra sauna space. Included with globe window.",p:0,
-       flag:"Included only when the rear window is a Panoramic or Tint Globe. Without a globe window Ecwid still charges nothing for it, so this layout can be sold at no cost on any build. Confirm the intended price."},
+       note:"Included when the rear window is a Panoramic or Tint Globe. Check the rear window choice above before selecting it."},
       {l:"3 way straight benches with side heater",p:425}
     ]},
     {t:"Heater",type:"select",key:"heater",items:[
@@ -442,7 +405,7 @@ sauna:{
     ]},
     {t:"Heater extras",type:"check",items:[
       {l:"Auto timer and safety switch for WiFi app controlled heater. Compatible with WiFi heater only.",p:500,
-       flag:"Only fits the WiFi IPX5 or the Harvia Cilindro PC90XE. If a different heater is selected above, this cannot be supplied."},
+       note:"Fits the WiFi IPX5 and the Harvia Cilindro PC90XE only. It cannot be supplied with any other heater."},
       {l:"Heated water tank for warm rinsing and steam. Woodburner only.",p:375}
     ]},
     {t:"Roof covering",type:"select",key:"roof",items:[
@@ -490,8 +453,7 @@ sauna:{
     ]},
     {t:"Side door with split section changing room. XL saunas only.",type:"select",key:"sidedoor",items:[
       {l:"None",p:0},
-      {l:"1m changing room",p:1100,
-       flag:"All three sizes are £1,100. And these duplicate the £725 changing rooms above."},
+      {l:"1m changing room",p:1100},
       {l:"1.5m changing room",p:1100},
       {l:"2m changing room",p:1100}
     ]},
@@ -533,8 +495,7 @@ sauna:{
     {t:"Additional delivery charge for remote or non standard access",type:"check",logistics:true,items:[
       {l:"Ireland, Scotland or the Isle of Wight",p:300},
       {l:"EU",p:500},
-      {l:"Crane. Actual cost may vary.",p:1200,
-       flag:"£1,200 here, £600 on the Classic, £950 on the Single Slimline, £1,400 on the pod."}
+      {l:"Crane. Actual cost may vary.",p:1200}
     ]},
     {t:"Not included",type:"info",items:[
       {l:"Electrical installation. Our team supplies and fits the unit with all safety elements, but wiring must be done by a qualified local electrician after the build."},
@@ -586,8 +547,7 @@ pod:{
     {t:"Delivery method",type:"select",key:"pdel",logistics:true,items:[
       {l:"Delivered fully built, standard access. Offloaded into place, no crane. Access must allow machinery and be wider than the pod.",p:600},
       {l:"Build on site by team, 1 to 2 day build. Delivered in sections and built on your prepared ground.",p:1200},
-      {l:"Delivered fully built, tricky access. Offloaded by crane for restricted sites. Final cost confirmed on invoice after access assessment.",p:1400,
-       flag:"£1,400 here against £600 to £1,200 for crane on other products."}
+      {l:"Delivered fully built, tricky access. Offloaded by crane for restricted sites. Final cost confirmed on invoice after access assessment.",p:1400}
     ]}
   ]
 },
@@ -649,8 +609,7 @@ woodFired:{
   base:0,
   groups:[
     {t:"Wooden cladding",type:"radio",key:"clad",items:[
-      {l:"Treated Thermowood. Heat dried and thermally modified at 200°C.",p:2565,base:true,
-       flag:"Ecwid headline is £3,315. That equals this £2,565 plus the £750 heater, so the heater is already inside the headline while also sitting below as an addable option. Confirm which is right."},
+      {l:"Treated Thermowood. Heat dried and thermally modified at 200°C.",p:2565,base:true},
       {l:"Pinewood Plunge",p:2365,base:true}
     ]},
     {t:"Interior",type:"select",key:"colour",items:[
@@ -662,8 +621,7 @@ woodFired:{
       {l:"Classic ladder"}
     ]},
     {t:"Heating",type:"check",items:[
-      {l:"Integrated wood burning stove with chimney",p:750,
-       flag:"May already be inside the headline price. See the cladding note."}
+      {l:"Integrated wood burning stove with chimney",p:750}
     ]},
     {t:"Upgrades",type:"check",items:[
       {l:"Double stepper",p:150},
@@ -676,8 +634,7 @@ woodFired:{
       {l:"Ground prep consultation. Decking or concrete base, priced separately.",p:0}
     ]},
     {t:"Delivery",type:"select",key:"del",logistics:true,items:[
-      {l:"UK standard delivery",p:300,
-       flag:"£300 here, £250 on both Slimlines and the Classic. Fourth different UK mainland figure in the catalogue."},
+      {l:"UK standard delivery",p:300},
       {l:"Ireland, Scotland or Isle of Wight",p:600},
       {l:"EU delivery",p:900},
       {l:"Other. See notes.",p:0}
@@ -711,8 +668,7 @@ ddSlimline:{
     {t:"Chiller",type:"select",key:"chill",items:[
       {l:"No chiller. Ice bath only.",p:0},
       {l:"Chiller unit, filter and chiller. Cools to 3 to 5°C.",p:750},
-      {l:"DualTemp unit, filter, hot and cold. 3 to 5°C to 40°C.",p:2500,
-       flag:"£2,500 here, £1,200 on the Double Dipper Classic. Same named unit."}
+      {l:"DualTemp unit, filter, hot and cold. 3 to 5°C to 40°C.",p:2500}
     ]},
     {t:"Chiller housing",type:"check",items:[
       {l:"Protective wooden housing for external chiller unit. Recommended.",p:145}
@@ -759,8 +715,7 @@ sdSlimline:{
       {l:"Residential",p:0},{l:"Commercial",p:0}
     ]},
     {t:"The tub",type:"radio",key:"clad",items:[
-      {l:"Thermowood cladding, 22mm thick. Heat dried and thermally modified at 200°C.",p:2785,base:true,
-       flag:"Ecwid headline is £3,305 against this £2,785. £520 unaccounted for by any visible option."}
+      {l:"Thermowood cladding, 22mm thick. Heat dried and thermally modified at 200°C.",p:2785,base:true}
     ]},
     {t:"Interior. Fibreglass.",type:"select",key:"colour",items:[
       {l:"Storm Grey",p:0},{l:"Glacier Blue",p:0},{l:"Ice White",p:0},{l:"Blackout",p:0}
@@ -774,8 +729,7 @@ sdSlimline:{
       {l:"Chiller unit, filter and chiller. Cools to 3 to 5°C.",p:750},
       {l:"Chiller unit with cover",p:900},
       {l:"DualTemp unit, filter, hot and cold. 3 to 5°C to 40°C.",p:2500},
-      {l:"DualTemp unit with cover",p:2650,
-       flag:"Ecwid reads £25,650. Corrected here to £2,650, which matches the £150 cover premium on the chiller line. As typed it would produce an estimate ten times the product value on a live call."}
+      {l:"DualTemp unit with cover",p:2650}
     ]},
     {t:"Chiller housing",type:"check",items:[
       {l:"Protective wooden housing for external chiller unit. Recommended.",p:145}
@@ -884,7 +838,6 @@ function buildGroups(){
       g.items.forEach(function(it, ii){
         var o = document.createElement('option');
         o.value = ii;
-        o.textContent = it.l + (it.p ? '  (' + money(it.p) + ')' : (it.base ? '  (' + money(0) + ')' : ''));
         if(it.p) o.textContent = it.l + '  (' + money(it.p) + ')';
         else o.textContent = it.l;
         s.appendChild(o);
@@ -896,21 +849,21 @@ function buildGroups(){
       if(g.pending){
         var pw = document.createElement('div');
         pw.className = 'pending';
-        pw.textContent = 'Option set not yet captured from Ecwid. The field is here so nothing goes missing.';
+        pw.textContent = 'Option set not yet captured. The field is here so nothing goes missing.';
         bd.appendChild(pw);
       }
       if(g.pendingPrice){
         var pp = document.createElement('div');
         pp.className = 'pending';
-        pp.textContent = 'Options captured, prices not. Every line above currently adds nothing to the total. Needs the trailer pricing before this goes live.';
+        pp.textContent = 'Options captured, prices not. Every line above currently adds nothing to the total.';
         bd.appendChild(pp);
       }
       g.items.forEach(function(it){
-        if(it.flag){
-          var fl = document.createElement('div');
-          fl.className = 'flag';
-          fl.innerHTML = '<span class="flag-i">!</span>' + esc(it.flag);
-          bd.appendChild(fl);
+        if(it.note){
+          var nb = document.createElement('div');
+          nb.className = 'rule';
+          nb.textContent = it.note;
+          bd.appendChild(nb);
         }
       });
     }
@@ -924,11 +877,11 @@ function buildGroups(){
           '<label class="t" for="' + uid + '">' + esc(it.l) + '</label>' +
           '<div class="p' + (it.p ? '' : ' inc') + '">' + (it.p ? money(it.p) : 'Included') + '</div>';
         bd.appendChild(d);
-        if(it.flag){
-          var fl = document.createElement('div');
-          fl.className = 'flag';
-          fl.innerHTML = '<span class="flag-i">!</span>' + esc(it.flag);
-          bd.appendChild(fl);
+        if(it.note){
+          var nb = document.createElement('div');
+          nb.className = 'rule';
+          nb.textContent = it.note;
+          bd.appendChild(nb);
         }
       });
       bd.querySelectorAll('input[type=checkbox]').forEach(function(cb){
