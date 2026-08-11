@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wave 2 Pipeline Board</title>
+<style>
+  :root{
+    --ink:#33312B;
+    --muted:#8a877e;
+    --auto:#C8F0A0;
+    --build:#A8DEF7;
+    --hand:#FFE08A;
+    --blank:#FF9FB2;
+    --line:#b7b4ab;
+    --line-drawn:#7CA5C9;
+    --tick:#3f9142;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    font-family:'Segoe UI','Trebuchet MS',sans-serif;
+    color:var(--ink);
+    background:#ffffff;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+  }
+
+  .topbar{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:10px 18px;border-bottom:1px solid #eee;background:#fff;flex-shrink:0;
+  }
+  .topbar h1{margin:0;font-size:16px;font-weight:700;white-space:nowrap;}
+  .savestate{font-size:11px;color:var(--muted);min-width:80px;}
+  .savestate.on{color:var(--tick);}
+  .key{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:#555;align-items:center;}
+  .key span{display:flex;align-items:center;gap:5px;}
+  .sw{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.15);}
+  .grow{flex:1;}
+  .topbar button{
+    border:1px solid #ddd;background:#fff;border-radius:7px;padding:6px 12px;
+    font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;color:#444;
+  }
+  .topbar button:hover{background:#f5f5f5;}
+  #addBtn{background:var(--blank);border-color:transparent;color:#5a2434;}
+
+  .main{flex:1;display:flex;overflow:hidden;}
+
+  .canvas-wrap{flex:1;overflow:auto;position:relative;background:#fff;}
+  .canvas{position:relative;width:1500px;height:900px;}
+  svg.links{position:absolute;top:0;left:0;width:1500px;height:900px;z-index:0;}
+  svg.links path.drawn{pointer-events:stroke;cursor:pointer;}
+
+  .box{
+    position:absolute;width:170px;border-radius:9px;padding:8px 10px 9px;
+    box-shadow:0 3px 8px rgba(0,0,0,.13);font-size:12px;z-index:2;
+  }
+  .box.auto{background:var(--auto);}
+  .box.build{background:var(--build);}
+  .box.hand{background:var(--hand);}
+  .box.blank{background:var(--blank);cursor:grab;user-select:none;}
+  .box.blank.dragging{cursor:grabbing;box-shadow:0 8px 18px rgba(0,0,0,.22);}
+  .box.done{outline:2px solid var(--tick);}
+
+  .box .head{display:flex;align-items:flex-start;gap:7px;}
+  .box .tickbox{
+    width:18px;height:18px;border-radius:5px;border:2px solid rgba(0,0,0,.35);
+    background:#fff;cursor:pointer;flex-shrink:0;margin-top:1px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;line-height:1;
+  }
+  .box.done .tickbox{background:var(--tick);border-color:var(--tick);color:#fff;}
+  .box .name{font-weight:700;font-size:12.5px;line-height:1.2;flex:1;}
+  .box.blank .name{outline:none;cursor:text;user-select:text;padding:1px 2px;border-radius:3px;}
+  .box.blank .name:focus{background:#fff;}
+  .box .desc{font-size:10.5px;line-height:1.35;color:rgba(0,0,0,.6);margin:4px 0 0;}
+  .box .cmt{
+    width:100%;margin-top:6px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:5px;
+    padding:5px 6px;font-family:inherit;font-size:11px;color:var(--ink);resize:vertical;
+    min-height:30px;height:34px;
+  }
+  .box.blank .cmt{cursor:text;user-select:text;}
+  .box .cmt:focus{outline:none;border-color:rgba(0,0,0,.25);}
+  .box .cmt::placeholder{color:rgba(0,0,0,.35);}
+
+  .box .del{
+    position:absolute;top:4px;right:4px;border:none;background:#fff;
+    border-radius:5px;width:20px;height:20px;font-size:12px;cursor:pointer;line-height:1;
+    color:rgba(0,0,0,.55);padding:0;display:none;box-shadow:0 1px 2px rgba(0,0,0,.15);
+  }
+  .box.blank:hover .del{display:block;}
+
+  /* the connector dots */
+  .port{
+    position:absolute;width:13px;height:13px;border-radius:50%;
+    background:#fff;border:2px solid var(--line-drawn);
+    cursor:crosshair;z-index:6;opacity:0;transition:opacity .12s;
+  }
+  .box:hover .port{opacity:1;}
+  .port:hover{background:var(--line-drawn);transform:scale(1.25);}
+  .port.left{left:-8px;top:calc(50% - 6px);}
+  .port.right{right:-8px;top:calc(50% - 6px);}
+  .port.top{top:-8px;left:calc(50% - 6px);}
+  .port.bottom{bottom:-8px;left:calc(50% - 6px);}
+
+  .panel{
+    width:270px;flex-shrink:0;border-left:1px solid #eee;background:#ffffff;
+    display:flex;flex-direction:column;padding:14px 14px 12px;overflow:hidden;
+  }
+  .panel h2{margin:0 0 3px;font-size:14px;font-weight:700;}
+  .panel .hint{font-size:11px;color:var(--muted);margin:0 0 10px;line-height:1.4;}
+  .parkAdd{display:flex;gap:6px;margin-bottom:10px;}
+  .parkAdd input{flex:1;border:1px solid #e2e0da;border-radius:7px;padding:7px 9px;font-family:inherit;font-size:12px;background:#fff;}
+  .parkAdd input:focus{outline:none;border-color:#9aa0a5;}
+  .parkAdd button{border:none;background:var(--hand);border-radius:7px;padding:0 12px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;color:#5a4a1a;}
+  .parkList{flex:1;overflow:auto;display:flex;flex-direction:column;gap:7px;}
+  .parkItem{
+    background:#ffffff;border:1px solid #e8e8e5;border-radius:8px;padding:8px 9px;
+    font-size:12px;line-height:1.35;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.05);
+  }
+  .parkItem .x{
+    position:absolute;top:5px;right:5px;border:none;background:transparent;color:#bbb;
+    cursor:pointer;font-size:14px;line-height:1;padding:2px;
+  }
+  .parkItem .x:hover{color:#e05a5a;}
+  .parkItem .txt{padding-right:14px;outline:none;}
+
+  .drawtip{font-size:10.5px;color:var(--muted);padding:4px 18px 0;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Wave 2 Pipeline Board</h1>
+  <span class="savestate" id="savestate"></span>
+  <div class="key">
+    <span><i class="sw" style="background:var(--auto)"></i> Auto, CRM event</span>
+    <span><i class="sw" style="background:var(--build)"></i> Auto, new build</span>
+    <span><i class="sw" style="background:var(--hand)"></i> Needs a hand</span>
+    <span><i class="sw" style="background:var(--blank)"></i> Added sticky</span>
+  </div>
+  <div class="grow"></div>
+  <button id="addBtn">+ Add a sticky</button>
+  <button id="resetBtn">Reset</button>
+</div>
+
+<div class="drawtip">Hover any box to see its dots. Drag from a dot to another box to draw a line. Click a line you drew to delete it.</div>
+
+<div class="main">
+  <div class="canvas-wrap" id="canvasWrap">
+    <div class="canvas" id="canvas">
+      <svg class="links" id="links"></svg>
+    </div>
+  </div>
+
+  <aside class="panel">
+    <h2>Parked for Wave 3</h2>
+    <p class="hint">New ideas to revisit after launch. Add here to keep Wave 2 focused. If something belongs in Wave 2, use "+ Add a sticky" and place it in the flow.</p>
+    <div class="parkAdd">
+      <input id="parkInput" placeholder="A new idea to park...">
+      <button id="parkBtn">+</button>
+    </div>
+    <div class="parkList" id="parkList"></div>
+  </aside>
+</div>
+
+<script>
+/* Fixed pipeline stages. */
+const STAGES = [
+  {id:'a1', type:'auto',  x:40,  y:340, name:'1. New Lead', desc:'Form submitted, assign AMP, auto-dial.'},
+  {id:'a2', type:'auto',  x:250, y:340, name:'2. Contacted by office', desc:'AMP dialled, call result decides next.'},
+  {id:'a3', type:'auto',  x:520, y:110, name:'3a. Reached warm', desc:'Confirmed or thinking, booked on the call.'},
+  {id:'a4', type:'auto',  x:520, y:340, name:'3b. Reached cold', desc:'Classified no.'},
+  {id:'a5', type:'auto',  x:520, y:570, name:'3c. No answer', desc:'Voicemail detected, sent a self-book link.'},
+  {id:'a6', type:'build', x:770, y:340, name:'4. Call booked with closer', desc:'Calendar booking, reassign to James. New build.'},
+  {id:'a7', type:'auto',  x:1000,y:340, name:'5. Estimate Sent', desc:'Ecwid order created. Proven working.'},
+  {id:'a8', type:'auto',  x:1230,y:340, name:'6. Deposit Paid', desc:'500 pound Stripe payment received.'},
+  {id:'catch', type:'hand', x:1230, y:640, name:'Manual catch: off-script lead', desc:'Liam takes an unscheduled call. No event, alert sent instead.'}
+];
+
+/* Built-in pipeline arrows (not deletable). */
+const LINKS = [
+  ['a1','a2'],
+  ['a2','a3'], ['a2','a4'], ['a2','a5'],
+  ['a3','a6'], ['a5','a6'],
+  ['a6','a7'], ['a7','a8']
+];
+
+const KEY='wave2-board-v5';
+let state=null;
+
+function freshState(){
+  return { done:{}, comments:{}, stickies:[], parked:[], drawn:[] }; // drawn: [{id,from,to}]
+}
+
+/* ---- save ---- */
+let saveTimer=null;
+function markSaving(){const e=document.getElementById('savestate');e.textContent='Saving...';e.classList.remove('on');}
+function markSaved(){const e=document.getElementById('savestate');const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});e.textContent='Saved '+t;e.classList.add('on');}
+function scheduleSave(){markSaving();clearTimeout(saveTimer);saveTimer=setTimeout(save,500);}
+async function save(){
+  try{
+    const r=await window.storage.set(KEY, JSON.stringify(state), false);
+    if(r){markSaved();} else {document.getElementById('savestate').textContent='Save did not confirm';}
+  }catch(e){ document.getElementById('savestate').textContent='Save unavailable here'; console.error(e); }
+}
+async function load(){
+  try{ const r=await window.storage.get(KEY,false); if(r&&r.value){state=JSON.parse(r.value);return;} }catch(e){}
+  state=freshState();
+}
+
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ---- unified box lookup (stages + stickies) ---- */
+const BOX_W=170, BOX_H=100, STICKY_W=165, STICKY_H=95;
+function allBoxes(){
+  const s=STAGES.map(x=>({id:x.id, x:x.x, y:x.y, w:BOX_W, h:BOX_H}));
+  const k=state.stickies.map(x=>({id:x.id, x:x.x, y:x.y, w:STICKY_W, h:STICKY_H}));
+  return [...s,...k];
+}
+function boxGeo(id){ return allBoxes().find(b=>b.id===id); }
+function centre(b){ return {cx:b.x+b.w/2, cy:b.y+b.h/2}; }
+
+/* pick the two nearest edge points between two boxes */
+function edgePoints(A,B){
+  const a=centre(A), b=centre(B);
+  const dx=b.cx-a.cx, dy=b.cy-a.cy;
+  let p1,p2;
+  if(Math.abs(dx)>=Math.abs(dy)){
+    // horizontal dominant
+    p1={x:A.x+(dx>=0?A.w:0), y:a.cy};
+    p2={x:B.x+(dx>=0?0:B.w), y:b.cy};
+  }else{
+    p1={x:a.cx, y:A.y+(dy>=0?A.h:0)};
+    p2={x:b.cx, y:B.y+(dy>=0?0:B.h)};
+  }
+  return [p1,p2];
+}
+
+/* ---- draw all lines (built-in + drawn) ---- */
+function svgEl(name){return document.createElementNS('http://www.w3.org/2000/svg',name);}
+function drawLinks(){
+  const svg=document.getElementById('links');
+  svg.innerHTML='';
+  const defs=svgEl('defs');
+  defs.innerHTML=`
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#b7b4ab"></path></marker>
+    <marker id="arrow2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#7CA5C9"></path></marker>`;
+  svg.appendChild(defs);
+
+  // built-in
+  LINKS.forEach(([f,t])=>{
+    const A=boxGeo(f), B=boxGeo(t); if(!A||!B) return;
+    const [p1,p2]=edgePoints(A,B);
+    svg.appendChild(pathBetween(p1,p2,'#b7b4ab','url(#arrow)',false));
+  });
+  // drawn
+  state.drawn.forEach(link=>{
+    const A=boxGeo(link.from), B=boxGeo(link.to); if(!A||!B) return;
+    const [p1,p2]=edgePoints(A,B);
+    const p=pathBetween(p1,p2,'#7CA5C9','url(#arrow2)',true);
+    p.dataset.id=link.id;
+    p.addEventListener('click',()=>{
+      if(confirm('Delete this line?')){
+        state.drawn=state.drawn.filter(d=>d.id!==link.id);
+        drawLinks(); scheduleSave();
+      }
+    });
+    svg.appendChild(p);
+  });
+}
+function pathBetween(p1,p2,colour,marker,drawn){
+  const midx=(p1.x+p2.x)/2;
+  const d=`M ${p1.x} ${p1.y} C ${midx} ${p1.y}, ${midx} ${p2.y}, ${p2.x} ${p2.y}`;
+  const p=svgEl('path');
+  p.setAttribute('d',d);
+  p.setAttribute('fill','none');
+  p.setAttribute('stroke',colour);
+  p.setAttribute('stroke-width', drawn?'2.5':'2');
+  p.setAttribute('marker-end',marker);
+  if(drawn) p.setAttribute('class','drawn');
+  return p;
+}
+
+/* ---- render boxes ---- */
+function ports(){
+  return `<div class="port left" data-port="1"></div><div class="port right" data-port="1"></div><div class="port top" data-port="1"></div><div class="port bottom" data-port="1"></div>`;
+}
+
+function renderBoxes(){
+  const c=document.getElementById('canvas');
+  [...c.querySelectorAll('.box')].forEach(n=>n.remove());
+
+  STAGES.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='box '+s.type+(state.done[s.id]?' done':'');
+    el.style.left=s.x+'px'; el.style.top=s.y+'px'; el.dataset.id=s.id;
+    el.innerHTML=`
+      ${ports()}
+      <div class="head">
+        <div class="tickbox" title="Mark confirmed">&#10003;</div>
+        <div class="name">${esc(s.name)}</div>
+      </div>
+      <div class="desc">${esc(s.desc)}</div>
+      <textarea class="cmt" placeholder="Comment...">${esc(state.comments[s.id]||'')}</textarea>`;
+    el.querySelector('.tickbox').addEventListener('click',()=>{state.done[s.id]=!state.done[s.id];el.classList.toggle('done',state.done[s.id]);scheduleSave();});
+    el.querySelector('.cmt').addEventListener('input',e=>{state.comments[s.id]=e.target.value;scheduleSave();});
+    wirePorts(el, s.id);
+    c.appendChild(el);
+  });
+
+  state.stickies.forEach(st=>c.appendChild(stickyEl(st)));
+}
+
+let zTop=20;
+function stickyEl(st){
+  const el=document.createElement('div');
+  el.className='box blank'+(st.done?' done':'');
+  el.style.left=st.x+'px'; el.style.top=st.y+'px'; el.dataset.id=st.id;
+  el.innerHTML=`
+    ${ports()}
+    <button class="del" title="Remove">&times;</button>
+    <div class="head">
+      <div class="tickbox" title="Mark confirmed">&#10003;</div>
+      <div class="name" contenteditable="true" spellcheck="false">${esc(st.name)}</div>
+    </div>
+    <textarea class="cmt" placeholder="Comment...">${esc(st.note||'')}</textarea>`;
+
+  el.querySelector('.tickbox').addEventListener('click',e=>{e.stopPropagation();st.done=!st.done;el.classList.toggle('done',st.done);scheduleSave();});
+  el.querySelector('.name').addEventListener('input',e=>{st.name=e.target.innerText;scheduleSave();});
+  el.querySelector('.cmt').addEventListener('input',e=>{st.note=e.target.value;scheduleSave();});
+  el.querySelector('.del').addEventListener('click',e=>{
+    e.stopPropagation();
+    state.stickies=state.stickies.filter(x=>x.id!==st.id);
+    state.drawn=state.drawn.filter(d=>d.from!==st.id && d.to!==st.id);
+    drawLinks(); renderBoxes(); scheduleSave();
+  });
+
+  // drag the sticky itself
+  el.addEventListener('pointerdown',e=>{
+    if(e.target.closest('[contenteditable],textarea,button,.tickbox,.port')) return;
+    e.preventDefault();
+    const sx=e.clientX, sy=e.clientY, ox=st.x, oy=st.y;
+    el.classList.add('dragging'); el.style.zIndex=++zTop;
+    el.setPointerCapture(e.pointerId);
+    function move(ev){
+      st.x=Math.max(0,ox+(ev.clientX-sx)); st.y=Math.max(0,oy+(ev.clientY-sy));
+      el.style.left=st.x+'px'; el.style.top=st.y+'px';
+      drawLinks(); // lines follow live
+    }
+    function up(){ el.classList.remove('dragging'); el.removeEventListener('pointermove',move); el.removeEventListener('pointerup',up); scheduleSave(); }
+    el.addEventListener('pointermove',move);
+    el.addEventListener('pointerup',up);
+  });
+
+  wirePorts(el, st.id);
+  return el;
+}
+
+/* ---- drawing links from a port ---- */
+let linking=null; // {fromId, ghost}
+function wirePorts(el, id){
+  el.querySelectorAll('.port').forEach(port=>{
+    port.addEventListener('pointerdown',e=>{
+      e.preventDefault(); e.stopPropagation();
+      startLink(id, e);
+    });
+  });
+}
+function startLink(fromId, e){
+  const svg=document.getElementById('links');
+  const ghost=svgEl('path');
+  ghost.setAttribute('fill','none');
+  ghost.setAttribute('stroke','#7CA5C9');
+  ghost.setAttribute('stroke-width','2.5');
+  ghost.setAttribute('stroke-dasharray','5 4');
+  svg.appendChild(ghost);
+  const A=boxGeo(fromId);
+  const start=centre(A);
+
+  function pt(ev){
+    const rect=document.getElementById('canvas').getBoundingClientRect();
+    return {x:ev.clientX-rect.left, y:ev.clientY-rect.top};
+  }
+  function move(ev){
+    const p=pt(ev);
+    ghost.setAttribute('d',`M ${start.cx} ${start.cy} L ${p.x} ${p.y}`);
+  }
+  function up(ev){
+    document.removeEventListener('pointermove',move);
+    document.removeEventListener('pointerup',up);
+    ghost.remove();
+    const targetEl=document.elementFromPoint(ev.clientX,ev.clientY);
+    const box=targetEl && targetEl.closest('.box');
+    if(box && box.dataset.id && box.dataset.id!==fromId){
+      const toId=box.dataset.id;
+      const exists=state.drawn.some(d=>(d.from===fromId&&d.to===toId));
+      if(!exists){
+        state.drawn.push({id:'l'+Date.now(), from:fromId, to:toId});
+        drawLinks(); scheduleSave();
+      }
+    }
+  }
+  document.addEventListener('pointermove',move);
+  document.addEventListener('pointerup',up);
+}
+
+/* ---- add / park / reset ---- */
+function addSticky(){
+  const wrap=document.getElementById('canvasWrap');
+  const x=wrap.scrollLeft+60, y=wrap.scrollTop+60;
+  state.stickies.push({id:'s'+Date.now(), x, y, name:'New idea', note:'', done:false});
+  renderBoxes(); drawLinks(); scheduleSave();
+}
+function renderParked(){
+  const list=document.getElementById('parkList');
+  list.innerHTML='';
+  state.parked.forEach(p=>{
+    const el=document.createElement('div');
+    el.className='parkItem';
+    el.innerHTML=`<button class="x" title="Remove">&times;</button><div class="txt" contenteditable="true" spellcheck="false">${esc(p.text)}</div>`;
+    el.querySelector('.txt').addEventListener('input',e=>{p.text=e.target.innerText;scheduleSave();});
+    el.querySelector('.x').addEventListener('click',()=>{state.parked=state.parked.filter(x=>x.id!==p.id);renderParked();scheduleSave();});
+    list.appendChild(el);
+  });
+}
+function addParked(){
+  const inp=document.getElementById('parkInput');
+  const t=inp.value.trim(); if(!t) return;
+  state.parked.push({id:'p'+Date.now(), text:t});
+  inp.value=''; renderParked(); scheduleSave();
+}
+function resetBoard(){
+  if(!confirm('This clears every tick, comment, added sticky, drawn line and parked idea, and rebuilds the starting board. This cannot be undone. Continue?')) return;
+  state=freshState(); drawLinks(); renderBoxes(); renderParked(); scheduleSave();
+}
+
+(async function(){
+  await load();
+  drawLinks();
+  renderBoxes();
+  renderParked();
+  document.getElementById('addBtn').addEventListener('click',addSticky);
+  document.getElementById('resetBtn').addEventListener('click',resetBoard);
+  document.getElementById('parkBtn').addEventListener('click',addParked);
+  document.getElementById('parkInput').addEventListener('keydown',e=>{if(e.key==='Enter')addParked();});
+  document.getElementById('savestate').textContent='Ready';
+})();
+</script>
+</body>
+</html>
