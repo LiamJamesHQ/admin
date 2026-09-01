@@ -241,6 +241,7 @@ h3 .em{vertical-align:middle;margin-right:10px;}
 .rules li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);max-width:none;}
 @media (max-width:900px){.jobs,.tiles{grid-template-columns:1fr 1fr;}}
 .sendrow{display:flex;gap:12px;align-items:center;margin-top:10px}.sendq{cursor:pointer;background:var(--honey);color:#fff;border:none;border-radius:6px;padding:10px 18px;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:1px}.sendq:hover{background:var(--honey-l)}.sendmail{font-size:13px;color:var(--sage);text-decoration:underline}
+.heroimg{width:100%;max-height:300px;object-fit:cover;border-radius:10px;display:block;margin:0 0 26px}
 </style>
 </head>
 <body>
@@ -278,6 +279,7 @@ h3 .em{vertical-align:middle;margin-right:10px;}
 <main>
 
 <div class="hero"><div class="wrap">
+  <img class="heroimg" src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a90ac1460935b340b7225a5.png" alt="Barrel Sauna UK">
   <div class="kicker">AMP training manual</div>
   <h1>Wave 2 leads, and the part <span>you play</span> in every one of them</h1>
   <p class="lede">From early September, Facebook and Meta ads start sending new enquiries into the system. The exact go-live day will be confirmed. You are the first human voice they hear. This manual covers what we need from you on each call, how the system reacts to what you log, and how to work the parts of GHL you will touch.</p>
@@ -778,10 +780,11 @@ h3 .em{vertical-align:middle;margin-right:10px;}
     var q=w.querySelector('textarea').value.trim();
     var more=w.querySelector('.morebox').checked;
     var name=(document.querySelector('input[data-save="name"], input[data-note="name"], #traineeName')||{}).value||'';
-    var lines=['AMP manual, '+title];
-    if(name) lines.push('From: '+name);
-    lines.push(more? 'I need more explaining on this section.' : 'Question on this section:');
-    if(q) lines.push(q);
+    var lines=['\ud83d\udcd6 AMP manual \u00b7 '+title];
+    if(name) lines.push('\ud83d\udc4b From: '+name);
+    lines.push(more? '\ud83d\ude4b I need more explaining on this section please!' : '\u2753 Question on this section:');
+    if(q) lines.push('\ud83d\udcac '+q);
+    lines.push('\ud83d\ude4f Thanks Nikki!');
     return lines.join('\n');
   }
   document.querySelectorAll('.sendq').forEach(function(b){
@@ -794,9 +797,9 @@ h3 .em{vertical-align:middle;margin-right:10px;}
   document.querySelectorAll('.sendmail').forEach(function(a){
     a.addEventListener('click',function(ev){
       ev.preventDefault();
-      if(NIKKI_EMAIL.indexOf('ADDRESS')>-1){alert('Nikki still needs to add her email to this page.');return;}
       var msg=buildMsg(a.dataset.sec,a.dataset.title);
-      window.location.href='mailto:'+NIKKI_EMAIL+'?subject='+encodeURIComponent('AMP manual question, '+a.dataset.title)+'&body='+encodeURIComponent(msg);
+      var su=encodeURIComponent('\ud83d\udcd6 AMP manual question \u00b7 '+a.dataset.title);
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(NIKKI_EMAIL)+'&su='+su+'&body='+encodeURIComponent(msg),'_blank');
     });
   });
 })();
