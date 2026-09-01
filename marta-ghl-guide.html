@@ -29,7 +29,6 @@ body{font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size:16px;lin
 section.band{margin:30px 0;}
 .band-header{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0 10px;border:none;border-bottom:1px solid rgba(17,20,23,0.6);background:none;cursor:pointer;font-size:20px;font-weight:700;text-align:left;font-family:inherit;color:var(--ink);}
 .band-tag{border-radius:20px;padding:4px 14px;font-size:13px;font-weight:400;white-space:nowrap;background:var(--tint);border:none;color:#1F3D28;}
-.band-tag.hw{background:var(--honey);color:#ffffff;}
 .band-body{padding:14px 0 0;}
 .band-intro{color:var(--sage);font-size:14.5px;padding:0 0 12px;}
 .jstep{display:flex;gap:14px;border-radius:10px;padding:14px 18px;margin:10px 0;align-items:flex-start;border:1px solid rgba(17,20,23,0.18);border-left:3px solid var(--green);background:#ffffff;}
@@ -37,6 +36,7 @@ section.band{margin:30px 0;}
 .jmain{flex:1;}
 .jtitle{font-size:16px;font-weight:400;color:var(--ink);}
 .jdesc{color:var(--mut);font-size:14px;margin-top:3px;}
+.blockhead{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--ink);margin:22px 0 4px;}
 .cardgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;}
 @media(max-width:640px){.cardgrid{grid-template-columns:1fr;}}
 .gcard{background:var(--tint);border-radius:12px;padding:18px 20px;}
@@ -56,6 +56,7 @@ section.band{margin:30px 0;}
 .tagchip.sys{background:var(--tint);color:#1F3D28;}
 .tagchip.you{background:#ffffff;border:1.5px solid var(--honey);color:var(--ink);}
 .tagnote{font-size:13px;color:var(--mut);margin:4px 0 14px;}
+.shot{border:1.5px dashed var(--green);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13.5px;color:var(--sage);background:#ffffff;}
 .outcome{border:1px solid rgba(17,20,23,0.18);border-radius:12px;margin:14px 0;overflow:hidden;background:#ffffff;}
 .outcome .oh{padding:12px 18px;font-size:17px;font-weight:700;color:var(--ink);background:var(--tint);}
 .outcome .orow{display:flex;gap:12px;padding:10px 18px;border-top:1px solid rgba(17,20,23,0.1);font-size:14px;}
@@ -82,10 +83,11 @@ section.band{margin:30px 0;}
 .work .sendrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;}
 .work .sendq{cursor:pointer;padding:8px 16px;border-radius:6px;border:1px solid var(--line);background:#ffffff;color:var(--ink);font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:1px;}
 .work .sendq:hover{background:var(--tint);}
-.work .sendmail{font-size:13px;color:var(--sage);cursor:pointer;text-decoration:underline;}
 .work .whisper{font-size:12px;color:var(--mut);margin-top:8px;}
-.checkline{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2);margin:10px 0;}
+.checkline{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2);margin:10px 0;cursor:pointer;}
 .checkline input[type=checkbox]{width:17px;height:17px;accent-color:var(--green);}
+.loginbtn{display:inline-block;margin:6px 0 4px;padding:14px 34px;border-radius:8px;background:var(--honey);color:#ffffff;font-weight:700;font-size:14px;letter-spacing:1.5px;text-decoration:none;}
+.loginbtn:hover{background:#b07d38;}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--forest);color:#ffffff;padding:10px 22px;border-radius:30px;font-size:14px;opacity:0;transition:all .3s;pointer-events:none;z-index:50;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;color:var(--mut);}
@@ -95,8 +97,8 @@ footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;co
 <body>
 <div class="hero">
 <h1>&#128218; Marta's Guide to GoHighLevel &#127793;</h1>
-<p class="sub">Your map of GHL, in plain English &#128506;&#65039;</p>
-<p class="ver">VERSION 1.0 &middot; SEPTEMBER 2026 &middot; INTERNAL, NOT CUSTOMER FACING</p>
+<p class="sub">The why behind the system you already run &#128506;&#65039;</p>
+<p class="ver">VERSION 2.0 &middot; SEPTEMBER 2026 &middot; INTERNAL, NOT CUSTOMER FACING</p>
 <div class="toolbar">
 <button class="btn" id="btnDownload" type="button">&#128190; DOWNLOAD MY PROGRESS</button>
 <button class="btn" id="btnRestore" type="button">&#128194; RESTORE A SAVED FILE</button>
@@ -115,306 +117,282 @@ footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;co
 <nav class="contents">
 <div class="ct">&#128218; CONTENTS</div>
 <a href="#s1" data-nav="s1">1 &middot; How this guide works</a>
-<a href="#s2" data-nav="s2">2 &middot; The lay of the land</a>
-<a href="#s3" data-nav="s3">3 &middot; The contact record</a>
-<a href="#s4" data-nav="s4">4 &middot; Smart lists</a>
-<a href="#s5" data-nav="s5">5 &middot; Pipelines</a>
-<a href="#s6" data-nav="s6">6 &middot; Tasks</a>
-<a href="#s7" data-nav="s7">7 &middot; Assigning contacts</a>
-<a href="#s8" data-nav="s8">8 &middot; Tags</a>
-<a href="#s9" data-nav="s9">9 &middot; Conversations and Jennifer</a>
-<a href="#s10" data-nav="s10">10 &middot; When something looks odd</a>
+<a href="#s2" data-nav="s2">2 &middot; Log in as you</a>
+<a href="#s3" data-nav="s3">3 &middot; Smart lists</a>
+<a href="#s4" data-nav="s4">4 &middot; Pipelines</a>
+<a href="#s5" data-nav="s5">5 &middot; Tasks</a>
+<a href="#s6" data-nav="s6">6 &middot; Assigning contacts</a>
+<a href="#s7" data-nav="s7">7 &middot; Tags</a>
+<a href="#s8" data-nav="s8">8 &middot; WhatsApp templates</a>
+<a href="#s9" data-nav="s9">9 &middot; When something looks odd</a>
 </nav>
 
 <section class="band" id="s1">
-<button class="band-header" type="button" data-band="s1"><span>1&#65039;&#8283; How this guide works &#128218;</span><span class="band-tag">start here</span></button>
+<button class="band-header" type="button" data-band="s1"><span>1&#65039;&#8283; How this guide works &#128218;</span><span class="band-tag">30 seconds</span></button>
 <div class="band-body" id="body-s1">
-<p class="band-intro">This is yours to keep. Nothing in here can break GHL, and it will always tell you clearly when something is look but do not touch.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#129309; Sections 1 to 7 are for our meeting</div><div class="jdesc">We work through them together. Sections 8 to 10 are yours to read afterwards, and any questions come back to Nikki.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#9997;&#65039; Tick and type as you go</div><div class="jdesc">Every section ends with a How was that box. Tick Got it when it makes sense, tick I need more explaining when it does not, and anything you type saves by itself in this browser.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#128232; Questions go straight to Nikki</div><div class="jdesc">The send button in each section opens WhatsApp with your question already written. You just press send.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">&#128190; Download your progress at the end</div><div class="jdesc">It saves a file of all your ticks and notes. Restore a saved file brings everything back on any computer.</div></div></div>
-<div class="callout"><div class="ck">ONE THING BEFORE WE START</div><div class="cb">GHL looks busy the first time you open it. You only need five areas of it, and this guide covers exactly those five. Everything else can stay folded away. &#127793;</div></div>
+<p class="band-intro">You know your way around GHL, so this is not a tour. It is the reasoning behind the parts of the system you have not needed until now, and the few new skills that come with them. Each section builds on the one before.</p>
+<p style="font-size:14.5px;">Tick, type and question as we go, it all saves itself in this browser. The send button in each section opens WhatsApp with your question already written, so nothing you wonder about gets lost. Download your progress at the end and you can pick it up on any computer.</p>
 <div class="work" data-sec="s1">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s1ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s1more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s1q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s1" data-title="Section 1, How this guide works">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s1" data-title="Section 1, How this guide works">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s1" data-title="Section 1, How this guide works">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
 <section class="band" id="s2">
-<button class="band-header" type="button" data-band="s2"><span>2&#65039;&#8283; The lay of the land &#128506;&#65039;</span><span class="band-tag">five places</span></button>
+<button class="band-header" type="button" data-band="s2"><span>2&#65039;&#8283; Log in as you &#128273;</span><span class="band-tag">the unlock</span></button>
 <div class="band-body" id="body-s2">
-<p class="band-intro">The menu down the left side of GHL is the whole map. These are the five places you will actually use.</p>
+<p class="band-intro">One change before anything else: from today, you work in GHL under your own login, not info@barrel. Everything else in this guide depends on it.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">Here is the why. Every click in GHL is stamped with the logged-in user. While you work as info@barrel, the system cannot tell your work from Liam's: it cannot give a task to you by name, cannot credit a call or a note to you, and cannot notify you about your own contacts, because as far as GHL knows, you do not exist. You have been doing the work while the record says Liam did it.</p>
 <div class="cardgrid">
-<div class="gcard"><div class="gt">&#128172; Conversations</div><div class="gd">Every message in and out of the business in one inbox. Email, WhatsApp and SMS all land here, sorted by contact.</div></div>
-<div class="gcard"><div class="gt">&#128100; Contacts</div><div class="gd">The filing cabinet. Every person who has ever enquired, one record each. Smart lists and Tasks live in here too.</div></div>
-<div class="gcard"><div class="gt">&#128200; Opportunities</div><div class="gd">The pipeline board. Each card is a person moving towards a deposit. Cards move on their own, more in section 5.</div></div>
-<div class="gcard"><div class="gt">&#128197; Calendars</div><div class="gd">Bookings. Book a Call Back for phone calls, Showroom Bookings for visits. You already get these by email.</div></div>
-<div class="gcard"><div class="gt">&#9989; Tasks</div><div class="gd">Your to-do list inside GHL. Found under Contacts. Section 6 makes this a daily habit.</div></div>
-<div class="gcard"><div class="gt">&#128274; Everything else</div><div class="gd">Automation, Marketing, Sites, Settings. These run the machinery underneath. Fine to look, never change anything in them.</div></div>
+<div class="gcard"><div class="gt">&#128203; Tasks can find you</div><div class="gd">The system can put your name on a task, and only what is genuinely yours shows in your list. Section 5 is built on this.</div></div>
+<div class="gcard"><div class="gt">&#129517; Work is routed properly</div><div class="gd">Some things need Liam's authority, pricing, refunds, product calls. With separate logins, his list holds only those, and yours holds the rest. That split is the whole point.</div></div>
+<div class="gcard"><div class="gt">&#128202; The record tells the truth</div><div class="gd">Who called, who noted, who booked. When something needs unpicking later, the history says who actually did it.</div></div>
+<div class="gcard"><div class="gt">&#128274; And it is safer</div><div class="gd">Your own password, and the shared inbox login stops being handed around. Everyone at BSUK is moving to this, you are first.</div></div>
 </div>
-<div class="callout"><div class="ck">THE SHORT VERSION</div><div class="cb">Five working areas: Conversations, Contacts, Opportunities, Calendars, Tasks. Automation and Settings are machinery. Look, never touch. &#128274;</div></div>
+<p style="text-align:center;margin:18px 0 4px;"><a class="loginbtn" href="https://app.gohighlevel.com/" target="_blank" rel="noopener">&#128273; OPEN GHL AND SIGN IN AS MARTA</a></p>
+<p class="tagnote" style="text-align:center;">Nikki has your login details ready. Sign in now, in the meeting, so everything after this section happens as you.</p>
+<div class="callout"><div class="ck">FROM TODAY</div><div class="cb">Always your login, never info@barrel. If you ever find a browser signed in as info@barrel, log out and back in as yourself before doing anything. The one minute it takes keeps the record honest. &#128273;</div></div>
 <div class="work" data-sec="s2">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s2ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s2more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s2q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s2" data-title="Section 2, The lay of the land">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s2" data-title="Section 2, The lay of the land">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s2" data-title="Section 2, Log in as you">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
 <section class="band" id="s3">
-<button class="band-header" type="button" data-band="s3"><span>3&#65039;&#8283; The contact record &#128100;</span><span class="band-tag">one person, one page</span></button>
+<button class="band-header" type="button" data-band="s3"><span>3&#65039;&#8283; Smart lists &#128203;</span><span class="band-tag">searches that stay fresh</span></button>
 <div class="band-body" id="body-s3">
-<p class="band-intro">Open any person in Contacts and you get their whole story on one screen. Everything else in this guide hangs off this page.</p>
-<table class="ptable">
-<tr><th>ZONE</th><th>WHAT LIVES THERE</th></tr>
-<tr><td>&#128072; Left column</td><td>Who they are. Name, phone, email, the Owner field (who at BSUK looks after them) and their tags. The Owner field matters in section 7.</td></tr>
-<tr><td>&#128064; Middle</td><td>What has happened. The activity feed shows every email, call, booking and stage change in order, plus the notes people have written.</td></tr>
-<tr><td>&#128073; Right side</td><td>The conversation itself and any appointments. You can read and reply without leaving the record.</td></tr>
-</table>
-<div class="callout"><div class="ck">THE GOLDEN HABIT</div><div class="cb">Notes on everything. If you speak to a customer, hear something from Jarek about their build, or spot anything worth remembering, write it as a note on their record. A note takes ten seconds and saves someone an awkward phone call later. &#128221;</div></div>
+<p class="band-intro">A smart list is a search you save once and never run again, because it keeps itself current. Any contact who matches the filter is in it the moment they match, and out the moment they stop.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">Why that matters: the questions worth asking of the contact list are the same ones every week. Who has nobody looking after them? What came in this week? How are the ad leads doing? Searching for those over and over is wasted minutes and easy to forget. A smart list turns each question into a tab at the top of Contacts, answered before you click it.</p>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128100; Open Contacts and click More Filters</div><div class="jdesc">The filter panel opens on the right, every field in the system is in there.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#127919; Pick the filter and its value</div><div class="jdesc">For example Assigned, left as empty. Watch the list narrow as you set it.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#128190; Save as smart list and name it</div><div class="jdesc">From then on it is a tab at the top of Contacts, permanently up to date.</div></div></div>
+<div class="shot">&#128247; Screenshot slot: More Filters panel open with the Assigned filter set to empty, and the Save as smart list button circled</div>
+<p class="band-intro" style="padding-top:8px;">The three we will build together, and why each one earns its place:</p>
+<div class="outcome">
+<div class="oh">&#128075; No owner</div>
+<div class="orow"><div class="ol">FILTER</div><div class="ov">Assigned is empty</div></div>
+<div class="orow"><div class="ol">WHY</div><div class="ov">An unowned contact has nobody notified about them and nobody accountable for them, which is exactly how a warm lead goes quiet. This list should read zero, and section 6 is how you empty it.</div></div>
+</div>
+<div class="outcome">
+<div class="oh">&#127381; New this week</div>
+<div class="orow"><div class="ol">FILTER</div><div class="ov">Date added in the last 7 days</div></div>
+<div class="orow"><div class="ol">WHY</div><div class="ov">One glance at the week's intake without pulling a report. When something looks unusually quiet or unusually busy, this is where you see it first.</div></div>
+</div>
+<div class="outcome">
+<div class="oh">&#128241; Wave 2 leads</div>
+<div class="orow"><div class="ol">FILTER</div><div class="ov">Tag includes <span class="tagchip sys">wave 2 facebook/meta lead</span></div></div>
+<div class="orow"><div class="ol">WHY</div><div class="ov">Everyone the Facebook ads have brought in, in one place. When Liam asks how the ads are doing, this list is the honest answer.</div></div>
+</div>
 <div class="notes-card">
-<div class="notes-title">&#128400;&#65039; Try it now, together</div>
-<label class="checkline"><input type="checkbox" data-check="s3t1"> Open Contacts and find the test contact Nikki shows you</label>
-<label class="checkline"><input type="checkbox" data-check="s3t2"> Read the activity feed from the bottom up, oldest first, so you see the story in order</label>
-<label class="checkline"><input type="checkbox" data-check="s3t3"> Add a note that says Marta was here, then delete it</label>
+<div class="notes-title">&#128400;&#65039; In the meeting</div>
+<label class="checkline"><input type="checkbox" data-check="s3t1"> Build No owner together</label>
+<label class="checkline"><input type="checkbox" data-check="s3t2"> Build New this week yourself</label>
+<label class="checkline"><input type="checkbox" data-check="s3t3"> Build Wave 2 leads yourself</label>
 </div>
 <div class="work" data-sec="s3">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s3ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s3more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s3q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s3" data-title="Section 3, The contact record">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s3" data-title="Section 3, The contact record">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s3" data-title="Section 3, Smart lists">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
 <section class="band" id="s4">
-<button class="band-header" type="button" data-band="s4"><span>4&#65039;&#8283; Smart lists &#128203;</span><span class="band-tag">saved searches</span></button>
+<button class="band-header" type="button" data-band="s4"><span>4&#65039;&#8283; Pipelines &#128200;</span><span class="band-tag">why the cards move themselves</span></button>
 <div class="band-body" id="body-s4">
-<p class="band-intro">A smart list is a saved search that never goes stale. You set the filter once, and the list quietly keeps itself up to date as contacts come and go. Build one for anything you check more than once a week.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128100; Open Contacts</div><div class="jdesc">You start from the full list of everyone.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#128269; Click More Filters</div><div class="jdesc">A panel opens on the right with every filter available.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#127919; Pick your filter and value</div><div class="jdesc">For example Assigned, then leave it as empty. The list narrows as you go.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">&#128190; Save as smart list and name it</div><div class="jdesc">It appears as a tab at the top of Contacts from then on.</div></div></div>
-<p class="band-intro" style="padding-top:12px;">The three lists we will build together:</p>
-<div class="outcome">
-<div class="oh">&#128075; No owner</div>
-<div class="orow"><div class="ol">FILTER</div><div class="ov">Assigned is empty</div></div>
-<div class="orow"><div class="ol">WHY</div><div class="ov">Leads with nobody looking after them are the ones that go quiet. This list should be close to zero. Anything sitting in it is a job for section 7.</div></div>
+<p class="band-intro">Opportunities, then the Wave 2 Facebook/Meta Ad pipeline. Each card is a person, each column a stage of their journey, and reading the board left to right is reading the state of the business today.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">The important thing is not what the stages are, it is why the cards move without anyone touching them. A stage change in this pipeline is never just a label. Landing in a stage is what fires that stage's messages, reminders and alerts, and leaving one is what switches them off. The automation moves a card only when it has recorded the real event, a call outcome, a booking, a payment, so the message a customer receives always matches what actually happened to them.</p>
+<div class="tscroll">
+<table class="ptable">
+<tr><th>STAGE</th><th>WHAT IT MEANS</th><th>MOVED BY</th></tr>
+<tr><td>&#10024; New Lead</td><td>An ad enquiry has landed. The system has already messaged them and set up the first call.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>&#9742;&#65039; Contacted by Office</td><td>The call team connected. Moved here off the record of that call.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>&#128245; Not Reached</td><td>No answer or voicemail. The retry and chase messages start on their own.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>&#128293; Reached and Warm</td><td>Interested. Nurture messages begin by themselves.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>&#10052;&#65039; Reached but Cold</td><td>Not now. Well spaced check-ins run quietly in the background.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>&#128197; Call Booked with Closer</td><td>Booked in with Giles or Ollie. The booking itself moves the card.</td><td><span class="stagewho">The booking</span></td></tr>
+<tr><td>&#128196; Estimate Sent</td><td>An estimate is out and its chase sequence runs on its own.</td><td><span class="stagewho you">Closer</span></td></tr>
+<tr><td>&#128183; Deposit Paid</td><td>The 500 pound deposit is in, they join the order queue, and the thank-you messages send themselves.</td><td><span class="stagewho you">Closer</span></td></tr>
+</table>
 </div>
-<div class="outcome">
-<div class="oh">&#127381; New this week</div>
-<div class="orow"><div class="ol">FILTER</div><div class="ov">Date added in the last 7 days</div></div>
-<div class="orow"><div class="ol">WHY</div><div class="ov">What came in while everyone was busy. A one-glance answer to how this week is going.</div></div>
-</div>
-<div class="outcome">
-<div class="oh">&#128241; Wave 2 leads</div>
-<div class="orow"><div class="ol">FILTER</div><div class="ov">Tag includes <span class="tagchip sys">wave 2 facebook/meta lead</span></div></div>
-<div class="orow"><div class="ol">WHY</div><div class="ov">Everyone who came in through the Facebook ads, in one place. Handy when Liam asks how the ads are doing.</div></div>
-</div>
-<div class="notes-card">
-<div class="notes-title">&#128400;&#65039; Try it now, together</div>
-<label class="checkline"><input type="checkbox" data-check="s4t1"> Build the No owner list with Nikki, following the four steps above</label>
-<label class="checkline"><input type="checkbox" data-check="s4t2"> Save it and check the tab appears at the top of Contacts</label>
-<label class="checkline"><input type="checkbox" data-check="s4t3"> Build New this week on your own, with Nikki watching</label>
-</div>
+<p class="tagnote">Scroll sideways on a narrow screen.</p>
+<div class="callout"><div class="ck">WHY WE NEVER DRAG A CARD</div><div class="cb">Two reasons, both invisible at the moment of dragging. First, dropping a card into a stage can fire that stage's messages at a customer whose story does not match them, or silence a sequence they should be getting. Second, the automation writes its own record of events, so a hand-moved card is often shoved straight back minutes later, and now the history is muddled too. A card in the wrong place is telling you something real about the system. Screenshot it and send it to Nikki, that is genuinely more useful than fixing it. &#128247;</div></div>
 <div class="work" data-sec="s4">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s4ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s4more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s4q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s4" data-title="Section 4, Smart lists">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s4" data-title="Section 4, Smart lists">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s4" data-title="Section 4, Pipelines">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
-<section class="band" id="s5">
-<button class="band-header" type="button" data-band="s5"><span>5&#65039;&#8283; Pipelines &#128200;</span><span class="band-tag">the cards move themselves</span></button>
-<div class="band-body" id="body-s5">
-<p class="band-intro">Open Opportunities and pick the Wave 2 Facebook/Meta Ad pipeline. Each column is a stage of the journey, each card is a real person, and reading left to right tells you exactly how the business is doing today.</p>
-<div class="tscroll">
-<table class="ptable">
-<tr><th>STAGE</th><th>WHAT IT MEANS</th><th>WHO MOVES IT</th></tr>
-<tr><td>&#10024; New Lead</td><td>A Facebook ad enquiry has just landed. The system has already messaged them and set up the first call.</td><td><span class="stagewho">Automatic</span></td></tr>
-<tr><td>&#9742;&#65039; Contacted by Office</td><td>The call team connected. The system moved them here off the record of that call.</td><td><span class="stagewho">Automatic</span></td></tr>
-<tr><td>&#128245; Not Reached</td><td>No answer or voicemail. The retry and the chase messages start on their own.</td><td><span class="stagewho">Automatic</span></td></tr>
-<tr><td>&#128293; Reached and Warm</td><td>They are interested. Nurture messages start by themselves.</td><td><span class="stagewho">Automatic</span></td></tr>
-<tr><td>&#10052;&#65039; Reached but Cold</td><td>Not interested for now. Well spaced check-ins run in the background.</td><td><span class="stagewho">Automatic</span></td></tr>
-<tr><td>&#128197; Call Booked with Closer</td><td>Booked in with Giles or Ollie to talk through what they want.</td><td><span class="stagewho">The booking</span></td></tr>
-<tr><td>&#128196; Estimate Sent</td><td>An estimate has gone out and the chase sequence runs by itself.</td><td><span class="stagewho you">Closer</span></td></tr>
-<tr><td>&#128183; Deposit Paid</td><td>The 500 pound deposit is in and they have joined the order queue. The thank-you messages send themselves.</td><td><span class="stagewho you">Closer</span></td></tr>
-</table>
+<div class="divider">
+<div class="dk">THE SHAPE OF WAVE 2</div>
+<div class="dt">The pipeline runs itself. A task is the rare moment it asks for a person. &#9989;</div>
 </div>
-<p class="tagnote">Scroll sideways on a narrow screen. The pipeline is called Wave 2 Facebook/Meta Ad in GHL.</p>
-<div class="callout"><div class="ck">THE GOLDEN RULE</div><div class="cb">Never drag a card between columns. Every card sits where it is because tags and automations put it there, and dragging one by hand can fire messages at a customer or silence a sequence they should be getting. If a card looks stuck or in the wrong place, that is real information. Screenshot it and send it to Nikki on WhatsApp. &#128247;</div></div>
+
+<section class="band" id="s5">
+<button class="band-header" type="button" data-band="s5"><span>5&#65039;&#8283; Tasks &#9989;</span><span class="band-tag">the main event</span></button>
+<div class="band-body" id="body-s5">
+<p class="band-intro">The Wave 2 pipeline was built to need people as little as possible. Chases, reminders, follow-ups, all of it runs on its own. So when the system creates a task, it means it has hit something only a human can do: a lead replied after the chase gave up, a call needs making, a judgement needs a person. Tasks are rare by design, which is exactly why none of them should sit unseen.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">And this is why section 2 came first. Now that you have your own login, the system can put a task against your name, and your task list becomes a true list of what is genuinely yours, not a pile shared with Liam's.</p>
+<div class="blockhead">&#128269; FINDING YOUR TASKS</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Open Contacts in the left menu, then the Tasks tab along the top</div><div class="jdesc">Tasks live inside the Contacts area, in the row of tabs above the list, alongside Smart Lists.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Click the filter button at the top right of the task list</div><div class="jdesc">A filter panel opens with dropdowns for Assignee, Due date and Status.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">Set Assignee to Marta, Status to Pending, and apply</div><div class="jdesc">The list is now only your open work. This filter is the difference between your list and everyone's noise, and it holds until you change it.</div></div></div>
+<div class="shot">&#128247; Screenshot slot: Tasks tab with the filter panel open, Assignee dropdown showing Marta selected</div>
+<div class="blockhead">&#128295; WORKING A TASK</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Open the task, then the contact it names</div><div class="jdesc">Every task is pinned to a contact, so the full story, messages, notes, history, is one click away. Read it before acting, the task only makes sense in its context.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Do the thing, then mark the task completed</div><div class="jdesc">Completing it matters as much as doing it. An open task reads as undone work, and if we later automate reminders off overdue tasks, a finished-but-open task would nag someone for nothing.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">If a task is genuinely not yours, reroute it, never sit on it</div><div class="jdesc">Anything needing Liam's authority, pricing, refunds, product calls, gets reassigned to him using the task's Assignee field, or a quick WhatsApp to Nikki if you are unsure. A task parked in the wrong list is invisible to the person who can actually do it.</div></div></div>
+<div class="shot">&#128247; Screenshot slot: An open task showing the linked contact and the Mark as completed control</div>
+<div class="blockhead">&#9200; THE RHYTHM</div>
+<p style="font-size:14.5px;">Twice a day, start of the morning and once after lunch. Most days the list will be empty, and empty is the system telling you it is coping. When something is in there, it is the only work the whole pipeline actually needs from a person that day, which makes it the most important ten minutes in the building.</p>
+<div class="notes-card">
+<div class="notes-title">&#128400;&#65039; In the meeting</div>
+<label class="checkline"><input type="checkbox" data-check="s5t1"> Filter the task list to yourself, on your new login</label>
+<label class="checkline"><input type="checkbox" data-check="s5t2"> Work and complete the practice task Nikki has left for you</label>
+<label class="checkline"><input type="checkbox" data-check="s5t3"> Reassign a practice task to Liam and watch it leave your list</label>
+</div>
 <div class="work" data-sec="s5">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s5ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s5more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s5q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s5" data-title="Section 5, Pipelines">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s5" data-title="Section 5, Pipelines">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s5" data-title="Section 5, Tasks">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
-<div class="divider">
-<div class="dk">KEEP ON THE DESK</div>
-<div class="dt">Automation moves the cards. People move the conversations. &#128172;</div>
-</div>
-
 <section class="band" id="s6">
-<button class="band-header" type="button" data-band="s6"><span>6&#65039;&#8283; Tasks &#9989;</span><span class="band-tag">your morning list</span></button>
+<button class="band-header" type="button" data-band="s6"><span>6&#65039;&#8283; Assigning contacts &#129309;</span><span class="band-tag">you as dispatcher</span></button>
 <div class="band-body" id="body-s6">
-<p class="band-intro">When an automation needs a human, it creates a task and puts a name on it. Some of those tasks have your name on them, and until now nobody has been checking. This section fixes that.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128100; Open Contacts, then the Tasks tab</div><div class="jdesc">Tasks sit inside the Contacts area, along the top.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#128269; Filter Assignee to your name</div><div class="jdesc">Now you only see what is actually yours.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#9989; Work top down, tick each one complete</div><div class="jdesc">Each task links to its contact, so the full story is one click away.</div></div></div>
-<div class="callout"><div class="ck">THE HABIT</div><div class="cb">Check your task list twice a day: when you start at nine, and once after lunch. Most days it will be empty, and empty is good news. On the days it is not, whatever is in there is something the automation could not do alone. &#9200;</div></div>
-<div class="callout"><div class="ck">WHY IT MATTERS</div><div class="cb">Right now, every alert in the business goes to Nikki's WhatsApp, and Nikki is one person in another timezone. You checking tasks each day gives BSUK a second pair of eyes, and means nothing waits for South Africa to wake up. &#127757;</div></div>
+<p class="band-intro">Every contact has an Owner, the one person at BSUK responsible for them. Now that everyone is under their own login, ownership finally means what it says, and you are the natural person to keep it right, because you see every conversation come through.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">Why one name matters: the owner is who the system notifies when that contact does something, who the calls and results are credited to, and who answers for them when a question comes up months later. An empty Owner field means all three of those go to nobody. And the split works the other way too: putting Liam's name only on what genuinely needs him, pricing, refunds, product decisions, keeps his list short enough that he actually sees it.</p>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">On the contact record, find Owner in the left details column</div><div class="jdesc">Click it and pick the person. Yourself, Giles, Ollie, Liam, whoever it should be.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">For several at once, use the list</div><div class="jdesc">Tick the contacts in any list or smart list, and the bulk actions bar that appears can assign them all in one go.</div></div></div>
+<div class="shot">&#128247; Screenshot slot: Contact record with the Owner field open, and a list view with contacts ticked and the bulk assign action showing</div>
+<div class="callout"><div class="ck">WHO GETS WHOM</div><div class="cb">The rule of thumb: whoever is already talking to them owns them. If it needs Liam's authority, it is Liam's. If nobody has touched them and it is not obvious, WhatsApp Nikki rather than guessing, a wrong owner is quieter but no better than none. &#129517;</div></div>
+<div class="callout"><div class="ck">THE WEEKLY SWEEP</div><div class="cb">Once a week, open your No owner smart list from section 3 and give everyone in it a name. Ten minutes, and no lead in the business is unowned. This one habit closes the exact gap warm leads used to fall through. &#129529;</div></div>
 <div class="notes-card">
-<div class="notes-title">&#128400;&#65039; Try it now, together</div>
-<label class="checkline"><input type="checkbox" data-check="s6t1"> Find the Tasks tab and filter it to your name</label>
-<label class="checkline"><input type="checkbox" data-check="s6t2"> Complete the practice task Nikki has left for you</label>
-<label class="checkline"><input type="checkbox" data-check="s6t3"> Say out loud what your two check-in times will be</label>
+<div class="notes-title">&#128400;&#65039; In the meeting</div>
+<label class="checkline"><input type="checkbox" data-check="s6t1"> Assign the test contact to yourself, then to Liam, then back</label>
+<label class="checkline"><input type="checkbox" data-check="s6t2"> Bulk assign two test contacts from a list in one action</label>
 </div>
 <div class="work" data-sec="s6">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s6ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s6more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s6q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s6" data-title="Section 6, Tasks">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s6" data-title="Section 6, Tasks">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s6" data-title="Section 6, Assigning contacts">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
 <section class="band" id="s7">
-<button class="band-header" type="button" data-band="s7"><span>7&#65039;&#8283; Assigning contacts &#129309;</span><span class="band-tag">one name on every person</span></button>
+<button class="band-header" type="button" data-band="s7"><span>7&#65039;&#8283; Tags &#127991;&#65039;</span><span class="band-tag">the wiring</span></button>
 <div class="band-body" id="body-s7">
-<p class="band-intro">Every contact has an Owner field, the person at BSUK responsible for them. When it is empty, nobody is responsible, and that is exactly how a warm lead goes cold without anyone noticing.</p>
-<div class="cardgrid">
-<div class="gcard"><div class="gt">&#128276; Notified</div><div class="gd">The owner gets the notifications about that contact, so the right person hears when something happens.</div></div>
-<div class="gcard"><div class="gt">&#128202; Credited</div><div class="gd">Calls and results are credited to the owner, so we can see who is handling what.</div></div>
-<div class="gcard"><div class="gt">&#128588; Accountable</div><div class="gd">One name means one person who will answer the question whatever happened with this customer.</div></div>
-<div class="gcard"><div class="gt">&#129300; Not sure who?</div><div class="gd">Do not guess. Send Nikki the contact's name on WhatsApp and carry on.</div></div>
-</div>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128100; Open the contact record</div><div class="jdesc">From Contacts, a smart list, or a conversation.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#9997;&#65039; Find Owner in the left column and pick the right person</div><div class="jdesc">The rule of thumb: assign to whoever is already talking to them. If Ollie has been messaging a customer, Ollie owns them.</div></div></div>
-<div class="callout"><div class="ck">THE WEEKLY SWEEP</div><div class="cb">This is where your No owner smart list from section 4 earns its keep. Once a week, open it, and give every contact in it an owner. Ten minutes, and no lead in the business is unowned. &#129529;</div></div>
-<div class="notes-card">
-<div class="notes-title">&#128400;&#65039; Try it now, together</div>
-<label class="checkline"><input type="checkbox" data-check="s7t1"> Open the No owner smart list you built in section 4</label>
-<label class="checkline"><input type="checkbox" data-check="s7t2"> Assign the test contact to yourself, then back to Nikki</label>
-</div>
-<div class="work" data-sec="s7">
-<div class="wt">&#129504; How was that?</div>
-<label><input type="checkbox" class="okbox" data-check="s7ok"> &#9989; Got it</label>
-<label><input type="checkbox" class="morebox" data-check="s7more"> &#10060; I need more explaining</label>
-<textarea class="note-box" data-note="s7q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s7" data-title="Section 7, Assigning contacts">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s7" data-title="Section 7, Assigning contacts">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
-</div>
-</div></section>
-
-<div class="divider">
-<div class="dk">HOMEWORK FROM HERE</div>
-<div class="dt">Sections 8 to 10 are yours to read in your own time. Questions to Nikki, any day but Thursday. &#128521;</div>
-</div>
-
-<section class="band" id="s8">
-<button class="band-header" type="button" data-band="s8"><span>8&#65039;&#8283; Tags &#127991;&#65039;</span><span class="band-tag hw">homework</span></button>
-<div class="band-body" id="body-s8">
-<p class="band-intro">A tag is a label on a contact. They look harmless, but at BSUK the tags are the wiring: automations read them to decide who gets which message, and when.</p>
-<p style="font-size:14.5px;margin-bottom:6px;">Tags placed and read by the system, shaded green. Leave them alone. &#128994;</p>
+<p class="band-intro">You see tags on every contact. What is easy to miss is what they are for: tags are how the automation remembers. Every workflow decision, send this, skip that, wait, alert someone, is the system reading a contact's tags and branching on exactly what it finds.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">Two consequences follow. First, tags are matched by exact spelling, one changed letter and a workflow simply stops finding anyone, with no error shown anywhere. Second, the system never removes tags on its own, so a contact's tag list is also their history, and the automation relies on old tags still being there to know what has already happened to someone.</p>
+<p style="font-size:14.5px;margin-bottom:6px;">System tags, shaded green. Placed and read by the automation. &#128994;</p>
 <div>
 <span class="tagchip sys">wave 2 facebook/meta lead</span>
 <span class="tagchip sys">wave 2 call booked</span>
 <span class="tagchip sys">amp call outcome is 'warm'</span>
 <span class="tagchip sys">closer call outcome is 'confirmed'</span>
 </div>
-<p class="tagnote">You will see many like these on Wave 2 contacts. They are how the automation steers.</p>
+<p class="tagnote">A few of the many you will see on Wave 2 contacts. Each one is a switch some workflow reads.</p>
 <p style="font-size:14.5px;margin-bottom:6px;">Tags people manage, honey outline. You may be asked to add one of these. &#128400;&#65039;</p>
 <div>
 <span class="tagchip you">&#128172; currently in conversation</span>
 <span class="tagchip you">&#128587; human follow up needed</span>
 </div>
-<p class="tagnote">Exact spellings for these are being confirmed with Liam. Until then, add tags only when Nikki asks.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128683; Never delete a tag</div><div class="jdesc">The system never removes tags itself, and an automation may be waiting to read that one. Deleting it can silently stop a customer's messages.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#9997;&#65039; Never rename a tag</div><div class="jdesc">Automations match the exact spelling. One changed letter and the workflow simply stops finding anyone.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#9989; Adding is fine, when asked</div><div class="jdesc">If Nikki or a checklist tells you to add a specific tag, that is safe. Type it exactly, all lowercase.</div></div></div>
-<div class="callout"><div class="ck">WHY SO STRICT</div><div class="cb">Because tag mistakes are invisible. Nothing turns red, no error appears. A customer just quietly stops hearing from us, and nobody finds out for weeks. Treat tags as read-only unless told otherwise and that can never happen on your watch. &#128064;</div></div>
+<p class="tagnote">Exact spellings for these are being confirmed with Liam. Until then, add tags only when Nikki asks, typed exactly, all lowercase.</p>
+<div class="callout"><div class="ck">WHY DELETING IS THE DANGEROUS ONE</div><div class="cb">A tag mistake is invisible. Nothing turns red, no error fires. A workflow quietly stops matching, a customer quietly stops hearing from us, and nobody finds out for weeks, usually when the customer calls to ask why we went silent. That is why the rule is blunt: never delete, never rename, add only when asked. It is not about trust, it is that the failure mode has no alarm. &#128064;</div></div>
+<div class="work" data-sec="s7">
+<div class="wt">&#129504; How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s7ok"> &#9989; Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s7more"> &#10060; I need more explaining</label>
+<textarea class="note-box" data-note="s7q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s7" data-title="Section 7, Tags">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<section class="band" id="s8">
+<button class="band-header" type="button" data-band="s8"><span>8&#65039;&#8283; WhatsApp templates &#128172;</span><span class="band-tag">the 24 hour rule</span></button>
+<div class="band-body" id="body-s8">
+<p class="band-intro">You run the inbox, so this rule touches you more than anyone: WhatsApp only lets a business message a customer freely within 24 hours of the customer's last message. Outside that window, only a pre-approved template will actually arrive.</p>
+<p style="font-size:14.5px;margin-bottom:12px;">The trap is how it fails. A typed message outside the window does not bounce or warn you. It shows as sent on our side and simply never reaches them, so the customer thinks we ignored them and we think we replied. Templates exist because Meta requires the wording of that first outreach message to be approved in advance, and once approved, a template always delivers, any time.</p>
+<div class="blockhead">&#128228; USING A TEMPLATE</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">In the conversation, check the channel and the clock</div><div class="jdesc">WhatsApp selected as the channel, and a look at when the customer last wrote. Inside 24 hours, type freely. Outside it, template only.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Open the template picker in the message toolbar</div><div class="jdesc">Pick the one that fits, fill in any blanks it asks for, and send.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">Check it shows delivered, not just sent</div><div class="jdesc">Delivered means it reached their phone. Sent alone, on an outside-window typed message, is the silent failure this whole section exists to avoid.</div></div></div>
+<div class="shot">&#128247; Screenshot slot: A WhatsApp conversation with the template picker open, and a delivered tick circled on a sent template</div>
+<div class="blockhead">&#128295; WHERE TEMPLATES COME FROM</div>
+<p style="font-size:14.5px;">Templates are written in GHL and submitted to Meta for approval, which can take anything from minutes to a day or two, so we keep a set ready rather than writing them when we need them. The wording is customer-facing, so it follows the usual path: when you notice a message you keep needing and no template fits, send Nikki the situation and rough wording, Liam signs off the copy, Nikki builds and submits it. Your part is spotting the gap, and you are the best placed person in the business to spot it.</p>
+<div class="notes-card">
+<div class="notes-title">&#128400;&#65039; In the meeting</div>
+<label class="checkline"><input type="checkbox" data-check="s8t1"> Find the template picker in a conversation</label>
+<label class="checkline"><input type="checkbox" data-check="s8t2"> Send a template to the test contact and check it shows delivered</label>
+</div>
 <div class="work" data-sec="s8">
 <div class="wt">&#129504; How was that?</div>
 <label><input type="checkbox" class="okbox" data-check="s8ok"> &#9989; Got it</label>
 <label><input type="checkbox" class="morebox" data-check="s8more"> &#10060; I need more explaining</label>
 <textarea class="note-box" data-note="s8q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s8" data-title="Section 8, Tags">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s8" data-title="Section 8, Tags">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s8" data-title="Section 8, WhatsApp templates">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
+
+<div class="divider">
+<div class="dk">ONE LAST THING</div>
+<div class="dt">You know this system's normal rhythm better than anyone. That is exactly why you will notice when it is off. &#128064;</div>
+</div>
 
 <section class="band" id="s9">
-<button class="band-header" type="button" data-band="s9"><span>9&#65039;&#8283; Conversations and Jennifer &#128172;</span><span class="band-tag hw">homework</span></button>
+<button class="band-header" type="button" data-band="s9"><span>9&#65039;&#8283; When something looks odd &#128680;</span><span class="band-tag">what to do with it</span></button>
 <div class="band-body" id="body-s9">
-<p class="band-intro">The Conversations inbox is every customer message in one place. Jennifer, our AI assistant, works in there with you.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128229; One thread per contact</div><div class="jdesc">Email, WhatsApp and SMS all land together, newest at the bottom.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#128260; Reply on the customer's channel</div><div class="jdesc">Check the channel selector above the message box before sending, so a WhatsApp gets a WhatsApp back.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#128221; Anything important becomes a note</div><div class="jdesc">If what you read or send matters later, put it on the contact record.</div></div></div>
-<div class="callout"><div class="ck">MEET JENNIFER</div><div class="cb">Jennifer reads incoming messages and drafts suggested replies inside the thread. At the moment she suggests rather than sends, so a human always presses the button. Read her draft properly before sending: right, send it, nearly right, edit it, wrong, write your own. &#129302;</div></div>
-<div class="outcome">
-<div class="oh">&#128587; When a human takes over completely</div>
-<div class="orow"><div class="ol">UPSET</div><div class="ov">The customer is unhappy or complaining. A person replies, not a draft.</div></div>
-<div class="orow"><div class="ol">PRICING</div><div class="ov">They are asking for pricing that is not on the price list, or any kind of discount.</div></div>
-<div class="orow"><div class="ol">DEPOSIT</div><div class="ov">Anything touching refunds or the deposit.</div></div>
-<div class="orow"><div class="ol">WHO</div><div class="ov">Those go to Liam. And remember, to customers Liam is always James, in every message, every time. &#129323;</div></div>
-</div>
-<div class="work" data-sec="s9">
-<div class="wt">&#129504; How was that?</div>
-<label><input type="checkbox" class="okbox" data-check="s9ok"> &#9989; Got it</label>
-<label><input type="checkbox" class="morebox" data-check="s9more"> &#10060; I need more explaining</label>
-<textarea class="note-box" data-note="s9q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s9" data-title="Section 9, Conversations and Jennifer">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s9" data-title="Section 9, Conversations and Jennifer">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
-</div>
-</div></section>
-
-<section class="band" id="s10">
-<button class="band-header" type="button" data-band="s10"><span>&#128290; When something looks odd &#128680;</span><span class="band-tag hw">homework</span></button>
-<div class="band-body" id="body-s10">
-<p class="band-intro">You will spot things. A card in a strange place, a message that should have sent and did not, a contact with no owner and no story. Spotting them is the job. Here is what to do next.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128247; Screenshot it</div><div class="jdesc">Whatever looks wrong, exactly as you see it, before anything changes.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#128221; Note the details</div><div class="jdesc">Contact name, the time, and what you clicked to get there.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#128172; WhatsApp Nikki, then leave it alone</div><div class="jdesc">Screenshot plus details. Then hands off, even if it is tempting to fix.</div></div></div>
-<div class="callout"><div class="ck">WHEN IN DOUBT, SEND IT</div><div class="cb">You are never bothering anyone with these. A false alarm costs thirty seconds. A real problem caught early can save a customer. &#128077;</div></div>
+<p class="band-intro">A card in a strange place, a message that should have gone and did not, a contact whose story does not add up. You will spot these before anyone else, and what you do next is the difference between a five minute fix and a customer lost.</p>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">&#128247; Screenshot it as found</div><div class="jdesc">Before anything changes. The state of the screen at that moment is usually the whole diagnosis.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">&#128221; Note the contact, the time, and how you got there</div><div class="jdesc">Those three details let Nikki replay exactly what the system did and find the wiring behind it.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">&#128172; WhatsApp Nikki, then hands off</div><div class="jdesc">Not because you could not fix it, but because a hand fix hides the evidence. The odd thing you found is a symptom, and Nikki needs it intact to cure the cause rather than the case.</div></div></div>
+<div class="callout"><div class="ck">WHEN IN DOUBT, SEND IT</div><div class="cb">A false alarm costs thirty seconds. A real problem caught early can save a customer. There is no version of this where sending was the wrong call. &#128077;</div></div>
 <div class="deskcard">
 <div class="dh">&#127794; Marta's desk card</div>
-<div class="drow"><div class="dl">TASKS</div><div class="dv">Twice a day: at nine, and after lunch. Empty is good news.</div></div>
+<div class="drow"><div class="dl">YOUR LOGIN</div><div class="dv">Always you, never info@barrel.</div></div>
+<div class="drow"><div class="dl">TASKS</div><div class="dv">Twice a day, morning and after lunch. Empty means the system is coping.</div></div>
 <div class="drow"><div class="dl">NO OWNER LIST</div><div class="dv">Weekly sweep until it reads zero.</div></div>
-<div class="drow"><div class="dl">NOTES</div><div class="dv">On everything, every time. Ten seconds now saves a phone call later.</div></div>
+<div class="drow"><div class="dl">24 HOUR RULE</div><div class="dv">Outside the customer's last 24 hours, WhatsApp templates only.</div></div>
 <div class="drow"><div class="dl">ODD THINGS</div><div class="dv">Screenshot, details, WhatsApp Nikki, hands off.</div></div>
 <div class="nevers">
 <div>&#128683; Never delete or rename a tag.</div>
 <div>&#128683; Never drag a card on the pipeline board.</div>
 <div>&#128683; Never change anything inside Automation.</div>
-<div>&#128683; Never edit a calendar or its settings.</div>
-<div>&#128683; Never run a bulk action or send a mass email.</div>
+<div>&#128683; Never type a WhatsApp outside the 24 hour window, template it.</div>
 </div>
 <div class="words">&#9997;&#65039; Words: estimate, never the other word. James, never Liam, to customers. The Barrel Sauna UK Team in anything written.</div>
 </div>
-<label class="checkline"><input type="checkbox" data-check="s10print"> &#128424;&#65039; Card printed and on the desk</label>
-<div class="work" data-sec="s10">
+<label class="checkline"><input type="checkbox" data-check="s9print"> &#128424;&#65039; Card printed and on the desk</label>
+<div class="work" data-sec="s9">
 <div class="wt">&#129504; How was that?</div>
-<label><input type="checkbox" class="okbox" data-check="s10ok"> &#9989; Got it</label>
-<label><input type="checkbox" class="morebox" data-check="s10more"> &#10060; I need more explaining</label>
-<textarea class="note-box" data-note="s10q" placeholder="Your question or note on this section"></textarea>
-<div class="sendrow"><button class="sendq" type="button" data-sec="s10" data-title="Section 10, When something looks odd">&#128232; SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s10" data-title="Section 10, When something looks odd">or email instead</span></div>
-<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+<label><input type="checkbox" class="okbox" data-check="s9ok"> &#9989; Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s9more"> &#10060; I need more explaining</label>
+<textarea class="note-box" data-note="s9q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s9" data-title="Section 9, When something looks odd">&#128232; SEND TO ME ON WHATSAPP</button></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp with the message ready, you press send.</div>
 </div>
 </div></section>
 
@@ -424,7 +402,7 @@ footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;co
 <div id="toast"></div>
 <script>
 (function(){
-  var KEY='bsuk-marta-ghl-guide-v1';
+  var KEY='bsuk-marta-ghl-guide-v2';
   var state={fields:{},checks:{},notes:{},savedAt:null};
   var timer=null;
   function load(){
@@ -514,7 +492,6 @@ footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;co
 })();
 (function(){
   var NIKKI_WA = "27695408842";
-  var NIKKI_EMAIL = "njfeldmann44@gmail.com";
   document.querySelectorAll('.work').forEach(function(w){
     var ok=w.querySelector('.okbox'), more=w.querySelector('.morebox');
     if(ok&&more){
@@ -536,14 +513,6 @@ footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;co
     b.addEventListener('click',function(){
       var msg=buildMsg(b.dataset.sec,b.dataset.title);
       window.open('https://wa.me/'+NIKKI_WA+'?text='+encodeURIComponent(msg),'_blank');
-    });
-  });
-  document.querySelectorAll('.sendmail').forEach(function(a){
-    a.addEventListener('click',function(ev){
-      ev.preventDefault();
-      var msg=buildMsg(a.dataset.sec,a.dataset.title);
-      var su=encodeURIComponent('\uD83D\uDCD6 Marta\u2019s GHL guide question \u00B7 '+a.dataset.title);
-      window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(NIKKI_EMAIL)+'&su='+su+'&body='+encodeURIComponent(msg),'_blank');
     });
   });
 })();
