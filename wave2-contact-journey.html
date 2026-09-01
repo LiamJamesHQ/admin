@@ -3,226 +3,591 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wave 2 Contact Journey</title>
+<title>AMP Training Manual, Wave 2, Barrel Sauna UK</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size:16px;line-height:1.65;}
-.wrap{max-width:820px;margin:0 auto;padding:0 22px 40px;}
-.hero{padding:44px 22px 36px;text-align:center;}
-.hero h1{font-size:34px;font-weight:700;letter-spacing:-0.5px;}
-.hero .sub{margin-top:8px;font-size:15px;}
+:root{--ink:#111417;--ink2:#3A4240;--mut:#5C6663;--green:#417C51;--forest:#2B5336;--sage:#50795F;--honey:#C08B41;--tint:#dbe7dd;--line:#111417;}
+body{font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size:16px;line-height:1.65;background:#ffffff;color:var(--ink2);}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px 40px;}
+.hero{padding:44px 22px 30px;text-align:center;background:#ffffff;border-bottom:3px solid var(--honey);color:var(--ink);}
+.hero h1{font-size:34px;font-weight:700;letter-spacing:-0.5px;color:var(--ink);}
+.hero .sub{margin-top:8px;font-size:15px;color:var(--sage);}
+.hero .ver{margin-top:6px;font-size:12.5px;color:var(--mut);letter-spacing:1px;}
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px;}
-.btn{cursor:pointer;padding:9px 20px;border-radius:6px;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:1px;}
-.saved-line{text-align:center;margin-top:10px;font-size:13px;color:var(--mut);}
-section.band{margin:30px 0;}
-.band-header{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0 10px;border-top:none;border-left:none;border-right:none;background:none;cursor:pointer;font-size:20px;font-weight:700;text-align:left;font-family:inherit;}
-.band-tag{border-radius:20px;padding:4px 14px;font-size:13px;font-weight:400;white-space:nowrap;}
-.band-body{padding:14px 0 0;}
-.band-intro{color:var(--mut);font-size:14.5px;padding:0 0 12px;}
-.jstep{display:flex;gap:14px;border-radius:10px;padding:14px 18px;margin:10px 0;align-items:flex-start;}
-.jnum{flex:0 0 30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;}
-.jmain{flex:1;} .jtitle{font-size:16px;font-weight:400;color:var(--ink);}
-.jdesc{color:var(--mut);font-size:14px;margin-top:3px;}
-.notes-card{border-radius:10px;padding:14px 18px;margin:16px 0 4px;}
-.notes-title{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--ink);}
-.note-box{width:100%;min-height:80px;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111417;background:#ffffff;resize:vertical;}
-footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;}
-@media print{.toolbar,.saved-line{display:none;}.band-body{display:block !important;}}
-
-:root{--ink:#111417;--ink2:#3A4240;--mut:#5C6663;--green:#417C51;--sage:#50795F;--honey:#C08B41;--tint:#dbe7dd;--line:#111417;}
-body{background:#ffffff;color:var(--ink2);}
-.hero{background:#ffffff;border-bottom:3px solid var(--honey);color:var(--ink);}
-.hero h1{color:var(--ink);} .hero .sub{color:var(--sage);}
-.band-header{color:var(--ink);border-bottom:1px solid rgba(17,20,23,0.6);}
-.band-tag{background:var(--tint);border:none;color:#1F3D28;}
-.jstep{border:1px solid rgba(17,20,23,0.18);border-left:3px solid var(--green);background:#ffffff;}
-.jnum{background:var(--honey);border:none;color:#ffffff;}
-.jtitle{color:var(--ink);} .kick{color:var(--sage);}
-.band-intro{color:var(--sage);}
-.btn{border:1px solid var(--line);background:#ffffff;color:var(--ink);}
+.btn{cursor:pointer;padding:9px 20px;border-radius:6px;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:1px;border:1px solid var(--line);background:#ffffff;color:var(--ink);}
 .btn:hover{background:var(--tint);}
-.notes-card{border:1px dashed var(--green);background:#ffffff;}
-.note-box{border:1px solid rgba(65,124,81,0.5);}
-footer{color:var(--mut);}
+.saved-line{text-align:center;margin-top:10px;font-size:13px;color:var(--mut);}
+.who{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px;}
+.who label{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:8px;}
+.who input{border:1px solid rgba(65,124,81,0.5);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:14px;color:var(--ink);background:#ffffff;}
+.progwrap{max-width:520px;margin:18px auto 0;}
+.progbar{height:10px;border-radius:20px;background:var(--tint);overflow:hidden;}
+.progfill{height:100%;width:0%;background:var(--green);border-radius:20px;transition:width .3s;}
+.progtext{text-align:center;font-size:13px;color:var(--sage);margin-top:6px;}
+.contents{margin:26px 0 6px;border:1px solid rgba(17,20,23,0.18);border-radius:10px;padding:16px 20px;background:#ffffff;}
+.contents .ct{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:1px;margin-bottom:8px;}
+.contents a{display:inline-block;margin:4px 10px 4px 0;padding:5px 14px;border-radius:20px;background:var(--tint);color:#1F3D28;text-decoration:none;font-size:13.5px;}
+.contents a.part{background:var(--honey);color:#ffffff;}
+.contents a.done{background:var(--green);color:#ffffff;}
+section.band{margin:30px 0;}
+.band-header{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0 10px;border:none;border-bottom:1px solid rgba(17,20,23,0.6);background:none;cursor:pointer;font-size:20px;font-weight:700;text-align:left;font-family:inherit;color:var(--ink);}
+.band-tag{border-radius:20px;padding:4px 14px;font-size:13px;font-weight:400;white-space:nowrap;background:var(--tint);border:none;color:#1F3D28;}
+.band-body{padding:14px 0 0;}
+.band-intro{color:var(--sage);font-size:14.5px;padding:0 0 12px;}
+.jstep{display:flex;gap:14px;border-radius:10px;padding:14px 18px;margin:10px 0;align-items:flex-start;border:1px solid rgba(17,20,23,0.18);border-left:3px solid var(--green);background:#ffffff;}
+.jnum{flex:0 0 30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:var(--honey);border:none;color:#ffffff;}
+.jmain{flex:1;}
+.jtitle{font-size:16px;font-weight:400;color:var(--ink);}
+.jdesc{color:var(--mut);font-size:14px;margin-top:3px;}
+.cardgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;}
+@media(max-width:640px){.cardgrid{grid-template-columns:1fr;}}
+.gcard{background:var(--tint);border-radius:12px;padding:18px 20px;}
+.gcard .gt{font-size:16.5px;color:var(--ink);margin-bottom:6px;}
+.gcard .gd{font-size:14px;color:var(--ink2);}
+.callout{border:1px solid rgba(17,20,23,0.18);border-left:3px solid var(--honey);border-radius:10px;padding:14px 18px;margin:16px 0;background:#ffffff;}
+.callout .ck{font-size:12.5px;letter-spacing:2px;color:var(--sage);margin-bottom:6px;}
+.callout .cb{font-size:14.5px;color:var(--ink2);}
+.discuss{border:1px dashed var(--honey);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--ink2);background:#ffffff;}
 
+.ptable{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;}
+.ptable th{text-align:left;padding:8px 10px;color:var(--sage);font-weight:700;font-size:12.5px;letter-spacing:1px;border-bottom:1px solid rgba(17,20,23,0.4);}
+.ptable td{padding:9px 10px;border-bottom:1px solid rgba(17,20,23,0.12);color:var(--ink2);vertical-align:top;}
+.ptable td:first-child{color:var(--ink);}
+.stagewho{border-radius:20px;padding:2px 12px;font-size:12.5px;white-space:nowrap;background:var(--tint);color:#1F3D28;}
+.stagewho.you{background:var(--honey);color:#ffffff;}
+.tagchip{display:inline-block;margin:4px 6px 4px 0;padding:5px 14px;border-radius:20px;font-size:13.5px;}
+.tagchip.sys{background:var(--tint);color:#1F3D28;}
+.tagchip.you{background:#ffffff;border:1.5px solid var(--honey);color:var(--ink);}
+.tagnote{font-size:13px;color:var(--mut);margin:4px 0 14px;}
+.outcome{border:1px solid rgba(17,20,23,0.18);border-radius:12px;margin:14px 0;overflow:hidden;background:#ffffff;}
+.outcome .oh{padding:12px 18px;font-size:17px;font-weight:700;color:var(--ink);background:var(--tint);}
+.outcome .orow{display:flex;gap:12px;padding:10px 18px;border-top:1px solid rgba(17,20,23,0.1);font-size:14px;}
+.outcome .ol{flex:0 0 78px;font-weight:700;color:var(--sage);font-size:12.5px;letter-spacing:1px;padding-top:2px;}
+.outcome .ov{flex:1;color:var(--ink2);}
+.divider{margin:38px 0;padding:26px 22px;text-align:center;background:var(--forest);border-radius:12px;color:#ffffff;}
+.divider .dk{font-size:12.5px;letter-spacing:2px;color:var(--honey);margin-bottom:6px;}
+.divider .dt{font-size:19px;font-weight:700;color:#ffffff;}
+.deskcard{border:2px solid var(--forest);border-radius:14px;overflow:hidden;margin:14px 0;background:#ffffff;}
+.deskcard .dh{background:var(--forest);color:#ffffff;padding:14px 20px;font-size:18px;font-weight:700;}
+.deskcard .drow{display:flex;gap:12px;padding:9px 20px;border-bottom:1px solid rgba(17,20,23,0.1);font-size:14px;}
+.deskcard .dl{flex:0 0 140px;color:var(--sage);font-weight:700;font-size:12.5px;letter-spacing:1px;padding-top:2px;}
+.deskcard .dv{flex:1;color:var(--ink2);}
+.deskcard .nevers{padding:12px 20px;background:var(--tint);font-size:14px;color:var(--ink);}
+.deskcard .nevers div{margin:4px 0;}
+.deskcard .words{padding:12px 20px;font-size:13.5px;color:var(--mut);}
+.notes-card{border:1px dashed var(--green);border-radius:10px;padding:14px 18px;margin:16px 0 4px;background:#ffffff;}
+.notes-title{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--ink);}
+.note-box{width:100%;min-height:80px;border:1px solid rgba(65,124,81,0.5);border-radius:8px;padding:10px 12px;font-family:inherit;font-size:14px;color:#111417;background:#ffffff;resize:vertical;}
+.work{border:1px solid rgba(17,20,23,0.18);border-radius:12px;padding:16px 20px;margin:18px 0 4px;background:#ffffff;}
+.work .wt{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.work label{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2);margin:6px 0;cursor:pointer;}
+.work input[type=checkbox]{width:17px;height:17px;accent-color:var(--green);}
+.work .sendrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;}
+.work .sendq{cursor:pointer;padding:8px 16px;border-radius:6px;border:1px solid var(--line);background:#ffffff;color:var(--ink);font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:1px;}
+.work .sendq:hover{background:var(--tint);}
+.work .sendmail{font-size:13px;color:var(--sage);cursor:pointer;text-decoration:underline;}
+.work .whisper{font-size:12px;color:var(--mut);margin-top:8px;}
+.checkline{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2);margin:10px 0;}
+.checkline input[type=checkbox]{width:17px;height:17px;accent-color:var(--green);}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--forest);color:#ffffff;padding:10px 22px;border-radius:30px;font-size:14px;opacity:0;transition:all .3s;pointer-events:none;z-index:50;}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+footer{text-align:center;font-size:12px;letter-spacing:1px;padding:24px 0 8px;color:var(--mut);}
+@media print{.toolbar,.saved-line,.work,.contents,.progwrap,.who{display:none;}.band-body{display:block !important;}.band-header{border-bottom:1px solid #111417;}}
 </style>
 </head>
 <body>
 <div class="hero">
-<h1>🗺️ Wave 2 Contact Journey ✨</h1>
-<p class="sub">every step a Wave 2 lead takes, workflow by workflow 🧭</p>
+<h1>📖 AMP Training Manual ✨</h1>
+<p class="sub">Wave 2 leads, and the part you play in every one of them 📞</p>
+<p class="ver">VERSION 0.4 DRAFT FOR REVIEW · 1 SEPTEMBER 2026 · WAVE 2 FACEBOOK AND META AD PIPELINE</p>
 <div class="toolbar">
-<button class="btn" id="btnSnapshot" type="button">💾 SAVE SNAPSHOT</button>
-<button class="btn" id="btnRestore" type="button">📂 RESTORE</button>
-<button class="btn" id="btnPdf" type="button">📄 PDF</button>
+<button class="btn" id="btnDownload" type="button">💾 DOWNLOAD MY PROGRESS</button>
+<button class="btn" id="btnRestore" type="button">📂 RESTORE A SAVED FILE</button>
+<button class="btn" id="btnPrint" type="button">📄 PRINT OR SAVE AS PDF</button>
+<button class="btn" id="btnReset" type="button">🧹 CLEAR EVERYTHING</button>
 <input type="file" id="fileRestore" accept="application/json" style="display:none">
 </div>
-<p class="saved-line">notes autosave on every keystroke · last saved: <span id="lastSaved">not yet</span></p>
+<div class="who">
+<label>👤 Your name <input type="text" id="traineeName" data-field="whoName"></label>
+<label>📅 Date started <input type="text" data-field="whoDate" placeholder="e.g. 7 September"></label>
+</div>
+<div class="progwrap">
+<div class="progbar"><div class="progfill" id="progFill"></div></div>
+<p class="progtext" id="progText">0 of 0 done</p>
+</div>
+<p class="saved-line">Everything you tick and type saves itself in your browser · <span id="savedAt">Not saved yet</span></p>
 </div>
 <div class="wrap">
-<section class="band" id="w1">
-<button class="band-header" type="button" data-band="w1"><span>1️⃣ W1: Lead Intake 🚪</span><span class="band-tag">the front door</span></button>
-<div class="band-body" id="body-w1">
-<p class="band-intro">A new Facebook lead is captured, tagged, handed to AMP and greeted within a minute, whatever the hour.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">📋 Facebook lead form submitted</div><div class="jdesc">The customer completes the Meta lead form and enters the system.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🏷️ Tagged as a Wave 2 lead</div><div class="jdesc">The tag wave 2 facebook/meta lead is applied. This tag gates everything downstream.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">📊 Moved to New Lead stage</div><div class="jdesc">The opportunity is created at the top of the pipeline.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">☎️ Assigned to AMP</div><div class="jdesc">The external call team owns the contact from this point.</div></div></div>
-<div class="jstep"><div class="jnum">5</div><div class="jmain"><div class="jtitle">💬 Instant greeting WhatsApp</div><div class="jdesc">Fires the moment the form arrives, day or night, while the enquiry is still warm.</div></div></div>
-<div class="jstep"><div class="jnum">6</div><div class="jmain"><div class="jtitle">⏰ Hold until open hours</div><div class="jdesc">If the WhatsApp delivered: a short hold so the rest lands between 10:30am and 5pm on weekdays, then the branded greeting email and the first AMP call is bridged.</div></div></div>
-<div class="jstep"><div class="jnum">7</div><div class="jmain"><div class="jtitle">📲 Fallback path</div><div class="jdesc">If the WhatsApp did not deliver: the same greeting goes by SMS, then the email, the AMP call, and a day later the Deal of the Month email.</div></div></div>
 
-<div class="notes-card"><div class="notes-title">📝 My notes on 1️⃣ W1</div><textarea class="note-box" data-note="w1" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w2">
-<button class="band-header" type="button" data-band="w2"><span>2️⃣ W2: Call Status Router 📞</span><span class="band-tag">what happened on the call?</span></button>
-<div class="band-body" id="body-w2">
-<p class="band-intro">Three sibling workflows listen to every call and route the lead by outcome. Each acts only on Wave 2 leads and knows whether the lead has already been reached, so nobody gets pulled backwards.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">📗 W2(a) call connected</div><div class="jdesc">First connected call only: the lead moves to contacted by office and is stamped with the reached tag every other workflow reads.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">📙 W2(b) call not answered</div><div class="jdesc">A missed call moves the lead to Not Reached and records the outcome. Two days later the team gets a follow up email and AMP gets a call-again task. If the lead is reached in the meantime, it ends early and both are skipped.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">📘 W2(c) lead rings us back</div><div class="jdesc">An inbound call that connects counts as the first conversation: moved to Contacted, stamped as reached, and pulled out of the no-answer net.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 2️⃣ W2</div><textarea class="note-box" data-note="w2" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w3">
-<button class="band-header" type="button" data-band="w3"><span>3️⃣ W3: Call Outcome Router 🎧</span><span class="band-tag">how did the chat go?</span></button>
-<div class="band-body" id="body-w3">
-<p class="band-intro">After every AMP conversation the call is transcribed and classified by AI as Confirmed, Thinking, No or Unclear, and the outcome routes what happens next. Leads with a call already booked are left alone.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">🔥 Warm (Confirmed or Thinking)</div><div class="jdesc">Moved to reached and warm, a 5 minute pause, then the was-great-speaking-with-you WhatsApp with the workshop video and SMS fallback, followed by the Get To Know Us email.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🧊 Cold (No)</div><div class="jdesc">Moved to reached but cold, then the cross sell WhatsApp: we do more than just barrel saunas. SMS fallback plus a hand-written style cross sell email.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">❓ Unclear</div><div class="jdesc">Tagged for the follow up net, which picks the lead up 48 hours later if nothing resolves.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 3️⃣ W3</div><textarea class="note-box" data-note="w3" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w4">
-<button class="band-header" type="button" data-band="w4"><span>4️⃣ W4: Warm Nurture & Cold Revival 🕯️</span><span class="band-tag">keeping the flame lit</span></button>
-<div class="band-body" id="body-w4">
-<p class="band-intro">Warm leads get a gentle, human paced sequence from Marta. Cold leads who reply get promoted straight back into it.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">🌱 Warm nurture</div><div class="jdesc">3 days after going warm: how's it going? 4 days later: can I help with anything? 3 days more: sorry, forgot to mention, with the Book a Call Back link. 7 quiet days later the lead is tagged as gone quiet and moves to the 8 week list. Full WhatsApp, SMS and email fallbacks, and booking a call pulls the lead out instantly.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🔄 Cold revival</div><div class="jdesc">Any reply from a cold lead removes the cold tag, promotes them to warm, and they flow into nurture like any other warm lead.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 4️⃣ W4</div><textarea class="note-box" data-note="w4" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w5">
-<button class="band-header" type="button" data-band="w5"><span>5️⃣ W5: No Answer Follow Up 📵</span><span class="band-tag">we tried to call</span></button>
-<div class="band-body" id="body-w5">
-<p class="band-intro">When the first AMP call goes unanswered the system retries once, then chases politely, and knows exactly when to stop.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">☎️ Automatic retry next day</div><div class="jdesc">The day after the miss, at lunchtime, a fresh AMP call is bridged. First time through only.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🛡️ Did anything land?</div><div class="jdesc">A day later: if the retry connected, or the lead replied, booked or paid, the chase ends silently.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">💬 The chase</div><div class="jdesc">Otherwise: we tried giving you a ring, with the Book a call back link; 2 days later are you still looking; 3 days later a last chance. Every message mirrored on SMS and email, and a reply pulls the lead out instantly.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">📊 Chase exhausted</div><div class="jdesc">Silent leads are marked exhausted and move to Cold. Leads who received every message also carry the revival tag, so a reply weeks later still promotes them back to warm.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 5️⃣ W5</div><textarea class="note-box" data-note="w5" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w6">
-<button class="band-header" type="button" data-band="w6"><span>6️⃣ W6: Call Booked for Closer 📅</span><span class="band-tag">it's in the diary</span></button>
-<div class="band-body" id="body-w6">
-<p class="band-intro">A confirmed booking on the Book a Call Back calendar switches the lead from being chased to being prepared for the closer.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">🏷️ Booking tagged</div><div class="jdesc">The wave 2 call booked tag is applied and every other workflow stands down.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🎣 Pulled out of nurture</div><div class="jdesc">Removed from warm nurture and the no answer chase, stage moves to call booked with closer.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">💬 Confirmation from Marta</div><div class="jdesc">A WhatsApp confirms the time with a reschedule link, with SMS and email fallbacks.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">🔔 Team warned about quiet leads</div><div class="jdesc">The confirmation email is watched for 2 days: leads who open but don't reschedule, and leads who never engage at all, both trigger a heads up so the closer knows who might not show.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 6️⃣ W6</div><textarea class="note-box" data-note="w6" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w7">
-<button class="band-header" type="button" data-band="w7"><span>7️⃣ W7: Closer Call Outcome Router 🤝</span><span class="band-tag">after the big call</span></button>
-<div class="band-body" id="body-w7">
-<p class="band-intro">The closer call is classified the same way as the first, and only leads with a booked call are routed here.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">✅ Confirmed</div><div class="jdesc">The deposit link email goes out.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🤔 Thinking</div><div class="jdesc">2 quiet days, then have you had a chance to think it over, with the lead-times nudge, on every channel. If the lead stays quiet the team is alerted, immediately when no channel delivers.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">🚫 No</div><div class="jdesc">The lead is tagged cold with 7 days of grace. Any sign of life, a reply, a deposit, an estimate, a booking, being away or saving for later, flags them for human follow up with a team alert. Everyone else moves to the 8 week list.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">❓ Unclear</div><div class="jdesc">The team is alerted directly, a person handles the nuance rather than automation.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 7️⃣ W7</div><textarea class="note-box" data-note="w7" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w8">
-<button class="band-header" type="button" data-band="w8"><span>8️⃣ W8: 8 & 12 Week Follow Up 📬</span><span class="band-tag">the long game</span></button>
-<div class="band-body" id="body-w8">
-<p class="band-intro">Leads parked on the marketing list rest, then get two well spaced touches.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">📧 8 weeks: where are you at with your build?</div><div class="jdesc">A personal check-in that lands with the team when they reply.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">📧 12 weeks: we build more than saunas</div><div class="jdesc">The full range email: hot tubs, ice baths, glamping pods, mobile saunas, grill cabins.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">🏁 Instant exit</div><div class="jdesc">Booking a call or paying a deposit at any point ends the sequence immediately and quietly.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 8️⃣ W8</div><textarea class="note-box" data-note="w8" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w9">
-<button class="band-header" type="button" data-band="w9"><span>9️⃣ W9: Warm Pending 🕰️</span><span class="band-tag">parked, not forgotten</span></button>
-<div class="band-body" id="body-w9">
-<p class="band-intro">Warm leads who go quiet are parked where the team can see them, and a single reply brings them back.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">🚪 Entry</div><div class="jdesc">7 quiet days after going warm, and only if no conversation is running, the lead is tagged, moved to warm pending, and the team is alerted.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🔄 Exit on reply</div><div class="jdesc">Any reply moves them straight back to reached and warm and removes the pending tag.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 9️⃣ W9</div><textarea class="note-box" data-note="w9" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w10">
-<button class="band-header" type="button" data-band="w10"><span>🔟 W10: Showroom Family 🏠</span><span class="band-tag">come and have a feel</span></button>
-<div class="band-body" id="body-w10">
-<p class="band-intro">Three workflows cover the showroom visit end to end. The showroom calendar sends its own confirmation and reminder emails, so these stay out of the customer's inbox.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">📅 W10(a) visit booked</div><div class="jdesc">A confirmed booking on the Showroom Bookings calendar tags the lead and pulls them out of nurture and the chase.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">👣 W10(b) visited</div><div class="jdesc">When the appointment is marked as showed, the lead is tagged visited showroom and the stage moves to match.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">🔔 W10(c) outcome</div><div class="jdesc">After the appointment ends: no-shows trigger a team alert, visitors end quiet.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 🔟 W10</div><textarea class="note-box" data-note="w10" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w11">
-<button class="band-header" type="button" data-band="w11"><span>1️⃣1️⃣ W11: Unclear Call 48hr Net 🕸️</span><span class="band-tag">nothing slips through</span></button>
-<div class="band-body" id="body-w11">
-<p class="band-intro">An unclear outcome from either router starts a 48 hour clock.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">⏳ 48 hours of grace</div><div class="jdesc">If anything resolves in that window, a reply, a booking, a payment, a clean outcome, the net lets go silently.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🔔 Unresolved</div><div class="jdesc">Otherwise the team is alerted: unclear call, still unresolved, human needed.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 1️⃣1️⃣ W11</div><textarea class="note-box" data-note="w11" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w12">
-<button class="band-header" type="button" data-band="w12"><span>1️⃣2️⃣ W12: Natural Call Silencer 🤫</span><span class="band-tag">a real chat beats a sequence</span></button>
-<div class="band-body" id="body-w12">
-<p class="band-intro">Any completed call with a Wave 2 lead means a real conversation happened, so the automation steps back.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">🎣 Pulled from the sequences</div><div class="jdesc">The lead is removed from warm nurture and the no answer chase.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🔥 Cold leads warm up</div><div class="jdesc">A cold lead who has an actual conversation is promoted back to reached and warm.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 1️⃣2️⃣ W12</div><textarea class="note-box" data-note="w12" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w13">
-<button class="band-header" type="button" data-band="w13"><span>1️⃣3️⃣ W13: Estimate Sent 📄</span><span class="band-tag">the home straight</span></button>
-<div class="band-body" id="body-w13">
-<p class="band-intro">The estimate stage starts a short, polite countdown to the deposit.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">📧 Deposit link email</div><div class="jdesc">The estimate is followed by the securing-your-build email with the deposit link, and the team is notified.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">💬 3 days: friendly check-in</div><div class="jdesc">Unpaid leads get a light WhatsApp and a personal style email: just checking in, reply if anything has changed.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">🔔 2 more days: team alert</div><div class="jdesc">Still unpaid and quiet, a person takes over.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">🏁 Payment ends everything</div><div class="jdesc">A successful £500 deposit at any moment ends the chase instantly.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 1️⃣3️⃣ W13</div><textarea class="note-box" data-note="w13" aria-label="Notes"></textarea></div>
-</div></section>
-<section class="band" id="w14">
-<button class="band-header" type="button" data-band="w14"><span>1️⃣4️⃣ Deposit Paid 🎉</span><span class="band-tag">we won them over</span></button>
-<div class="band-body" id="body-w14">
-<p class="band-intro">The moment the £500 deposit clears, on any pipeline, the celebration and the handover begin.</p>
-<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">🏷️ Tagged and moved</div><div class="jdesc">The deposit paid tag fires every guard in the system, and the stage moves to deposit paid.</div></div></div>
-<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">💬 Just a quick thanks</div><div class="jdesc">A short WhatsApp from Marta confirms it landed and points to the email.</div></div></div>
-<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">📧 Branded thank you email</div><div class="jdesc">Deposit received, the journey circles showing deposit paid as the active stage, and what happens next.</div></div></div>
-<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">🥳 Team celebration alert</div><div class="jdesc">The good-news internal email goes to the assigned user and Marta: contact details, £500 received, next steps, open in GHL.</div></div></div>
-
-<div class="notes-card"><div class="notes-title">📝 My notes on 1️⃣4️⃣ Deposit Paid 🎉</div><textarea class="note-box" data-note="w14" aria-label="Notes"></textarea></div>
-</div></section>
-
-<footer>WAVE 2 CONTACT JOURNEY · BARREL SAUNA UK INTERNAL · THE FULL SYSTEM, W1 TO DEPOSIT PAID 🏁</footer>
+<nav class="contents">
+<div class="ct">📚 CONTENTS</div>
+<a href="#s1" data-nav="s1">1 · What we need from you</a>
+<a href="#s2" data-nav="s2">2 · The lead journey</a>
+<a href="#s3" data-nav="s3">3 · Call outcomes</a>
+<a href="#s4" data-nav="s4">4 · Tags and notes</a>
+<a href="#s5" data-nav="s5">5 · Calendars and bookings</a>
+<a href="#s6" data-nav="s6">6 · Working in GHL</a>
+<a href="#s7" data-nav="s7">7 · Call script</a>
+<a href="#s8" data-nav="s8">8 · Telling us what you hear</a>
+<a href="#s9" data-nav="s9">9 · Quick reference card</a>
+<a href="#s10" data-nav="s10">10 · Open decisions</a>
+</nav>
+<section class="band" id="s1">
+<button class="band-header" type="button" data-band="s1"><span>1️⃣ What we need from you 🎯</span><span class="band-tag">on one page</span></button>
+<div class="band-body" id="body-s1">
+<p class="band-intro">You already answer our phones and qualify callers every day. Wave 2 changes one thing: these leads come in through the system, and the system reacts to every call. Four things, in this order, every time.</p>
+<div class="cardgrid">
+<div class="gcard"><div class="gt">📧 Your day starts with the heads-up email</div><div class="gd">It lands before calls begin with the day's lead count, so you know what is coming.</div></div>
+<div class="gcard"><div class="gt">📞 Take the bridged calls, 10:30 to 17:00, Monday to Friday</div><div class="gd">You do not dial. The system rings you and connects you to the lead, and every call is recorded and logged automatically because of it.</div></div>
+<div class="gcard"><div class="gt">👀 After the call, check the record landed</div><div class="gd">The AI writes the outcome, note and tags from the transcript. Read it, and add anything it could not hear. Section 4 covers the tags that are still yours.</div></div>
+<div class="gcard"><div class="gt">📅 Book into the right calendar</div><div class="gd">Calls with the closer into Book a Call Back, workshop visits into Showroom Bookings. Section 5.</div></div>
 </div>
+<div class="callout"><div class="ck">WHY IT MATTERS</div><div class="cb">The AI logs every call from the transcript, and the automation fires off that record: follow up messages, reminders, alerts to the team. Your check after each call is the safety net. If the AI misread something and nobody corrects it, the customer gets the wrong message, or none at all.</div></div>
+<div class="work" data-sec="s1">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s1ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s1more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s1q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s1" data-title="Section 1, What we need from you">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s1" data-title="Section 1, What we need from you">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<section class="band" id="s2">
+<button class="band-header" type="button" data-band="s2"><span>2️⃣ The lead journey 🗺️</span><span class="band-tag">and where you sit</span></button>
+<div class="band-body" id="body-s2">
+<p class="band-intro">Every Wave 2 lead moves along this pipeline. Honey stages are yours. Green stages move on their own off the record of your call or your booking. Grey stages belong to the closers.</p>
+<table class="ptable">
+<tr><th>STAGE</th><th>WHAT HAPPENS</th><th>WHO MOVES IT</th></tr>
+<tr><td>✨ New Lead</td><td>Arrives from the ad form. The system bridges you a call.</td><td><span class="stagewho you">You: call</span></td></tr>
+<tr><td>☎️ Contacted by Office</td><td>You connected. The system moves them here off your call.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>📵 Not Reached</td><td>No answer or voicemail. The retry and chase start on their own.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>🔥 Reached and Warm</td><td>A warm outcome. Nurture messages start.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>❄️ Reached but Cold</td><td>A cold outcome. Cross sell, then well spaced check-ins.</td><td><span class="stagewho">Automatic</span></td></tr>
+<tr><td>📅 Call Booked with Closer</td><td>Moves here the moment you book the calendar slot.</td><td><span class="stagewho you">You: book</span></td></tr>
+<tr><td>📄 Estimate Sent</td><td>Closer sends the estimate.</td><td><span class="stagewho">Closer</span></td></tr>
+<tr><td>💷 Deposit Paid</td><td>500 pound deposit, into the order queue.</td><td><span class="stagewho">Closer</span></td></tr>
+</table>
+<p class="tagnote">Scroll sideways on a narrow screen. The pipeline is called Wave 2 Facebook/Meta Ad in GHL.</p>
+<div class="callout"><div class="ck">MOVING A LEAD BY HAND</div><div class="cb">You can drag a lead between stages, and there will be moments when you should. Two things to know first: a hand move can be overwritten a few minutes later when the automation writes its own outcome, and some stages fire messages when a lead lands in them. So the rule is: let the system move it, and only move by hand when the stage is plainly wrong and you have already left a note saying why.</div></div>
+<div class="discuss">🤝 <span style="font-weight:700;color:#111417">For discussion with Liam:</span> which single case, if any, is a hand move always allowed in. Suggested: "system placed them in the wrong stage and the note explains why".</div>
+<div class="work" data-sec="s2">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s2ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s2more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s2q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s2" data-title="Section 2, The lead journey">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s2" data-title="Section 2, The lead journey">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<div class="divider"><div class="dk">WHAT THE AI WROTE</div><div class="dt">The automation reads the transcript. Your job is to make sure what it wrote is true. 👀</div></div>
+
+<section class="band" id="s3">
+<button class="band-header" type="button" data-band="s3"><span>3️⃣ Four outcomes 🔀</span><span class="band-tag">and what each one sets off</span></button>
+<div class="band-body" id="body-s3">
+<p class="band-intro">Every completed call lands in one of these. The AI reads the call and writes the outcome; your check makes it right. Here is what happens next in each case, so you can tell a caller what to expect.</p>
+
+<div class="outcome"><div class="oh">🔥 Connected, warm</div>
+<div class="orow"><div class="ol">YOU DO</div><div class="ov">Book them into Book a Call Back there and then if they will take a slot. If not, check the record shows warm.</div></div>
+<div class="orow"><div class="ol">THEN</div><div class="ov">If booked: confirmation, reminders and closer notification fire. If not booked: a WhatsApp with the invitation to visit the workshop, then a gentle check in sequence from Marta over the following days.</div></div>
+<div class="orow"><div class="ol">NEVER</div><div class="ov">Give a price or an estimate. The closer does that on the booked call.</div></div>
+</div>
+
+<div class="outcome"><div class="oh">❄️ Connected, cold</div>
+<div class="orow"><div class="ol">YOU DO</div><div class="ov">Add the reason they are not interested to the record. Check the tag shows cold.</div></div>
+<div class="orow"><div class="ol">THEN</div><div class="ov">One cross sell message showing the wider range, then two well spaced check-ins at 8 and 12 weeks. A reply at any point warms them back up and a person picks it up.</div></div>
+<div class="orow"><div class="ol">NEVER</div><div class="ov">Push, and never promise silence. A clear "no thanks" is a fine outcome, but the later check-ins will still go out unless they ask us to stop contacting them altogether. That is what DND is for, Section 6.</div></div>
+</div>
+
+<div class="outcome"><div class="oh">📵 No answer or voicemail</div>
+<div class="orow"><div class="ol">YOU DO</div><div class="ov">Let the call finish so GHL records it. Do not call again yourself.</div></div>
+<div class="orow"><div class="ol">THEN</div><div class="ov">The next working day at lunchtime the system bridges you a fresh call to them. If that also goes unanswered, a timed chase of messages runs over the following days. If they reply, a task lands in your queue to call again, Section 6.</div></div>
+<div class="orow"><div class="ol">NEVER</div><div class="ov">Ring three times in a row. The retry and the chase are designed so one attempt at a time is enough from you.</div></div>
+</div>
+
+<div class="outcome"><div class="oh">🤔 Connected, unclear</div>
+<div class="orow"><div class="ol">YOU DO</div><div class="ov">Write the fullest note of the four, on top of whatever the AI wrote. What they asked, what you could not answer, what they want next. Tag human follow up needed.</div></div>
+<div class="orow"><div class="ol">THEN</div><div class="ov">If nothing has moved in 48 hours, an alert goes to the team, who read your note and route it.</div></div>
+<div class="orow"><div class="ol">NEVER</div><div class="ov">Leave it with no note. A blank unclear is the one outcome the system cannot recover.</div></div>
+</div>
+
+<div class="callout"><div class="ck">HOW THE SYSTEM READS YOUR CALL</div><div class="cb">After every call, the recording is transcribed and an AI classifies the conversation, then writes the outcome, the note and the tags. A clear, natural conversation makes that reading accurate. Your added note catches what the transcript cannot carry: anything agreed off the call, background the caller gave in passing, or a correction where the AI plainly misheard.</div></div>
+<div class="work" data-sec="s3">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s3ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s3more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s3q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s3" data-title="Section 3, Four outcomes">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s3" data-title="Section 3, Four outcomes">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+<section class="band" id="s4">
+<button class="band-header" type="button" data-band="s4"><span>4️⃣ Tags and notes 🏷️</span><span class="band-tag">the job that makes it all work</span></button>
+<div class="band-body" id="body-s4">
+<p class="band-intro">Most tags are written by the system and the AI off your call. Your job is lighter but just as important: add the two tags that are yours when they apply, and correct anything that no longer fits. Clean tags are the difference between a customer getting the right message and the wrong one.</p>
+<div class="callout"><div class="ck">TWO KINDS OF TAG</div><div class="cb">Some tags are placed by the system. Never add, remove or edit these, even if one looks wrong. Other tags are yours to manage.</div></div>
+<div>
+<span class="tagchip sys">wave 2 facebook/meta lead</span>
+<span class="tagchip sys">wave 2 no answer chase started</span>
+<span class="tagchip sys">no answer chase exhausted</span>
+<span class="tagchip sys">wave 2 call booked</span>
+<span class="tagchip sys">closer call outcome is ...</span>
+</div>
+<p class="tagnote">System tags, shaded green. Leave them alone. 🟢</p>
+<div>
+<span class="tagchip you">🔥 warm</span>
+<span class="tagchip you">❄️ cold</span>
+<span class="tagchip you">📵 no answer</span>
+<span class="tagchip you">💬 currently in conversation</span>
+<span class="tagchip you">🙋 human follow up needed</span>
+</div>
+<p class="tagnote">Your tags, honey outline. Exact spellings to be confirmed, see Open decisions.</p>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">1️⃣ One clean status per contact</div><div class="jdesc">When you add or correct a tag, leave the one that tells the team what to do next, not a pile of history.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🔁 Replace, do not stack</div><div class="jdesc">If a lead was tagged warm last week and today they say they have bought elsewhere, remove warm and tag cold. An old tag left behind sends them the wrong messages.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">📝 Every call gets a note, and the AI writes it</div><div class="jdesc">Check it landed, and add anything it could not hear: side details, anything agreed off the recording.</div></div></div>
+<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">💬 "Currently in conversation" is automatic</div><div class="jdesc">It goes on the moment a lead replies to us, and comes off 24 hours after one of us replies back. It tells the automation to stay quiet while a human is talking. If you are mid conversation and you cannot see it, add it yourself.</div></div></div>
+<div class="jstep"><div class="jnum">5</div><div class="jmain"><div class="jtitle">🙋 "Human follow up needed" is for anything that does not fit</div><div class="jdesc">An unusual request, a question you could not answer, a complaint. This tag is what gets a person to look at it.</div></div></div>
+<div class="jstep"><div class="jnum">6</div><div class="jmain"><div class="jtitle">👀 Check the tag saved</div><div class="jdesc">GHL sometimes drops a change. Close the contact and reopen it before you move on.</div></div></div>
+<div class="work" data-sec="s4">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s4ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s4more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s4q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s4" data-title="Section 4, Tags and notes">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s4" data-title="Section 4, Tags and notes">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<div class="divider"><div class="dk">THE TRIGGER</div><div class="dt">A booking is not a diary entry. It is the moment the whole system wakes up. 📅</div></div>
+
+<section class="band" id="s5">
+<button class="band-header" type="button" data-band="s5"><span>5️⃣ Calendars and bookings 📅</span><span class="band-tag">the one thing that must be exact</span></button>
+<div class="band-body" id="body-s5">
+<p class="band-intro">A booking is the trigger. The moment a lead is booked into the right calendar, the system moves them to Call Booked, confirms with them, sends reminders, sends directions for a visit, and tells the closer. Booked into the wrong calendar, none of that happens and the lead thinks we forgot them.</p>
+<table class="ptable">
+<tr><th>WHAT THE LEAD WANTS</th><th>CALENDAR TO USE</th><th>WHO TAKES IT</th></tr>
+<tr><td>☎️ A call with someone about their build</td><td>Book a Call Back</td><td>Liam James, for now</td></tr>
+<tr><td>🏠 To visit the workshop or showroom</td><td>Showroom Bookings</td><td>Liam James</td></tr>
+</table>
+<div class="callout"><div class="ck">STOP AND CHECK</div><div class="cb">Resolved: the automation watches Book a Call Back for calls and Showroom Bookings for visits, confirmed 31 August. The showroom calendar sends its own confirmation and reminder emails, so a visit booking looks quieter in the conversation view. That is normal.</div></div>
+<div class="callout"><div class="ck">TO BEGIN WITH</div><div class="cb">Book every call into Book a Call Back only. Once you have a feel for how warm different callers are, and how our sales process runs, we will open up the choice of who a call goes to.<br><br>Every booking, and every contact, must be assigned to Liam James. If assignment can be automated so you never have to remember it, it will be, and this line will be removed.</div></div>
+<div class="work" data-sec="s5">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s5ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s5more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s5q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s5" data-title="Section 5, Calendars and bookings">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s5" data-title="Section 5, Calendars and bookings">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<section class="band" id="s6">
+<button class="band-header" type="button" data-band="s6"><span>6️⃣ Working in GHL 🖱️</span><span class="band-tag">click by click</span></button>
+<div class="band-body" id="body-s6">
+<p class="band-intro">Only the parts you will actually use. Screenshots will be dropped into the marked slots. Each block is one task, start to finish.</p>
+
+<div class="callout"><div class="ck">🔍 FIND THE LEAD AND OPEN THE CONTACT</div><div class="cb"></div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Open the alert, or go to Contacts in the left menu</div><div class="jdesc">New Wave 2 leads carry the tag "wave 2 facebook/meta lead". Filter by that tag to see only them.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Click the name to open the contact record</div><div class="jdesc">Check the assigned user shows Liam James. If it does not, set it now.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Contacts list filtered by the Wave 2 tag, with the assigned user field circled</p>
+</div>
+
+<div class="callout"><div class="ck">📞 TAKE THE BRIDGED CALL</div><div class="cb"></div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">When the bridged call rings, answer it</div><div class="jdesc">The system has dialled you and the lead together, so the call is recorded and visible to the system automatically.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Let the call end naturally, even a no answer</div><div class="jdesc">Hanging up early on a ringing line can stop GHL logging it as a completed attempt.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Contact record with the call panel open</p>
+</div>
+
+<div class="callout"><div class="ck">👀 CHECK THE RECORD LANDED</div><div class="cb"></div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">A few minutes after the call, open the contact and read what the AI wrote</div><div class="jdesc">The outcome, the note and the tags are written from the transcript. Read them against your memory of the call.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Add what it could not hear, correct what it misread</div><div class="jdesc">Extra detail goes in the Notes panel in plain words. A wrong tag gets replaced with the right one, one clean status, Section 4.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">Close the contact, reopen it, check your changes are there</div><div class="jdesc">Saved is not the same as held.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Notes panel and Tags field on a contact, with the AI note and a human addition</p>
+</div>
+
+<div class="callout"><div class="ck">📅 BOOK A CALL OR A VISIT</div><div class="cb"></div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">On the contact, open Appointments and click Book</div><div class="jdesc">Choose the calendar named in Section 5. Check the name before you pick a slot.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Pick the slot, confirm the contact details, save</div><div class="jdesc">Then open the contact's Appointments again and check it is listed against the right calendar.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Booking panel with the calendar dropdown open and the correct calendar highlighted</p>
+</div>
+
+<div class="callout"><div class="ck">✅ TASKS ASSIGNED TO YOU</div><div class="cb">When a chased lead needs a second human call, the system creates a task against your name. Tasks are the queue of calls the system could not make for you.</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Open Tasks in the left menu, filter to your name</div><div class="jdesc">Each task names the contact and what it wants, usually a call-again on a lead who did not answer.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Open the contact from the task, make the call, check the record</div><div class="jdesc">As always.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">Mark the task complete</div><div class="jdesc">An open task means an uncalled lead, so the list should be empty by the end of each day.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Tasks view filtered to the agent, one task open</p>
+</div>
+
+<div class="callout"><div class="ck">📋 YOUR TWO SMART LISTS, AND FOLLOW-UP WEDNESDAYS</div><div class="cb">Two saved lists in GHL collect the leads that need a human again. They are the whole of your Wednesday.</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Open Contacts, then Smart Lists, and pin these two</div><div class="jdesc">Wave 2 AMP, 7 days no activity: leads nothing has moved on in a week. Wave 2 AMP, reached but cold: the polite no-for-nows worth one light revisit.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Every Wednesday, work both lists top to bottom</div><div class="jdesc">Call as always, then check the record on each contact and correct any tag that no longer fits.</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">Empty list, job done</div><div class="jdesc">If a list is empty on Wednesday, that is the system working, not a mistake.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Smart Lists menu with the two Wave 2 AMP lists pinned</p>
+</div>
+
+<div class="callout"><div class="ck">🔕 DO NOT DISTURB</div><div class="cb">DND stops all automated messages to a contact. Use it when someone asks us to stop contacting them, or when a person is now handling them directly and the automated messages would get in the way.</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">On the contact record, find the DND toggle at the top of the contact details</div><div class="jdesc">You can switch off all channels, or just one, such as SMS.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Switch it on, then add a note saying why and when</div><div class="jdesc">Without the note nobody will know why the messages stopped.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: DND toggle on a contact, with the channel options showing</p>
+</div>
+
+<div class="callout"><div class="ck">✋ MOVE A LEAD IN THE PIPELINE BY HAND</div><div class="cb"></div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Go to Opportunities in the left menu and pick the Wave 2 Facebook/Meta Ad pipeline</div><div class="jdesc">Each card is a lead. Columns are the stages from Section 2.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Drag the card to the correct stage, then add a note on the contact saying why</div><div class="jdesc">Only when the stage is plainly wrong. See the rule in Section 2.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Pipeline board view with a card mid drag</p>
+</div>
+
+<div class="callout"><div class="ck">💬 SEND A MESSAGE USING A TEMPLATE</div><div class="cb">Most messages to leads are automated. If you ever need to send one yourself, WhatsApp has a rule: outside 24 hours of the customer's last message, only an approved template can be sent. A typed message in that window silently fails. Templates are the safe route.</div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">Open Conversations, select the contact, choose WhatsApp as the channel</div><div class="jdesc">If it is more than 24 hours since they last wrote to us, you must use a template.</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">Click the template icon, pick the one that fits, fill any blanks, send</div><div class="jdesc">Then check the message shows as delivered, not just sent.</div></div></div>
+<p class="tagnote">📷 Screenshot slot: Conversation window with the template picker open</p>
+</div>
+<div class="discuss">🤝 <span style="font-weight:700;color:#111417">For discussion with Liam:</span> does AMP ever message a lead themselves, or only call? If only call, the template block can be cut and the risk of a failed typed message goes away.</div>
+<div class="work" data-sec="s6">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s6ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s6more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s6q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s6" data-title="Section 6, Working in GHL">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s6" data-title="Section 6, Working in GHL">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+<div class="divider"><div class="dk">ON THE PHONE</div><div class="dt">Find out enough to know warm from cold, then offer the slot. 🎙️</div></div>
+
+<section class="band" id="s7">
+<button class="band-header" type="button" data-band="s7"><span>7️⃣ Call script 🎙️</span><span class="band-tag">a suggested shape</span></button>
+<div class="band-body" id="body-s7">
+<p class="band-intro">This is a structure to discuss, not approved wording. Nothing here is Liam's copy yet. Each block has a placeholder for his words.</p>
+<div class="callout"><div class="ck">STATUS</div><div class="cb">Draft structure for the Liam meeting. Every bracketed line needs his wording or his yes.</div></div>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">👋 Opening</div><div class="jdesc">Name the ad they responded to, so they place the call straight away. Say who you are calling from. Ask if now is a good time.<br>[Liam's opening line]</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">❓ Three questions, and no more</div><div class="jdesc">The closer will go deep. Your job is to find out enough to know warm from cold and to book. Suggested: what are they thinking of, sauna, hot tub, ice bath, something mobile, something else? Where would it go, and roughly when are they hoping to have it? Have they seen anything of ours they liked, or would they like to see the workshop?<br>[Liam to confirm, cut or replace the three questions]</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">🚪 The offer</div><div class="jdesc">Two doors: a call with James about their build, or a visit to the workshop. Offer the slot there and then rather than asking them to think about it.<br>[Liam's book a call wording]<br>[Liam's book a visit wording, the same words used in the warm WhatsApp]</div></div></div>
+<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">💷 When they ask about price</div><div class="jdesc">Suggested line: the estimate depends on the build, and that is exactly what James goes through on the call. Then return to the offer.<br>[Liam to confirm what AMP may and may not say about price and lead times]</div></div></div>
+<div class="jstep"><div class="jnum">5</div><div class="jmain"><div class="jtitle">✅ Close</div><div class="jdesc">Repeat what was booked, confirm the number and email for the confirmation, thank them.<br>[Liam's close]</div></div></div>
+<div class="work" data-sec="s7">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s7ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s7more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s7q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s7" data-title="Section 7, Call script">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s7" data-title="Section 7, Call script">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<section class="band" id="s8">
+<button class="band-header" type="button" data-band="s8"><span>8️⃣ Telling us what you hear 👂</span><span class="band-tag">you hear it first</span></button>
+<div class="band-body" id="body-s8">
+<p class="band-intro">You will hear the same questions again and again before anyone else in the business does. Once you are in the swing of it, we want that back from you.</p>
+<div class="jstep"><div class="jnum">1</div><div class="jmain"><div class="jtitle">❓ Questions that keep coming up that you could not answer</div></div></div>
+<div class="jstep"><div class="jnum">2</div><div class="jmain"><div class="jtitle">🛒 Things callers expected us to offer that we do not</div></div></div>
+<div class="jstep"><div class="jnum">3</div><div class="jmain"><div class="jtitle">💬 Places where the automated messages seem to confuse people</div></div></div>
+<div class="jstep"><div class="jnum">4</div><div class="jmain"><div class="jtitle">🧗 Anything that makes the call harder than it should be</div></div></div>
+<div class="callout"><div class="ck">FORMAT AND RHYTHM</div><div class="cb">To be agreed. Suggested: a short WhatsApp to Nikki at the end of each week, three lines, no formality.</div></div>
+<div class="discuss">🤝 <span style="font-weight:700;color:#111417">For discussion with Liam:</span> who receives AMP's feedback and how often. Suggested Nikki weekly, so Liam is only pinged with decisions.</div>
+<div class="work" data-sec="s8">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s8ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s8more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s8q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s8" data-title="Section 8, Telling us what you hear">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s8" data-title="Section 8, Telling us what you hear">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<div class="divider"><div class="dk">KEEP IT CLOSE</div><div class="dt">Everything above, on one card. 🃏</div></div>
+
+<section class="band" id="s9">
+<button class="band-header" type="button" data-band="s9"><span>9️⃣ Quick reference card 🃏</span><span class="band-tag">for the desk</span></button>
+<div class="band-body" id="body-s9">
+<p class="band-intro">Print this section on its own if you like. Everything above, in one glance.</p>
+<div class="deskcard">
+<div class="dh">🌲 Barrel Sauna UK · Wave 2 desk card</div>
+<div class="drow"><div class="dl">HOURS</div><div class="dv">Bridged calls, 10:30 to 17:00, Mon to Fri</div></div>
+<div class="drow"><div class="dl">PIPELINE</div><div class="dv">Wave 2 Facebook/Meta Ad</div></div>
+<div class="drow"><div class="dl">CALLS</div><div class="dv">The system dials you; answer, and let every call end naturally</div></div>
+<div class="drow"><div class="dl">ASSIGNED TO</div><div class="dv">Liam James, always</div></div>
+<div class="drow"><div class="dl">CALL CALENDAR</div><div class="dv">Book a Call Back</div></div>
+<div class="drow"><div class="dl">VISIT CALENDAR</div><div class="dv">Showroom Bookings</div></div>
+<div class="drow"><div class="dl">AFTER EVERY CALL</div><div class="dv">Check the AI record, add what it could not hear, reopen to check it held</div></div>
+<div class="drow"><div class="dl">YOUR TAGS</div><div class="dv">currently in conversation, human follow up needed, plus corrections</div></div>
+<div class="nevers">
+<div>💷 Never give a price. The closer does that.</div>
+<div>🟢 Never touch a green system tag.</div>
+<div>📵 Never re-dial a no answer yourself.</div>
+<div>📝 Never leave an unclear call without a note.</div>
+<div>🤫 Never promise a cold lead we will not be in touch again. DND is the only real silence.</div>
+</div>
+<div class="words">✍️ Words: estimate, never the other word. James, never Liam, on the phone. The Barrel Sauna UK Team in anything written.</div>
+</div>
+<label class="checkline"><input type="checkbox" data-check="s9card"> 🖨️ Card printed and on the desk</label>
+<div class="work" data-sec="s9">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s9ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s9more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s9q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s9" data-title="Section 9, Quick reference card">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s9" data-title="Section 9, Quick reference card">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<section class="band" id="s10">
+<button class="band-header" type="button" data-band="s10"><span>🔟 Open decisions 🤝</span><span class="band-tag">internal, delete before sending</span></button>
+<div class="band-body" id="body-s10">
+<p class="band-intro">Internal, for the Liam meeting. Delete this section before this goes to AMP. Each row is a decision, with a suggested answer so the meeting is a yes or no, not a discussion from scratch.</p>
+<table class="ptable">
+<tr><th>DECISION</th><th>SUGGESTED</th><th>WHY</th></tr>
+<tr><td>📅 Which calendars</td><td>Resolved 31 August: Book a Call Back for calls, Showroom Bookings for visits</td><td>Kept here so the meeting can confirm and move on</td></tr>
+<tr><td>👤 Assign to Liam James</td><td>Automate it in W1 and drop it from AMP's list</td><td>Ten minutes to build, one less thing to forget</td></tr>
+<tr><td>🏷️ Human tags: exact spellings</td><td>Fix the five names now and create them in GHL</td><td>Tag spelling drift is the most common way manual tags break</td></tr>
+<tr><td>✋ Manual pipeline moves</td><td>Allowed only when the stage is plainly wrong and a note explains it</td><td>W2 and W3 overwrite stages; some stages fire messages</td></tr>
+<tr><td>💬 Does AMP ever message leads</td><td>Calls only, at least for launch</td><td>Removes the failed typed WhatsApp risk and cuts a training block</td></tr>
+<tr><td>🎙️ Call script wording</td><td>Liam's words captured in Section 7 notes during the meeting</td><td>Nothing in Section 7 is his copy yet</td></tr>
+<tr><td>💷 Price and lead time boundary</td><td>AMP gives none; one holding line agreed</td><td>Closer owns the estimate</td></tr>
+<tr><td>👂 Feedback loop</td><td>Weekly WhatsApp to Nikki</td><td>Keeps Liam to decisions only</td></tr>
+<tr><td>👥 Individual GHL users for AMP agents</td><td>Decide before launch or after</td><td>Affects who a call shows as made by</td></tr>
+<tr><td>🎧 Voicemail greeting</td><td>Delyth records before launch day</td><td>Already on the launch checklist</td></tr>
+</table>
+<div class="work" data-sec="s10">
+<div class="wt">🧠 How was that?</div>
+<label><input type="checkbox" class="okbox" data-check="s10ok"> ✅ Got it</label>
+<label><input type="checkbox" class="morebox" data-check="s10more"> ❌ I need more explaining</label>
+<textarea class="note-box" data-note="s10q" placeholder="Your question or note on this section"></textarea>
+<div class="sendrow"><button class="sendq" type="button" data-sec="s10" data-title="Section 10, Open decisions">📨 SEND TO NIKKI ON WHATSAPP</button><span class="sendmail" data-sec="s10" data-title="Section 10, Open decisions">or email instead</span></div>
+<div class="whisper">Saves automatically as you type. Sending opens WhatsApp or your email with the message ready, you press send.</div>
+</div>
+</div></section>
+
+<footer>BARREL SAUNA UK · THE BARREL SAUNA UK TEAM · BARRELSAUNAUK.COM · WAVE 2 INTERNAL TRAINING 🏁</footer>
+</div>
+<div id="toast"></div>
 <script>
 (function(){
-  var KEY="wave2-journey-v1";
-  var lastSavedEl=document.getElementById("lastSaved");
-  function collect(){var s={notes:{}};document.querySelectorAll(".note-box").forEach(function(t){s.notes[t.dataset.note]=t.value;});return s;}
-  function stamp(){lastSavedEl.textContent=new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit",second:"2-digit"});}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(collect()));stamp();}catch(e){}}
-  function load(){var raw;try{raw=localStorage.getItem(KEY);}catch(e){return;}if(!raw)return;var s;try{s=JSON.parse(raw);}catch(e){return;}if(!s||!s.notes)return;document.querySelectorAll(".note-box").forEach(function(t){if(typeof s.notes[t.dataset.note]==="string")t.value=s.notes[t.dataset.note];});lastSavedEl.textContent="restored from last visit";}
-  document.querySelectorAll(".note-box").forEach(function(t){t.addEventListener("input",save);});
-  document.querySelectorAll(".band-header").forEach(function(h){h.addEventListener("click",function(){var b=document.getElementById("body-"+h.dataset.band);b.style.display=(b.style.display==="none")?"":"none";});});
-  document.getElementById("btnSnapshot").addEventListener("click",function(){var blob=new Blob([JSON.stringify(collect(),null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="wave2-journey-notes.json";a.click();URL.revokeObjectURL(a.href);});
-  document.getElementById("btnRestore").addEventListener("click",function(){document.getElementById("fileRestore").click();});
-  document.getElementById("fileRestore").addEventListener("change",function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var s;try{s=JSON.parse(r.result);}catch(e){alert("That file is not a valid snapshot.");return;}if(!s||!s.notes){alert("That file is not a valid snapshot.");return;}document.querySelectorAll(".note-box").forEach(function(t){if(typeof s.notes[t.dataset.note]==="string")t.value=s.notes[t.dataset.note];});save();};r.readAsText(f);ev.target.value="";});
-  document.getElementById("btnPdf").addEventListener("click",function(){window.print();});
+  var KEY='bsuk-amp-training-v2';
+  var state={fields:{},checks:{},notes:{},savedAt:null};
+  var timer=null;
+  function load(){
+    try{var raw=localStorage.getItem(KEY);if(raw){state=JSON.parse(raw);}}catch(e){}
+    apply();
+  }
+  function apply(){
+    document.querySelectorAll('[data-field]').forEach(function(el){el.value=state.fields[el.dataset.field]||'';});
+    document.querySelectorAll('[data-check]').forEach(function(el){el.checked=!!state.checks[el.dataset.check];});
+    document.querySelectorAll('[data-note]').forEach(function(el){el.value=state.notes[el.dataset.note]||'';});
+    document.getElementById('savedAt').textContent=state.savedAt?('Saved '+state.savedAt):'Not saved yet';
+    progress();
+  }
+  function collect(){
+    document.querySelectorAll('[data-field]').forEach(function(el){state.fields[el.dataset.field]=el.value;});
+    document.querySelectorAll('[data-check]').forEach(function(el){state.checks[el.dataset.check]=el.checked;});
+    document.querySelectorAll('[data-note]').forEach(function(el){state.notes[el.dataset.note]=el.value;});
+  }
+  function save(){
+    collect();
+    var d=new Date();
+    state.savedAt=d.toLocaleDateString('en-GB')+' '+d.toTimeString().slice(0,5);
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+    document.getElementById('savedAt').textContent='Saved '+state.savedAt;
+    progress();
+  }
+  function queue(){clearTimeout(timer);timer=setTimeout(save,400);}
+  function progress(){
+    var all=document.querySelectorAll('.okbox');var done=0;
+    all.forEach(function(el){if(el.checked)done++;});
+    document.getElementById('progText').textContent=done+' of '+all.length+' sections done';
+    document.getElementById('progFill').style.width=(all.length?Math.round(done/all.length*100):0)+'%';
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      var id=a.dataset.nav;var sec=document.getElementById(id);if(!sec)return;
+      var ok=sec.querySelector('.okbox'),more=sec.querySelector('.morebox');
+      a.classList.remove('done','part');
+      if(ok&&ok.checked)a.classList.add('done');else if(more&&more.checked)a.classList.add('part');
+    });
+  }
+  function toast(msg){
+    var t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');
+    setTimeout(function(){t.classList.remove('on');},2200);
+  }
+  document.addEventListener('input',function(e){
+    if(e.target.matches('[data-field],[data-note]'))queue();
+  });
+  document.addEventListener('change',function(e){
+    if(e.target.matches('[data-check]')){save();if(e.target.classList.contains('okbox')&&e.target.checked)toast('🎉 Section done');}
+  });
+  document.getElementById('btnDownload').addEventListener('click',function(){
+    save();
+    var name=(state.fields.whoName||'amp').replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+    var blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='amp-training-progress-'+name+'.json';document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+    toast('📥 Progress file downloaded');
+  });
+  document.getElementById('btnRestore').addEventListener('click',function(){document.getElementById('fileRestore').click();});
+  document.getElementById('fileRestore').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{var s=JSON.parse(r.result);
+        if(!s||typeof s!=='object'||!s.checks){throw new Error('bad');}
+        state={fields:s.fields||{},checks:s.checks||{},notes:s.notes||{},savedAt:s.savedAt||null};
+        apply();save();toast('🔄 Progress restored');
+      }catch(err){toast('That file is not a saved progress file');}
+      e.target.value='';
+    };
+    r.readAsText(f);
+  });
+  document.getElementById('btnPrint').addEventListener('click',function(){save();window.print();});
+  document.getElementById('btnReset').addEventListener('click',function(){
+    if(!confirm('Clear all ticks and notes on this page? Download your progress first if you want to keep it.'))return;
+    state={fields:{},checks:{},notes:{},savedAt:null};
+    try{localStorage.removeItem(KEY);}catch(e){}
+    apply();toast('Cleared');
+  });
+  document.querySelectorAll('.band-header').forEach(function(h){
+    h.addEventListener('click',function(e){
+      if(e.target.closest('a'))return;
+      var b=document.getElementById('body-'+h.dataset.band);
+      b.style.display=(b.style.display==='none')?'':'none';
+    });
+  });
   load();
+})();
+(function(){
+  var NIKKI_WA = "27695408842";
+  var NIKKI_EMAIL = "njfeldmann44@gmail.com";
+  document.querySelectorAll('.work').forEach(function(w){
+    var ok=w.querySelector('.okbox'), more=w.querySelector('.morebox');
+    if(ok&&more){
+      ok.addEventListener('change',function(){ if(ok.checked){more.checked=false; more.dispatchEvent(new Event('change'));}});
+      more.addEventListener('change',function(){ if(more.checked){ok.checked=false; ok.dispatchEvent(new Event('change'));}});
+    }
+  });
+  function buildMsg(sec,title){
+    var w=document.querySelector('.work[data-sec="'+sec+'"]');
+    var q=w.querySelector('textarea').value.trim();
+    var more=w.querySelector('.morebox').checked;
+    var name=(document.getElementById('traineeName')||{}).value||'';
+    var lines=['\ud83d\udcd6 AMP manual \u00b7 '+title];
+    if(name) lines.push('\ud83d\udc4b From: '+name);
+    lines.push(more? '\ud83d\ude4b I need more explaining on this section please!' : '\u2753 Question on this section:');
+    if(q) lines.push('\ud83d\udcac '+q);
+    lines.push('\ud83d\ude4f Thanks Nikki!');
+    return lines.join('\n');
+  }
+  document.querySelectorAll('.sendq').forEach(function(b){
+    b.addEventListener('click',function(){
+      var msg=buildMsg(b.dataset.sec,b.dataset.title);
+      window.open('https://wa.me/'+NIKKI_WA+'?text='+encodeURIComponent(msg),'_blank');
+    });
+  });
+  document.querySelectorAll('.sendmail').forEach(function(a){
+    a.addEventListener('click',function(ev){
+      ev.preventDefault();
+      var msg=buildMsg(a.dataset.sec,a.dataset.title);
+      var su=encodeURIComponent('\ud83d\udcd6 AMP manual question \u00b7 '+a.dataset.title);
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(NIKKI_EMAIL)+'&su='+su+'&body='+encodeURIComponent(msg),'_blank');
+    });
+  });
 })();
 </script>
 </body>
