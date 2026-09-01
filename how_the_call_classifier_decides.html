@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Call Classifier Decides</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--ink:#111417;--ink2:#3A4240;--mut:#5C6663;--green:#417C51;--sage:#50795F;--honey:#C08B41;--tint:#dbe7dd;}
+body{font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size:16px;line-height:1.65;background:#ffffff;color:var(--ink2);}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 40px;}
+.hero{padding:44px 22px 30px;text-align:center;border-bottom:3px solid var(--honey);}
+.hero h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;color:var(--ink);}
+.hero .sub{margin-top:8px;font-size:15px;color:var(--sage);}
+.badge{display:inline-block;margin-top:16px;background:var(--tint);color:#1F3D28;border-radius:20px;padding:5px 16px;font-size:13px;}
+h2{font-size:20px;font-weight:700;color:var(--ink);margin:34px 0 10px;padding-bottom:8px;border-bottom:1px solid rgba(17,20,23,0.6);}
+.card{display:flex;gap:14px;border:1px solid rgba(17,20,23,0.18);border-left:3px solid var(--green);border-radius:10px;padding:14px 18px;margin:10px 0;align-items:flex-start;}
+.disc{flex:0 0 30px;height:30px;border-radius:50%;background:var(--honey);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.cmain{flex:1;} .ct{font-size:16px;color:var(--ink);}
+.cd{color:var(--mut);font-size:14px;margin-top:3px;}
+/* diagram */
+.diagram{margin:22px 0 6px;text-align:center;}
+.dbox{display:inline-block;background:#ffffff;border:1px solid rgba(17,20,23,0.6);border-radius:10px;padding:12px 22px;font-size:15px;color:var(--ink);}
+.dbrain{background:var(--tint);border:none;color:#1F3D28;}
+.arrow{font-size:20px;color:var(--sage);margin:6px 0;line-height:1;}
+.outs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.chip{border-radius:20px;padding:8px 18px;font-size:14px;color:#ffffff;}
+.chip .sub2{display:block;font-size:11.5px;opacity:0.92;margin-top:2px;}
+.c1{background:var(--green);} .c2{background:var(--honey);} .c3{background:#3A4240;} .c4{background:#ffffff;color:var(--ink);border:1px dashed rgba(17,20,23,0.6);}
+.c4 .sub2{color:var(--mut);}
+.outgrid{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+.og{flex:1 1 240px;border:1px solid rgba(17,20,23,0.18);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink2);}
+.og span{display:block;font-size:13px;color:var(--sage);letter-spacing:1px;margin-bottom:3px;}
+footer{text-align:center;font-size:12px;letter-spacing:1px;color:var(--mut);padding:30px 0 8px;}
+@media print{@page{size:A4;margin:10mm;} .card,.og{page-break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>🧠📞 How the Call Classifier Decides</h1>
+  <p class="sub">step 9 of the Zap, in depth 🛠️</p>
+  <span class="badge">⚙️ Call Outcome Routing · version 13 · live</span>
+</div>
+<div class="wrap">
+
+<h2>🗺️ The journey of one call</h2>
+<div class="diagram">
+  <div class="dbox">🎙️ Call ends, transcript captured</div>
+  <div class="arrow">↓</div>
+  <div class="dbox dbrain">🧠 Classifier reads it against the same fixed rules, every call</div>
+  <div class="arrow">↓</div>
+  <div class="outs">
+    <div class="chip c1">✅ Confirmed<span class="sub2">agreed to proceed or pay</span></div>
+    <div class="chip c2">🤔 Thinking<span class="sub2">interested, no commitment</span></div>
+    <div class="chip c3">🚫 No<span class="sub2">not proceeding</span></div>
+    <div class="chip c4">❓ Unclear<span class="sub2">cannot tell, never a guess</span></div>
+  </div>
+</div>
+
+<h2>📡 What it is given</h2>
+<div class="card"><div class="disc">1</div><div class="cmain"><div class="ct">The transcript only</div><div class="cd">Labelled SPEAKER 0 and SPEAKER 1, nothing else.</div></div></div>
+<div class="card"><div class="disc">2</div><div class="cmain"><div class="ct">It works out who is who</div><div class="cd">The salesperson is the one talking about products, prices, lead times and availability.</div></div></div>
+<div class="card"><div class="disc">3</div><div class="cmain"><div class="ct">No outside help</div><div class="cd">No web access, no other calls, no CRM data.</div></div></div>
+
+<h2>📏 The rules it must follow</h2>
+<div class="card"><div class="disc">1</div><div class="cmain"><div class="ct">Same written instructions on every call</div><div class="cd">Never varied, so every call is judged the same way.</div></div></div>
+<div class="card"><div class="disc">2</div><div class="cmain"><div class="ct">Answers only</div><div class="cd">No explanation, no opinion.</div></div></div>
+<div class="card"><div class="disc">3</div><div class="cmain"><div class="ct">Seven answers, every one required</div><div class="cd">It cannot leave a blank.</div></div></div>
+
+<h2>🎯 How it lands on one</h2>
+<div class="card"><div class="disc">💬</div><div class="cmain"><div class="ct">What the prospect actually said, not how they sounded</div><div class="cd">Clear commitment is Confirmed. Interest without commitment is Thinking. A stated no is No.</div></div></div>
+<div class="card"><div class="disc">❓</div><div class="cmain"><div class="ct">Doubt goes to Unclear</div><div class="cd">Anything it cannot place goes to Unclear rather than a guess, and a human picks it up.</div></div></div>
+
+<h2>📝 The other six things it writes down</h2>
+<div class="outgrid">
+  <div class="og"><span>🧾 SUMMARY</span>Three or four sentences on where the call stands</div>
+  <div class="og"><span>🤝 CLOSER PROMISES</span>What the salesperson committed to, or None</div>
+  <div class="og"><span>👤 CUSTOMER ACTIONS</span>What the prospect said they would do, or None</div>
+  <div class="og"><span>📅 NEXT TOUCH</span>Date and time agreed, or Not agreed</div>
+  <div class="og"><span>🧱 OBJECTIONS</span>Anything raised, or None</div>
+  <div class="og"><span>🛁 PRODUCT DISCUSSED</span>Product and spec, including any price given</div>
+</div>
+
+<h2>🛡️ The safety net</h2>
+<div class="card"><div class="disc">1</div><div class="cmain"><div class="ct">Unclear is never lost</div><div class="cd">It still creates a task and a WhatsApp, and the 48 hour net alerts the team if nothing resolves.</div></div></div>
+<div class="card"><div class="disc">2</div><div class="cmain"><div class="ct">The full transcript sits on the contact</div><div class="cd">Every decision can be checked against what was actually said.</div></div></div>
+<div class="card"><div class="disc">3</div><div class="cmain"><div class="ct">Easy to change</div><div class="cd">The rules live in one place and take ten minutes to update.</div></div></div>
+
+<footer>BUILT BY NIKKI 🛠️ · 30 AUGUST 2026 · QUESTIONS TO NIKKI ON WHATSAPP</footer>
+</div>
+</body>
+</html>
