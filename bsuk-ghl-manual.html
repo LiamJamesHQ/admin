@@ -35,7 +35,7 @@
 
   /* hero */
   .hero-block{position:relative;overflow:hidden;
-    background:linear-gradient(180deg, rgba(22,38,28,0.42) 0%, rgba(22,38,28,0.18) 45%, rgba(22,38,28,0.86) 100%),
+    background:linear-gradient(180deg, rgba(22,38,28,0.62) 0%, rgba(22,38,28,0.45) 45%, rgba(22,38,28,0.92) 100%),
     url('https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a99526ffac7854efe438f4a.png') center / cover no-repeat;
     min-height:68vh;display:flex;align-items:flex-end;}
   .hero-block .inner{max-width:980px;margin:0 auto;padding:120px 24px 100px;width:100%;}
@@ -614,6 +614,11 @@
       <div class="plab">From today</div>
       <div class="wb">Always your login, never a shared account. <b>If you find a browser signed in as a shared inbox, log out and back in as yourself</b> before doing anything. The one minute it takes keeps the record honest.</div>
     </div>
+    <div class="try-card">
+      <div class="tt">&#9997;&#65039; Prove it, thirty seconds</div>
+      <p class="body" style="margin-bottom:10px;">In GHL, click your avatar at the top right and look at the name on the account. Type that name here. The Got it tick below stays locked until you do, because this one matters more than any other rule in the Office chapters.</p>
+      <input type="text" id="loginname" data-note="of1name" placeholder="The name on your GHL login" style="width:100%;border:1px solid var(--hairline);border-radius:12px;padding:12px 14px;font-family:var(--face);font-size:14px;color:var(--ink);background:#ffffff;">
+    </div>
     <div class="work" data-sec="of1" data-title="Office, Log in as you"></div>
   </div>
 </section>
@@ -774,28 +779,9 @@
   </div>
 </section>
 
-<section class="chapter" id="ct2" data-roles="callteam" style="padding-top:0;">
-  <div class="wrap">
-    <div class="chapkick">Call Team &middot; Chapter 2 of 5</div>
-    <h2>Call outcomes, and what <span>each one triggers</span></h2>
-    <p class="lede">Your outcome is a switch. The moment you record it, the system routes the lead down one of four roads, so the honest outcome is the helpful one.</p>
-    <div class="info-grid">
-      <div class="icard"><div class="disc">&#128293;</div><div class="t">Warm</div><div class="s">Interested. The system starts nurture messages and works towards a sales team booking. Warm is for genuine interest, not politeness.</div></div>
-      <div class="icard"><div class="disc">&#10060;</div><div class="t">No</div><div class="s">Not for them. Sequences stop, a polite close goes out, and nobody chases someone who said no.</div></div>
-      <div class="icard"><div class="disc">&#128245;</div><div class="t">No answer</div><div class="s">The retry and chase machinery starts on its own. You do not need to remember them, the system does.</div></div>
-      <div class="icard"><div class="disc">&#10067;</div><div class="t">Unclear</div><div class="s">Could not establish where they stand. The system flags unclear outcomes for follow-up so they cannot quietly drift.</div></div>
-    </div>
-    <div class="why-box">
-      <div class="plab">Why honest beats hopeful</div>
-      <div class="wb">Marking a polite-but-cold lead as warm does not help anyone. <b>It books sales team time against someone who will not show,</b> and it sends the lead messages that feel pushy because they never asked for them. The system amplifies whatever you record.</div>
-    </div>
-    <div class="work" data-sec="ct2" data-title="Call Team, Call outcomes"></div>
-  </div>
-</section>
-
 <section class="chapter" id="ct3" data-roles="callteam" style="padding-top:0;">
   <div class="wrap">
-    <div class="chapkick">Call Team &middot; Chapter 3 of 5</div>
+    <div class="chapkick">Call Team &middot; Chapter 2 of 5</div>
     <h2>Booking <span>the closer</span></h2>
     <p class="lede">A warm lead's next step is a diary slot with the sales team, and the booking itself is what moves their card forward. No booking, no movement.</p>
     <div class="step"><div class="n">1</div><div><div class="t">Book while they are on the phone</div><div class="s">A warm lead who hangs up without a slot has to be caught again later. The moment of interest is the moment to book.</div></div></div>
@@ -810,6 +796,25 @@
       <img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9abf02ac5d03a109540583.png" alt="The Book appointment modal with the calendar dropdown open, contact search, and the date, slot and status fields">
     </div>
     <div class="work" data-sec="ct3" data-title="Call Team, Booking the closer"></div>
+  </div>
+</section>
+
+<section class="chapter" id="ct2" data-roles="callteam" style="padding-top:0;">
+  <div class="wrap">
+    <div class="chapkick">Call Team &middot; Chapter 3 of 5</div>
+    <h2>Call outcomes, and what <span>each one triggers</span></h2>
+    <p class="lede">Your outcome is a switch. The moment you record it, the system routes the lead down one of four roads, so the honest outcome is the helpful one.</p>
+    <div class="info-grid">
+      <div class="icard"><div class="disc">&#128293;</div><div class="t">Warm</div><div class="s">Interested. The system starts nurture messages and works towards a sales team booking. Warm is for genuine interest, not politeness.</div></div>
+      <div class="icard"><div class="disc">&#10060;</div><div class="t">No</div><div class="s">Not for them. Sequences stop, a polite close goes out, and nobody chases someone who said no.</div></div>
+      <div class="icard"><div class="disc">&#128245;</div><div class="t">No answer</div><div class="s">The retry and chase machinery starts on its own. You do not need to remember them, the system does.</div></div>
+      <div class="icard"><div class="disc">&#10067;</div><div class="t">Unclear</div><div class="s">Could not establish where they stand. The system flags unclear outcomes for follow-up so they cannot quietly drift.</div></div>
+    </div>
+    <div class="why-box">
+      <div class="plab">Why honest beats hopeful</div>
+      <div class="wb">Marking a polite-but-cold lead as warm does not help anyone. <b>It books sales team time against someone who will not show,</b> and it sends the lead messages that feel pushy because they never asked for them. The system amplifies whatever you record.</div>
+    </div>
+    <div class="work" data-sec="ct2" data-title="Call Team, Call outcomes"></div>
   </div>
 </section>
 
@@ -890,8 +895,8 @@
     ]},
     callteam:{label:'Call Team', chapters:[
       {id:'ct1', e:'\u2728', t:'The first call', s:'The first human voice after the ad'},
-      {id:'ct2', e:'\uD83C\uDFAF', t:'Call outcomes', s:'Warm, no, no answer, unclear, and what each triggers'},
       {id:'ct3', e:'\uD83D\uDCC5', t:'Booking the closer', s:'The booking is what moves the card'},
+      {id:'ct2', e:'\uD83C\uDFAF', t:'Call outcomes', s:'Warm, no, no answer, unclear, and what each triggers'},
       {id:'ct4', e:'\uD83D\uDCDD', t:'Notes that help', s:'Written for the next person to open'},
       {id:'ct5', e:'\uD83D\uDEA8', t:'Escalations', s:'When to hand a caller to BSUK'}
     ]}
@@ -1057,7 +1062,20 @@
     render();toast('Cleared');
   });
 
+  // login-check gate: of1's Got it stays locked until a name is typed
+  function gateLogin(){
+    var lg=document.getElementById('loginname');
+    var ob=document.querySelector("[data-check='of1ok']");
+    if(!lg||!ob)return;
+    var ok=lg.value.trim().length>1;
+    ob.disabled=!ok;
+    if(!ok&&ob.checked){ob.checked=false;state.checks['of1ok']=false;queue();}
+    var lab=ob.closest('label');if(lab){lab.style.opacity=ok?'1':'0.45';}
+  }
+  document.addEventListener('input',function(e){if(e.target&&e.target.id==='loginname')gateLogin();});
+
   render();
+  gateLogin();
 })();
 </script>
 
