@@ -55,7 +55,8 @@
 
   /* how it works */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px;}
-  .step{background:var(--tint-l);border:1px solid var(--hairline);border-radius:12px;padding:28px 24px;}
+  .steps-band{background:var(--tint);}
+  .step{background:#ffffff;border:1px solid var(--hairline);border-radius:12px;padding:28px 24px;box-shadow:0 10px 26px rgba(43,83,54,0.10);}
   .step .num{width:34px;height:34px;border-radius:17px;background:var(--honey-d);color:#ffffff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
   .step .t{display:block;font-weight:700;color:var(--forest-deep);font-size:16px;margin-bottom:6px;}
   .step span{font-size:14px;color:var(--ink-l);line-height:1.6;}
@@ -67,7 +68,8 @@
 
   /* badges */
   .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px;}
-  .badge{background:rgba(255,255,255,0.06);border:1px solid rgba(143,174,134,0.25);border-radius:10px;padding:18px 20px;font-size:15px;color:var(--body-dark);backdrop-filter:blur(4px);}
+  .badge{background:var(--tint-l);border:1px solid rgba(143,174,134,0.35);border-radius:10px;padding:14px 18px;font-size:15px;color:var(--forest-deep);font-weight:700;display:flex;align-items:center;gap:14px;}
+  .badge .bicon{flex:0 0 44px;width:44px;height:44px;border-radius:22px;background:var(--sage);display:flex;align-items:center;justify-content:center;font-size:19px;}
 
   /* visit band */
   .visit{
@@ -89,7 +91,7 @@
   .xsell{background:#ffffff;}
   .xgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px;}
   .xtile{border-radius:12px;overflow:hidden;border:1px solid var(--hairline);background:#ffffff;}
-  .xtile img{display:block;width:100%;height:170px;object-fit:cover;}
+  .xtile img{display:block;width:100%;height:auto;}
   .xtile .xlab{padding:16px 18px 18px;}
   .xtile .xlab .t{display:block;font-weight:700;color:var(--forest-deep);font-size:16px;margin-bottom:4px;}
   .xtile .xlab span{font-size:14px;color:var(--ink-l);line-height:1.55;}
@@ -127,7 +129,7 @@
     height:62vh; min-height:380px;
     background:
       linear-gradient(180deg, rgba(22,38,28,0.25) 0%, rgba(22,38,28,0.10) 50%, rgba(22,38,28,0.35) 100%),
-      url('https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9b2fe280583b8e7062b397.png') center 55%/cover no-repeat;
+      url('https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9c7f52e29b3baf97d7ad10.png') center 55%/cover no-repeat;
   }
 
   /* reviews */
@@ -171,7 +173,7 @@
 </div>
 
 <!-- HOW IT WORKS : copy adapted from live Workflow 13 email (approved base) -->
-<section>
+<section class="steps-band">
   <div class="wrap reveal">
     <div class="kicker">The Next Steps</div>
     <h2>Securing <span>your build</span></h2>
@@ -201,9 +203,9 @@
     </div>
     <p class="cap">Every sauna is handcrafted to order in our workshop in Caerphilly.</p>
     <div class="badges">
-      <div class="badge">🏴󠁧󠁢󠁷󠁬󠁳󠁿&nbsp;&nbsp;Welsh family business</div>
-      <div class="badge">🔨&nbsp;&nbsp;Handmade to order</div>
-      <div class="badge">🌲&nbsp;&nbsp;Built to last</div>
+      <div class="badge"><span class="bicon">🐉</span>Welsh family business</div>
+      <div class="badge"><span class="bicon">🔨</span>Handmade to order</div>
+      <div class="badge"><span class="bicon">🌲</span>Built to last</div>
     </div>
   </div>
 </section>
@@ -212,7 +214,8 @@
 <section class="reviews">
   <div class="wrap reveal">
     <div class="kicker">In Their Words</div>
-    <h2>Rated 4.6 on <span>Google</span></h2>
+    <img src="Google-Review-Symbol.png" alt="Google reviews, five stars" style="display:block;height:74px;width:auto;margin:0 0 14px 0;">
+    <h2>What our customers <span>say</span></h2>
     <div class="rgrid">
       <div class="rcard"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="qt">So happy with our sauna from Barrel Sauna UK. It's really well made, looks great and works perfectly. Great customer service from this fantastic UK company and a brilliant sauna. Love it!</p><div class="who">Gemma</div></div>
       <div class="rcard"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="qt">We are absolutely thrilled with it. It's beautifully made, and more importantly we have had so many compliments about how the sauna experience is, with perfect temperature and ambience.</p><div class="who">Jane N., Eagle Fire and Ice</div></div>
@@ -251,7 +254,7 @@
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a774d899994d35aa05de03f.jpg" alt="Mobile sauna trailer"><div class="xlab"><span class="t">Mobile saunas</span><span>Sauna trailers, ready to tow.</span></div></div>
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a7853935a64f2b5673614fd.png" alt="The Double Dipper"><div class="xlab"><span class="t">The Double Dipper</span><span>Hot tub and cold plunge in one build.</span></div></div>
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a8a949767bb7ac351d20617.jpg" alt="Glamping pod"><div class="xlab"><span class="t">Glamping pods</span><span>Pods for gardens and glamping sites.</span></div></div>
-      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9c41c8e29b3baf97d13764.png" alt="Shepherd's hut"><div class="xlab"><span class="t">Shepherd's huts</span><span>Traditional huts, built to order.</span></div></div>
+      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9c80a3ff1a50b732255b1c.png" alt="Shepherd's hut"><div class="xlab"><span class="t">Shepherd's huts</span><span>Traditional huts, built to order.</span></div></div>
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a97e0b2c7069f4fc7b28eae.jpg" alt="Outdoor shower"><div class="xlab"><span class="t">Showers</span><span>A perfect match with a sauna or hot tub, especially for commercial builds.</span></div></div>
     </div>
   </div>
