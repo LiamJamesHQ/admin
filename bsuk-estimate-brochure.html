@@ -85,13 +85,14 @@
 
   /* cross-sell */
   .xsell{background:#ffffff;}
-  .xgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px;}
+  .xgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px;}
   .xtile{border-radius:12px;overflow:hidden;border:1px solid var(--hairline);background:#ffffff;}
-  .xtile img{display:block;width:100%;height:210px;object-fit:cover;}
+  .xtile img{display:block;width:100%;height:170px;object-fit:cover;}
   .xtile .xlab{padding:16px 18px 18px;}
   .xtile .xlab .t{display:block;font-weight:700;color:var(--forest-deep);font-size:16px;margin-bottom:4px;}
   .xtile .xlab span{font-size:14px;color:var(--ink-l);line-height:1.55;}
-  @media (max-width:720px){.xgrid{grid-template-columns:1fr;}}
+  @media (max-width:900px){.xgrid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.xgrid{grid-template-columns:1fr;}}
 
   /* deposit band */
   .deposit{background:#ffffff;text-align:center;}
@@ -189,15 +190,19 @@
 <!-- CROSS-SELL : what else we build. Descriptors kept plain, product claims are Liam territory -->
 <section class="xsell">
   <div class="wrap">
-    <div class="kicker">More Than Saunas</div>
-    <h2>What else we <span>build</span></h2>
+    <div class="kicker">Our Range</div>
+    <!-- COPY GAP: section heading reworded to include barrel saunas, needs Liam sign-off -->
+    <h2>What we <span>build</span></h2>
     <p class="lede">Everything below is handcrafted to order in the same workshop, by the same team.</p>
     <div class="xgrid">
-      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a78535b03343f290f6fc3d3.jpg" alt="Wood-fired hot tub"><div class="xlab"><span class="t">Hot tubs</span><span>Wood-fired hot tubs, built to order.</span></div></div>
+      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9b2fe280583b8e7062b397.png" alt="Barrel sauna"><div class="xlab"><span class="t">Barrel saunas</span><span>Bespoke barrel saunas, made to order.</span></div></div>
+      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a78535b03343f290f6fc3d3.jpg" alt="Wood-fired hot tub"><div class="xlab"><span class="t">Hot tubs</span><span>Wood-fired and electric hot tubs, built to order.</span></div></div>
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9948dc0ba3728cefed8a58.png" alt="Cold plunge"><div class="xlab"><span class="t">Cold plunges</span><span>Cold plunge and ice bath builds.</span></div></div>
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a774d899994d35aa05de03f.jpg" alt="Mobile sauna trailer"><div class="xlab"><span class="t">Mobile saunas</span><span>Sauna trailers, ready to tow.</span></div></div>
-      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a7853935a64f2b5673614fd.png" alt="The Double Dipper"><div class="xlab"><span class="t">The Double Dipper</span><span>Sauna and plunge in one build.</span></div></div>
+      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a7853935a64f2b5673614fd.png" alt="The Double Dipper"><div class="xlab"><span class="t">The Double Dipper</span><span>Hot tub and cold plunge in one build.</span></div></div>
       <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a8a949767bb7ac351d20617.jpg" alt="Glamping pod"><div class="xlab"><span class="t">Glamping pods</span><span>Pods for gardens and glamping sites.</span></div></div>
+      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9c41c8e29b3baf97d13764.png" alt="Shepherd's hut"><div class="xlab"><span class="t">Shepherd's huts</span><span>Traditional huts, built to order.</span></div></div>
+      <div class="xtile"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a97e0b2c7069f4fc7b28eae.jpg" alt="Outdoor shower"><div class="xlab"><span class="t">Showers</span><span>A perfect match with a sauna or hot tub, especially for commercial builds.</span></div></div>
     </div>
   </div>
 </section>
