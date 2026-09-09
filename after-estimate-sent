@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Your estimate is on its way</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+:root{color-scheme:light only;supported-color-schemes:light;}
+html,body{background-color:#ffffff !important;}
+@media only screen and (max-width:480px){
+  .px{padding-left:20px !important;padding-right:20px !important;}
+  .hval{font-size:24px !important;}
+  .pillcell{padding:16px 36px !important;}
+  .pilltext{font-size:16px !important;}
+  .tile{display:block !important;width:100% !important;}
+  .tpost{padding-left:0 !important;padding-right:0 !important;}
+}
+</style>
+<!-- outlook-fixes-applied --></head>
+<body style="margin:0; padding:0; background:#ffffff;">
+
+<!-- PREHEADER -->
+<div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">Your itemised estimate is on its way to your inbox.</div>
+
+<table style="background-color:#ffffff; padding:24px 0;" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tbody>
+    <tr>
+      <td align="center" style="padding:0 12px;">
+        <table style="background-color:#ffffff; border-collapse:collapse; width:100%; max-width:640px;" width="640" cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+
+            <!-- Logo band -->
+            <tr>
+              <td colspan="7" style="background-color:#2B5336; padding:12px 32px;" align="center">
+                <img style="height:auto; width:110px; display:block; margin:0 auto;" src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a159cbca7ceea4e5718f77f.png" alt="Barrel Sauna UK" width="110" title="Barrel Sauna UK">
+              </td>
+            </tr>
+
+            <!-- Hero band : baked veil and type -->
+            <tr>
+              <td colspan="7" style="padding:0; line-height:0; font-size:0;">
+                <a href="https://www.barrelsaunauk.com/secure-your-build" style="text-decoration:none;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f6ffd968770b81c571840.jpg" alt="Built by hand in Wales. This could be your garden." width="640" style="display:block; width:100%; height:auto; border:0;"></a>
+              </td>
+            </tr>
+
+            <!-- Greeting and thanks -->
+            <tr>
+              <td colspan="7" class="px" style="padding:32px 32px 8px 32px; font-family:Raleway, Arial, sans-serif; font-size:15px; color:#333333; line-height:1.6;">
+                <p style="margin:0;">Hi {{contact.first_name}},</p>
+                <p style="margin:0;">&nbsp;</p>
+                <p style="margin:0;">Thank you for talking your build through with us. Your itemised estimate is on its way to your inbox, and this email walks you through everything that comes with it.</p>
+                <p style="margin:0;">&nbsp;</p>
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:18px; font-weight:700; line-height:1.35; color:#2B5336;">Made to last a <span style="color:#C08B41;">lifetime</span></p>
+                <p style="margin:0;">&nbsp;</p>
+                <p style="margin:0;">We are a family run business. We hand build in our workshop down in Wales, and our products are built to last a lifetime.</p>
+              </td>
+            </tr>
+
+            <!-- Estimate panel : ground green -->
+            <tr>
+              <td colspan="7" style="padding:20px 0 0 0;">
+                <table style="background-color:#16271C; border-radius:8px;" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#16271C">
+                  <tbody>
+                    <tr>
+                      <td style="padding:26px 28px 26px 28px;">
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; color:#D6A868;">YOUR ESTIMATE</p>
+                        <p style="margin:0;">&nbsp;</p>
+                        <p class="hval" style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:28px; font-weight:700; line-height:1.1; color:#D6A868;">&pound;{{contact.quoted_value}} + VAT</p>
+                        <p style="margin:0;">&nbsp;</p>
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:400; color:#dfe9df;">Order reference {{contact.order_number}}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+
+            <!-- WHAT EVERY BUILD INCLUDES : spec strip -->
+            <tr>
+              <td colspan="7" class="px" style="padding:24px 32px 8px 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#E9F0EA" style="background-color:#E9F0EA; border-radius:14px;">
+                  <tbody>
+                    <tr>
+                      <td style="padding:22px 24px 6px 24px;">
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#50795F;">WHAT YOUR ESTIMATE INCLUDES</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 24px 0 24px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 12px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#417C51" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#127794;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 12px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#333333;"><span style="font-weight:700; color:#2B5336;">47mm treated thermowood walls.</span> Heat dried at 200&deg;C with up to 96&#37; of the moisture removed, or pinewood if you prefer.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 12px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#417C51" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#128297;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 12px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#333333;"><span style="font-weight:700; color:#2B5336;">Stainless steel tightening bands and fixings</span> throughout, with double glazed windows and sandglass door options.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 18px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#417C51" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#129520;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 18px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#333333;"><span style="font-weight:700; color:#2B5336;">Everything needed included:</span> benches with backrests, structural floor panels, lockable solid timber door, heater surround with fire protection, drainage, ventilation and volcanic stones.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+
+            <!-- QUALITY OF BUILD : before Tim -->
+            <tr>
+              <td colspan="7" class="px" style="padding:20px 32px 8px 32px; font-family:Raleway, Arial, sans-serif; font-size:15px; color:#333333; line-height:1.6;">
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:20px; font-weight:700; line-height:1.3; color:#2B5336;">Not a kit. <span style="color:#C08B41;">Handmade</span> from the ground up</p>
+                <p style="margin:0;">&nbsp;</p>
+                <p style="margin:0;">We are not a kit sauna company that imports standard units. Every build leaves our workshop made to order, right down to our purpose built trailers, and everything needed to use it from day one is in your estimate.</p>
+              </td>
+            </tr>
+
+
+            <!-- VIDEO BLOCK HEADING : Liam's copy -->
+            <tr>
+              <td colspan="7" class="px" style="padding:28px 32px 0 32px;" align="center">
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:22px; font-weight:700; line-height:1.25; color:#2B5336;">Check out some previous <span style="color:#C08B41;">installs</span> and happy clients</p>
+              </td>
+            </tr>
+
+            <!-- ON-SITE INSTALLATION : dark forest panel, Liam's video -->
+            <tr>
+              <td colspan="7" class="px" style="padding:20px 32px 8px 32px;">
+                <table style="background-color:#2B5336; border-radius:8px;" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2B5336">
+                  <tbody>
+                    <tr>
+                      <td class="tpost" style="padding:24px 24px 0 24px; line-height:0; font-size:0;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9ccf19ff1a50b7322b5ef7.mp4" target="_blank" style="display:block; text-decoration:none; line-height:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6aa04d4f9ce7949849da216e.jpg" alt="James on one of our on-site installations. Click to watch." width="552" style="display:block; width:100%; height:auto; border:0; border-radius:8px;"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding:16px 24px 24px 24px;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9ccf19ff1a50b7322b5ef7.mp4" target="_blank" style="font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#D6A868; text-decoration:none;; mso-style-textfill-fill-color: #D6A868;"><!--[if mso]><font color="#D6A868"><![endif]-->CLICK TO WATCH<!--[if mso]></font><![endif]--></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- INSTALL REELS : two portrait tiles, side by side on all screens -->
+            <tr>
+              <td colspan="7" class="px" style="padding:16px 32px 0 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr>
+                      <td width="50%" valign="top" style="padding:0 8px 0 0;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f64d8730969fc0fc199a6.mp4" target="_blank" style="display:block; text-decoration:none; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f6b74bcef8b5f2c339ba7.jpg" alt="A mobile sauna handover. Click to watch." width="276" style="display:block; width:100%; height:auto; border:0; border-radius:12px;"></a>
+                        <p style="margin:10px 0 0 0; text-align:center;"><a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f64d8730969fc0fc199a6.mp4" target="_blank" style="font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#C08B41; text-decoration:none;">CLICK TO WATCH</a></p>
+                      </td>
+                      <td width="50%" valign="top" style="padding:0 0 0 8px;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f64d84793a2d512baa8e1.mp4" target="_blank" style="display:block; text-decoration:none; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f6cb7968770b81c56a8be.jpg" alt="A happy local client with her sauna. Click to watch." width="276" style="display:block; width:100%; height:auto; border:0; border-radius:12px;"></a>
+                        <p style="margin:10px 0 0 0; text-align:center;"><a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9f64d84793a2d512baa8e1.mp4" target="_blank" style="font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#C08B41; text-decoration:none;">CLICK TO WATCH</a></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- WHO WE ARE : dark forest panel, CTA closes it -->
+            <tr>
+              <td colspan="7" class="px" style="padding:24px 32px 8px 32px;">
+                <table style="background-color:#2B5336; border-radius:8px;" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2B5336">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="padding:28px 24px 0 24px;">
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:20px; font-weight:700; line-height:1.3; color:#ffffff;">Meet the <span style="color:#D6A868;">people</span> who you are buying from</p>
+                        <p style="margin:0;">&nbsp;</p>
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#dfe9df;">Here is Tim on who we are and how we build.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tpost" style="padding:16px 24px 0 24px; line-height:0; font-size:0;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a90bc82747464c6b3a2e03c.mp4" target="_blank" style="display:block; text-decoration:none; line-height:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a90c908e20cab63728d7808.png" alt="Tim on who we are and how we build. Click to watch." width="552" style="display:block; width:100%; height:auto; border:0; border-radius:8px;"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding:16px 24px 24px 24px;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a90bc82747464c6b3a2e03c.mp4" target="_blank" style="font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#D6A868; text-decoration:none;; mso-style-textfill-fill-color: #D6A868;"><!--[if mso]><font color="#D6A868"><![endif]-->CLICK TO WATCH<!--[if mso]></font><![endif]--></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+
+            <!-- Badges : white on white with lift -->
+            <tr>
+              <td colspan="7" class="px" style="padding:16px 32px 28px 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="background-color:#ffffff; border:1px solid rgba(65,124,81,0.14); border-radius:14px; box-shadow:0 10px 30px rgba(22,38,28,0.12);">
+                  <tbody>
+                    <tr>
+                      <td style="padding:22px 8px 18px 8px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody>
+                            <tr>
+                              <td width="33%" align="center" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tbody><tr><td align="center" valign="middle" width="56" height="56" bgcolor="#417C51" style="width:56px;height:56px;border-radius:28px;font-size:26px;text-align:center;vertical-align:middle;">&#128009;</td></tr></tbody></table>
+                          <p style="margin:10px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:1px; color:#2B5336;">Welsh family business</p>
+                        </td>
+                              <td width="33%" align="center" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tbody><tr><td align="center" valign="middle" width="56" height="56" bgcolor="#417C51" style="width:56px;height:56px;border-radius:28px;font-size:26px;text-align:center;vertical-align:middle;">&#128296;</td></tr></tbody></table>
+                          <p style="margin:10px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:1px; color:#2B5336;">Handmade to order</p>
+                        </td>
+                              <td width="33%" align="center" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tbody><tr><td align="center" valign="middle" width="56" height="56" bgcolor="#417C51" style="width:56px;height:56px;border-radius:28px;font-size:26px;text-align:center;vertical-align:middle;">&#127794;</td></tr></tbody></table>
+                          <p style="margin:10px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:1px; color:#2B5336;">Built to last</p>
+                        </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- COME SEE US : baked veil and type -->
+            <tr>
+              <td colspan="7" style="padding:0; line-height:0; font-size:0;">
+                <img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9e18314ea183e872a25ff3.jpg" alt="Visit us. Come see us, make a weekend of it. We are based in the Welsh valleys, near Brecon, with local walking routes all around." width="640" style="display:block; width:100%; height:auto; border:0;">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7" class="px" style="padding:24px 32px 0 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="background-color:#ffffff; border:1px solid rgba(65,124,81,0.18); border-radius:16px; box-shadow:0 10px 24px rgba(22,38,28,0.12);">
+                  <tbody><tr>
+                    <td width="78" valign="middle" style="padding:18px 0 18px 18px;">
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="52" height="52" bgcolor="#2B5336" style="width:52px;height:52px;border-radius:26px;font-size:23px;text-align:center;vertical-align:middle;">&#9978;</td></tr></tbody></table>
+                    </td>
+                    <td valign="middle" style="padding:18px 20px 18px 14px;">
+                      <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:16px; font-weight:700; color:#2B5336;">Stay the night</p>
+                      <p style="margin:4px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#333333;">A local glamping site has one of <span style="font-weight:700; color:#C08B41;">our saunas</span> and one of <span style="font-weight:700; color:#C08B41;">our hot tubs</span>. Stay over and use them in a real setting.</p>
+                    </td>
+                  </tr></tbody>
+                </table>
+                <p style="margin:0;">&nbsp;</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="background-color:#ffffff; border:1px solid rgba(65,124,81,0.18); border-radius:16px; box-shadow:0 10px 24px rgba(22,38,28,0.12);">
+                  <tbody><tr>
+                    <td width="78" valign="middle" style="padding:18px 0 18px 18px;">
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="52" height="52" bgcolor="#2B5336" style="width:52px;height:52px;border-radius:26px;font-size:23px;text-align:center;vertical-align:middle;">&#128296;</td></tr></tbody></table>
+                    </td>
+                    <td valign="middle" style="padding:18px 20px 18px 14px;">
+                      <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:16px; font-weight:700; color:#2B5336;">Tour the workshop</p>
+                      <p style="margin:4px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#333333;">Walk our workshop in Caerphilly and see your sauna being made by the people who build it.</p>
+                    </td>
+                  </tr></tbody>
+                </table>
+                <p style="margin:0;">&nbsp;</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="background-color:#ffffff; border:1px solid rgba(65,124,81,0.18); border-radius:16px; box-shadow:0 10px 24px rgba(22,38,28,0.12);">
+                  <tbody><tr>
+                    <td width="78" valign="middle" style="padding:18px 0 18px 18px;">
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="52" height="52" bgcolor="#2B5336" style="width:52px;height:52px;border-radius:26px;font-size:23px;text-align:center;vertical-align:middle;">&#129494;</td></tr></tbody></table>
+                    </td>
+                    <td valign="middle" style="padding:18px 20px 18px 14px;">
+                      <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:16px; font-weight:700; color:#2B5336;">Try before you decide</p>
+                      <p style="margin:4px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#333333;">Use our saunas in commercial settings nearby and get a feel for the finished thing.</p>
+                    </td>
+                  </tr></tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Book a visit pill -->
+            <tr>
+              <td colspan="7" class="px" style="padding:20px 32px 0 32px;" align="center">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                  <tbody>
+                    <tr>
+                      <td align="center" bgcolor="#C08B41" class="pillcell" style="background-color:#C08B41; border-radius:30px; padding:14px 38px; mso-padding-alt:14px 38px; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:700;">
+                        <a href="https://www.barrelsaunauk.com/showroom-bookings" target="_blank" style="display:block; text-decoration:none;; mso-style-textfill-fill-color: #ffffff;"><!--[if mso]><font color="#ffffff"><![endif]--><span style="color:#ffffff; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:700;">Book a visit</span><!--[if mso]></font><![endif]--></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+
+            <!-- HOW YOUR BUILD ARRIVES : delivery methods -->
+            <tr>
+              <td colspan="7" class="px" style="padding:56px 32px 8px 32px;">
+                <table style="background-color:#2B5336; border-radius:8px;" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2B5336">
+                  <tbody>
+                    <tr>
+                      <td style="padding:26px 24px 6px 24px;">
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#D6A868;">HOW YOUR BUILD ARRIVES</p>
+                        <p style="margin:0;">&nbsp;</p>
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:20px; font-weight:700; line-height:1.3; color:#ffffff;">Delivered and installed, <span style="color:#D6A868;">your way</span></p>
+                        <p style="margin:0;">&nbsp;</p>
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.6; color:#dfe9df;">We deliver and install across the UK and Ireland, whichever route suits your space.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:16px 24px 8px 24px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 14px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#3F6A4C" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#128666;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 14px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:700; color:#ffffff;">Fully built, lifted into place</p>
+                              <p style="margin:2px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#dfe9df;">Your sauna arrives pre built on a trailer, ready to lift into position by crane or forklift.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 14px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#3F6A4C" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#128230;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 14px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:700; color:#ffffff;">Delivered in parts</p>
+                              <p style="margin:2px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#dfe9df;">We can deliver in parts with install instructions where access is tight.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 14px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#3F6A4C" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#128296;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 14px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:700; color:#ffffff;">Built on site</p>
+                              <p style="margin:2px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#dfe9df;">For tricky access or premium designs, our team builds it right there in your space.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tbody><tr>
+                            <td width="60" valign="top" style="padding:4px 0 24px 0;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td align="center" valign="middle" width="46" height="46" bgcolor="#C08B41" style="width:46px;height:46px;border-radius:23px;font-size:21px;text-align:center;vertical-align:middle;">&#128656;</td></tr></tbody></table>
+                            </td>
+                            <td valign="middle" style="padding:0 0 24px 12px;">
+                              <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:700; color:#ffffff;">Mobile saunas, business ready</p>
+                              <p style="margin:2px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:14px; font-weight:400; line-height:1.55; color:#dfe9df;">Mounted on our in house manufactured trailers and arriving ready to use, with internal feed wood burners and panoramic globe windows made in the UK. Take it to beaches, events and retreats, and test locations before committing to a fixed site.</p>
+                            </td>
+                          </tr></tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding:4px 24px 0 24px;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a90250060935b340b64720a.mp4" target="_blank" style="display:inline-block; text-decoration:none; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6aa04d4f16ed327815ad526f.jpg" alt="James explains how delivery works. Click to watch." width="300" style="display:block; width:100%; max-width:300px; height:auto; border:0; border-radius:8px;"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="padding:14px 24px 24px 24px;">
+                        <a href="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a90250060935b340b64720a.mp4" target="_blank" style="font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#D6A868; text-decoration:none;; mso-style-textfill-fill-color: #D6A868;"><!--[if mso]><font color="#D6A868"><![endif]-->CLICK TO WATCH<!--[if mso]></font><![endif]--></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- WHAT ELSE WE DO : kicker, then soft icon strip, then heading -->
+            <tr>
+              <td colspan="7" class="px" style="padding:40px 32px 0 32px;">
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#50795F;">OUR RANGE</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7" class="px" style="padding:14px 32px 0 32px;" align="center">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="background-color:#ffffff; border:1px solid rgba(65,124,81,0.20); border-radius:60px;">
+                  <tbody><tr><td align="center" style="padding:20px 30px;">
+                    <img style="height:auto; width:100%; max-width:540px; display:block; margin:0 auto;" src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9e53d3b2a8a6f15009063b.png" alt="Barrel saunas, hot tubs, cold plunges, mobile saunas, the Double Dipper, glamping pods, shepherd's huts and showers" width="540" title="Barrel saunas, hot tubs, cold plunges, mobile saunas, the Double Dipper, glamping pods, shepherd's huts and showers">
+                  </td></tr></tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7" class="px" style="padding:18px 32px 0 32px; font-family:Raleway, Arial, sans-serif; font-size:15px; color:#333333; line-height:1.6;">
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:34px; font-weight:700; line-height:1.2; color:#2B5336;">What we <span style="color:#C08B41;">build</span></p>
+                <p style="margin:0;">&nbsp;</p>
+                <p style="margin:0;">Everything below is handcrafted to order in the same workshop, by the same team.</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7" class="px" style="padding:18px 26px 0 26px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9b2fe280583b8e7062b397.png" alt="Barrel Saunas" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">BARREL SAUNAS</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a7853679994d35aa0e5121f.jpg" alt="Hot Tubs" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">HOT TUBS</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9948dc0ba3728cefed8a58.png" alt="Cold Plunges" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">COLD PLUNGES</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a774d899994d35aa05de03f.jpg" alt="Mobile Saunas" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">MOBILE SAUNAS</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a7853935a64f2b5673614fd.png" alt="The Double Dipper" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">THE DOUBLE DIPPER</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a8a949767bb7ac351d20617.jpg" alt="Glamping Pods" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">GLAMPING PODS</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9c80a3ff1a50b732255b1c.png" alt="Shepherd'S Huts" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">SHEPHERD'S HUTS</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="tile" width="50%" valign="top" style="padding:6px;">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(65,124,81,0.14); border-radius:12px;">
+                          <tbody>
+                            <tr><td style="padding:0; line-height:0; font-size:0;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9da4564ea183e87297f253.jpg" alt="Showers" width="280" style="display:block; width:100%; height:auto; border:0; border-radius:12px 12px 0 0;"></td></tr>
+                            <tr><td bgcolor="#2B5336" style="background-color:#2B5336; border-top:2px solid #C08B41; border-radius:0 0 12px 12px; padding:12px 14px;"><p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:#ffffff;">SHOWERS</p></td></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- SECURE YOUR BUILD : journey strip -->
+            <tr>
+              <td colspan="7" class="px" style="padding:32px 32px 8px 32px;">
+                <table style="background-color:#2B5336; border-radius:8px;" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2B5336">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="padding:26px 14px 28px 14px;">
+                        <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; color:#D6A868;">WHERE YOU ARE RIGHT NOW</p>
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:18px;">
+                          <tbody>
+                            <tr>
+                              <td width="33%" align="center" valign="top">
+                                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tbody><tr><td align="center" valign="middle" width="56" height="56" bgcolor="#C08B41" style="width:56px;height:56px;border-radius:28px;font-size:24px;text-align:center;vertical-align:middle;">&#128196;</td></tr></tbody></table>
+                                <p style="margin:10px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; color:#ffffff;">ESTIMATE RECEIVED<br>&#10022;</p>
+                              </td>
+                              <td width="33%" align="center" valign="top">
+                                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top:4px;"><tbody><tr><td align="center" valign="middle" width="52" height="52" bgcolor="#3F6A4C" style="width:52px;height:52px;border-radius:26px;font-size:23px;text-align:center;vertical-align:middle;">&#128183;</td></tr></tbody></table>
+                                <p style="margin:10px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:400; letter-spacing:1px; color:#8fae86;">PAY DEPOSIT</p>
+                              </td>
+                              <td width="33%" align="center" valign="top">
+                                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top:4px;"><tbody><tr><td align="center" valign="middle" width="52" height="52" bgcolor="#3F6A4C" style="width:52px;height:52px;border-radius:26px;font-size:23px;text-align:center;vertical-align:middle;">&#128296;</td></tr></tbody></table>
+                                <p style="margin:10px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:11px; font-weight:400; letter-spacing:1px; color:#8fae86;">ENTER BUILD QUEUE</p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Secure your place close -->
+            <tr>
+              <td colspan="7" class="px" style="padding:44px 32px 0 32px;" align="center">
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:22px; font-weight:700; line-height:1.25; color:#2B5336;">Secure your <span style="color:#C08B41;">place</span> in the order queue</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7" class="px" style="padding:30px 32px 0 32px;" align="center">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                  <tbody>
+                    <tr>
+                      <td align="center" bgcolor="#C08B41" class="pillcell" style="background-color:#C08B41; border-radius:30px; padding:18px 44px; mso-padding-alt:18px 44px; font-family:Raleway, Arial, sans-serif; font-size:17px; font-weight:700;">
+                        <a href="https://www.barrelsaunauk.com/secure-your-build" target="_blank" style="display:block; text-decoration:none;; mso-style-textfill-fill-color: #ffffff;"><!--[if mso]><font color="#ffffff"><![endif]--><span class="pilltext" style="color:#ffffff; font-family:Raleway, Arial, sans-serif; font-size:17px; font-weight:700;">Pay your &pound;500 deposit</span><!--[if mso]></font><![endif]--></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p style="margin:24px 0 0 0; font-family:Raleway, Arial, sans-serif; font-size:13px; font-weight:400; line-height:1.6; color:#333333;">Your estimate price excludes VAT, stated separately on your itemised estimate.</p>
+              </td>
+            </tr>
+
+            <!-- Questions first -->
+            <tr>
+              <td colspan="7" class="px" style="padding:40px 32px 40px 32px;" align="center">
+                <p style="margin:0; font-family:Raleway, Arial, sans-serif; font-size:15px; font-weight:400; line-height:1.6; color:#333333;">Questions first? Reply to this email or</p>
+                <table style="margin:16px auto 0 auto;" role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                  <tbody>
+                    <tr>
+                      <td align="center" bgcolor="#31D24F" class="pillcell" style="background-color:#31D24F; border-radius:30px; padding:10px 26px; mso-padding-alt:10px 26px; font-family:Raleway, Arial, sans-serif; font-size:16px; font-weight:700;">
+                        <a href="https://wa.me/447360274142" target="_blank" style="display:block; text-decoration:none;; mso-style-textfill-fill-color: #ffffff;"><!--[if mso]><font color="#ffffff"><![endif]--><span style="color:#ffffff; font-family:Raleway, Arial, sans-serif; font-size:16px; font-weight:700;">WhatsApp Us</span><!--[if mso]></font><![endif]--></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Sign-off -->
+            <tr>
+              <td colspan="7" class="px" style="padding:0 32px 32px 32px; font-family:Raleway, Arial, sans-serif; font-size:15px; color:#333333; line-height:1.6;">
+                <p style="margin:0;">Speak soon,<br><span style="font-weight:700; color:#2B5336;">The Barrel Sauna UK Team</span></p>
+              </td>
+            </tr>
+
+            <!-- ===== BSUK SIGNATURE : Millie's original, full glory ===== -->
+            <tr>
+              <td colspan="7" style="padding:0; line-height:0; font-size:0;">
+                <a href="https://www.barrelsaunauk.com" style="text-decoration:none;"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a96e859fac7854efe0a2fdc.jpeg" alt="Barrel Sauna UK, bespoke, made to order. info@barrelsaunauk.com, +44 2920 676731, WhatsApp +44 7360 274142, www.barrelsaunauk.com" width="640" style="display:block; width:100%; height:auto; border:0;"></a>
+              </td>
+            </tr>
+            <!-- ===== END BSUK SIGNATURE ===== -->
+
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
